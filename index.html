@@ -1,16 +1,134 @@
 <!doctype html>
 <html>
   <head>
-    <title>Spacy.io</title>
+    <title>Ouscension</title>
     <style>
-      
+      #player {
+                width: 25px;
+                height: 25px;
+                background: #00ffff;
+                position: absolute;
+                z-index: 1000000;
+      }
     </style>
   </head>
   <body>
+    
+    <div id="player"></div>
+    
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       $(function () {
+        
+        var wKey = 87;
+        var aKey = 65;
+        var sKey = 83;
+        var dKey = 68;
+        
+        var controller = new Object();
+        
+            var screenX = 0;
+            var screenY = 0;
+            if(true) {
+                var w = window;
+                d = document;
+                e = d.documentElement;
+                g = d.getElementsByTagName('body')[0];
+                x = w.innerWidth || e.clientWidth || g.clientWidth;
+                y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+                screenX = x;
+                screenY = y;
+            }
+            
+            var lastUpdate = new Date().getTime();
+        
+        var player = createSprite('player',20,screenY / 2,25,25);
+        //!
+        player.moveSpeed = 15;
+        //!
+        var score = 0;
+        
+        
+        
+        
+        function checkCollision (a,b) {
+                return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+            }
+            function createSprite(element,x,y,w,h) {
+                var result = new Object();
+                result.element = element;
+                result.x = x;
+                result.y = y;
+                result.w = w;
+                result.h = h;
+                return result;
+            }
+        function setPosition(sprite) {
+                
+                if(sprite.x < 0) {
+                    sprite.x = 0;
+                }
+                if(sprite.y < 0) {
+                    sprite.y = 0;
+                }
+                if(sprite.x > screenX - sprite.w) {
+                    sprite.x = screenX - sprite.w;
+                }
+                if(sprite.y > screenY - sprite.h) {
+                    sprite.y = screenY - sprite.h;
+                }
+                
+            var e = document.getElementById(sprite.element);
+                e.style.left = sprite.x + "px";
+                e.style.top = sprite.y + "px";
+            }
+            document.onkeydown = function(evt) {
+                toggleKey(evt.keyCode, true)
+            };
+            document.onkeyup = function(evt) {
+                toggleKey(evt.keyCode, false)
+            };
+            function toggleKey(keyCode, isPressed) {
+                if(keyCode == wKey) {
+                    controller.w = isPressed;
+                }
+                if(keyCode == aKey) {
+                    controller.a = isPressed;
+                }
+                if(keyCode == sKey) {
+                    controller.s = isPressed;
+                }
+                if(keyCode == dKey) {
+                    controller.d = isPressed;
+                }
+            }
+            function handleControls() {
+                if(controller.w) {
+                    player.y -= player.moveSpeed;
+                }
+                if(controller.a) {
+                    player.x -= player.moveSpeed;
+                }
+                if(controller.s) {
+                    player.y += player.moveSpeed;
+                }
+                if(controller.d) {
+                    player.x += player.moveSpeed;
+                }
+            }
+            //Update
+            function Update () {
+                if(new Date().getTime() - lastUpdate > 40) {
+                    handleControls();
+                    setPosition(player);
+                    
+                    lastUpdate = new Date().getTime();
+                }
+                setTimeout('Update();', 2);
+            }
+            
+            Update();
         
       });
     </script>
