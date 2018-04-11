@@ -1,7 +1,7 @@
 {
-  "name": "socket-chat-example",
+  "name": "Ouscension",
   "version": "0.0.1",
-  "description": "my first socket.io app",
+  "description": "A shootie gam",
   "dependencies": {
     "express": "^4.15.2",
     "socket.io": "^1.7.3"
