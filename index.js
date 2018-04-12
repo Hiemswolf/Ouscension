@@ -18,6 +18,10 @@ io.on('connection', function(socket){
     io.emit('loadNewChar', socket.number);
   });
   
+  socket.on('playerInfo', function(val, x , y) {
+    io.emit('showPlayer', val, x, y);
+  });
+  
   socket.on('disconnect', function() {
     
   });
