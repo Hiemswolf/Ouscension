@@ -67,7 +67,7 @@
                 result.h = h;
                 return result;
             }
-        function setPosition(sprite) {
+        function setPosition(sprite) { if(createdSelf) {
                 
                 if(sprite.x < 0) {
                     sprite.x = 0;
@@ -85,6 +85,7 @@
             var e = document.getElementById(sprite.element);
                 e.style.left = sprite.x + "px";
                 e.style.top = sprite.y + "px";
+            }
             }
             document.onkeydown = function(evt) {
                 toggleKey(evt.keyCode, true)
