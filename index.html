@@ -22,6 +22,7 @@
       $(function () {
         
         var socket = io();
+        var createdSelf = false;
         
         socket.emit('createChar');
         
@@ -130,7 +131,7 @@
                 }
                 var element = document.createElement('div');
                 element.className = 'player';
-                element.innerHTML = usr;
+                //element.innerHTML = usr;
                 element.id = value;
                 element.style.left = '-50px';
                 element.style.top = '-50px';
