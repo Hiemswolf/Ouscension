@@ -21,6 +21,8 @@
     <script>
       $(function () {
         
+        socket.emit('createChar');
+        
         var wKey = 87;
         var aKey = 65;
         var sKey = 83;
@@ -43,12 +45,12 @@
             
             var lastUpdate = new Date().getTime();
         
-        var player = createSprite('player',20,screenY / 2,25,25);
-        //!
-        player.moveSpeed = 15;
-        //!
-        var score = 0;
-        
+        var player = new Object();
+          player.x = screenX / 2;
+          player.y = screenY / 2;
+          player.moveSpeed = 5;
+          player.w = 25;
+          player.h = 25;
         
         
         
@@ -117,6 +119,22 @@
                     player.x += player.moveSpeed;
                 }
             }
+        
+            socket.on('loadNewChar', function(value) {
+                if(createdSelf === false) {
+                  createdSelf = true;
+                  player.element = value;
+                  //player.name = usr;
+                }
+                var element = document.createElement('div');
+                element.className = 'player';
+                element.innerHTML = usr;
+                element.id = value;
+                element.style.left = '-50px';
+                element.style.top = '-50px';
+                document.getElementById('playerContainer').appendChild(element);
+              });
+        
             //Update
             function Update() {
                 if(new Date().getTime() - lastUpdate > 40) {
