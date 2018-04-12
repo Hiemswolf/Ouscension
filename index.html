@@ -49,7 +49,7 @@
         var player = new Object();
           player.x = screenX / 2;
           player.y = screenY / 2;
-          player.moveSpeed = 5;
+          player.moveSpeed = 20;
           player.w = 25;
           player.h = 25;
         
@@ -68,20 +68,7 @@
                 return result;
             }
         function setPosition(sprite) { if(createdSelf) {
-                
-                if(sprite.x < 0) {
-                    sprite.x = 0;
-                }
-                if(sprite.y < 0) {
-                    sprite.y = 0;
-                }
-                if(sprite.x > screenX - sprite.w) {
-                    sprite.x = screenX - sprite.w;
-                }
-                if(sprite.y > screenY - sprite.h) {
-                    sprite.y = screenY - sprite.h;
-                }
-                console.log(sprite.element);
+          
             var e = document.getElementById(sprite.element);
                 e.style.left = sprite.x + "px";
                 e.style.top = sprite.y + "px";
@@ -138,10 +125,25 @@
                 document.getElementById('playerContainer').appendChild(element);
               });
         
+            socket.on('showPlayer', function(value, x , y){
+          if(createdSelf && value !== null) {
+            if($("#" + value).length == 0) {
+              var element = document.createElement('div');
+              element.className = 'player';
+              //element.innerHTML = name;
+              element.id = value;
+              document.getElementById('playerContainer').appendChild(element);
+            }
+            document.getElementById(value).style.left = x + 'px';
+            document.getElementById(value).style.top = y + 'px';
+          }
+          });
+        
             //Update
             socket.on('loop', function() {
               handleControls();
-              setPosition(player);
+              
+              io.emit('playerInfo', player.element, player.x, player.y)
             });
         
       });
