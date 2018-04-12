@@ -45,8 +45,6 @@
                 screenX = x;
                 screenY = y;
             }
-            
-            var lastUpdate = new Date().getTime();
         
         var player = new Object();
           player.x = screenX / 2;
@@ -140,17 +138,10 @@
               });
         
             //Update
-            function Update() {
-                if(new Date().getTime() - lastUpdate > 40) {
-                    handleControls();
-                    setPosition(player);
-                    
-                    lastUpdate = new Date().getTime();
-                }
-                setTimeout(function() {Update();}, 2);
+            socket.on('loop', function() {
+              handleControls();
+              setPosition(player);
             }
-            
-            Update();
         
       });
     </script>
