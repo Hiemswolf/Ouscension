@@ -3,6 +3,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
+var itemCounter = 0;
 var lastUpdate = new Date().getTime();
 
 app.get('/', function(req, res){
@@ -10,6 +11,12 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
+  
+  socket.on('createChar', function() {
+    itemCounter++;
+    socket.number = itemCounter;
+    io.emit('loadNewChar', socket.number);
+  });
   
   socket.on('disconnect', function() {
     
