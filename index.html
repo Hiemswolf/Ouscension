@@ -21,6 +21,8 @@
     <script>
       $(function () {
         
+        var socket = io();
+        
         socket.emit('createChar');
         
         var wKey = 87;
