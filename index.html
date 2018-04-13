@@ -111,7 +111,7 @@
         
         document.onmousemove = function(evt) {
           var angle = Math.atan2((evt.y - player.y), (evt.x - player.x)) * (180 / Math.PI);
-          document.getElementById(player.element).style.transform = "rotate(" + angle + "deg)";
+          player.angle = angle;
         };
         
             socket.on('loadNewChar', function(value) {
@@ -130,7 +130,7 @@
                 document.getElementById('playerContainer').appendChild(element);
               });
         
-            socket.on('showPlayer', function(value, x , y){
+            socket.on('showPlayer', function(value, x , y, angle){
           if(createdSelf && value !== null) {
             if($("#" + value).length == 0) {
               var element = document.createElement('div');
@@ -141,6 +141,7 @@
             }
             document.getElementById(value).style.left = x + 'px';
             document.getElementById(value).style.top = y + 'px';
+            document.getElementById(value).style.transform = "rotate(" + angle + "deg)";
           }
           });
         
@@ -148,7 +149,7 @@
             socket.on('loop', function() {
               handleControls();
               
-              socket.emit('playerInfo', player.element, player.x, player.y)
+              socket.emit('playerInfo', player.element, player.x, player.y, player.angle)
             });
         
       });
