@@ -162,7 +162,7 @@
             bulletCounter++;
             var id = player.element + "bullet" + bulletCounter;
           
-            var bullet = createSprite(id, player.x - player.w / 2, player.y - player.h / 2, 5, 5);
+            var bullet = createSprite(id, player.x + player.w / 2, player.y + player.h / 2, 5, 5);
             bullet.angle = player.angle;    
           
             var element = document.createElement("div");
