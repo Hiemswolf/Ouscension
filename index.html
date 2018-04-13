@@ -171,6 +171,9 @@
             document.getElementById('bulletContainer').appendChild(element);
         }
         
+        document.onmousedown = function() {
+          newBullet();
+        }
             //Update
             socket.on('loop', function() {
               handleControls();
