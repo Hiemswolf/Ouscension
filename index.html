@@ -112,7 +112,7 @@
         document.onmousedown = function(evt) {
           var angle = Math.atan((evt.y - player.y) / (evt.x - player.x));
           document.getElementById(player.element).style.transform = "rotate(" + angle + ")";
-        }
+        };
         
             socket.on('loadNewChar', function(value) {
                 if(createdSelf === false) {
