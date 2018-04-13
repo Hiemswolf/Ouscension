@@ -62,6 +62,7 @@
           player.h = 25;
         
         var bulletCounter = 0;
+        var bullets = [];
         
         
         
@@ -162,21 +163,34 @@
             var id = player.element + "bullet" + bulletCounter;
           
             var bullet = createSprite(id, player.x - player.w / 2, player.y - player.h / 2, 5, 5);
-              
+            bullet.angle = player.angle;    
+          
             var element = document.createElement("div");
             element.className = "bullet";
             element.id = id;
             element.style.left = '-50px';
             element.style.top = '-50px';
+            element.style.transform = "rotate(" + bullet.angle + "deg)";
             document.getElementById('bulletContainer').appendChild(element);
+          
+            bullets[bullets.length] = bullet;
         }
         
         document.onmousedown = function() {
           newBullet();
         }
+        
+        function bulletHandler() {
+          for(i = 0; i < bullets.length; i++) {
+            bullets[i].x++;
+            setPosition(bullets[i]);
+          }
+        }
+        
             //Update
             socket.on('loop', function() {
               handleControls();
+              bulletHandler();
               
               socket.emit('playerInfo', player.element, player.x, player.y, player.angle)
             });
