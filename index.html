@@ -109,7 +109,7 @@
                 }
             }
         
-        document.onmousedown = function(evt) {
+        document.onmousemove = function(evt) {
           var angle = Math.atan2((evt.y - player.y), (evt.x - player.x)) * (180 / Math.PI);
           document.getElementById(player.element).style.transform = "rotate(" + angle + "deg)";
         };
