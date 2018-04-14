@@ -46,6 +46,12 @@ io.on('connection', function(socket){
   });
 });
 
+function setPosition(sprite) { if(createdSelf) {
+    var e = document.getElementById(sprite.element);
+    e.style.left = sprite.x + "px";
+    e.style.top = sprite.y + "px";
+  }
+}
 
 function Update() {
   if(lastUpdate + 40 <= new Date().getTime()) {
