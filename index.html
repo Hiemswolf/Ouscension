@@ -177,6 +177,7 @@
               var element = document.getElementById('bullets[i].element');
               
               if(element !== null) {
+                element.style.display = "hidden";
                 element.parentNode.removeChild(element);
               }
             } else {
