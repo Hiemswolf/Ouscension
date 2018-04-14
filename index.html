@@ -173,7 +173,15 @@
               }
             }
             
-            setPosition(bullets[i]);
+            if(bullets[i].lifeTimer < 0) {
+              var element = document.getElementById('bullets[i].element');
+              
+              if(element !== null) {
+                element.parentNode.removeChild(element);
+              }
+            } else
+              setPosition(bullets[i]);
+            }
           }
         }
         
