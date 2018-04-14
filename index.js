@@ -62,7 +62,7 @@ function Update() {
   if(lastUpdate + 40 <= new Date().getTime()) {
     for(i = 0; i < bullets.length; i++) {
       bullets[i].lifeTimer--;
-      if(bullets[i].lifeTimer < 0) {
+      if(bullets[i].lifeTimer < -5) {
         bullets.splice(i, 1);
       }
     }
