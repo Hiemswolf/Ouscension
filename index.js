@@ -61,6 +61,7 @@ function createSprite(element, x, y, w, h) {
 function Update() {
   if(lastUpdate + 40 <= new Date().getTime()) {
     for(i = 0; i < bullets.length; i++) {
+      bullets[i].x += 5;
       bullets[i].lifeTimer--;
       if(bullets[i].lifeTimer < -5) {
         bullets.splice(i, 1);
