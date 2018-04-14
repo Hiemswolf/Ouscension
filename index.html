@@ -159,7 +159,7 @@
         
         function bulletHandler(bullets) {
           for(i = 0; i < bullets.length; i++) {
-            //bullets[i].x++;
+            bullets[i].x++;
             
             if(createdSelf && bullets[i].element !== null) {
               if($("#" + bullets[i].element).length == 0) {
