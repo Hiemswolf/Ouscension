@@ -25,6 +25,7 @@ io.on('connection', function(socket){
           
     var bullet = createSprite(itemCounter, player.x + player.w / 2, player.y + player.h / 2, 5, 5);
     bullet.angle = player.angle;    
+    bullet.lifeTimer = 40;
           
     /*var element = document.createElement("div");
     element.className = "bullet";
@@ -59,6 +60,13 @@ function createSprite(element, x, y, w, h) {
 
 function Update() {
   if(lastUpdate + 40 <= new Date().getTime()) {
+    for(i = 0; i < bullets.length; i++) {
+      bullets[i].lifeTimer--;
+      if(bullets[i].lifeTimer < 0) {
+        bullets.splice(i, 1);
+      }
+    }
+    
     io.emit('loop', bullets);
     
     lastUpdate = new Date().getTime();
