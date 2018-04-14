@@ -154,7 +154,7 @@
           });
         
         document.onmousedown = function() {
-          socket.emit('newBullet', player);
+          socket.emit('createBullet', player);
         }
         
         function bulletHandler(bullets) {
