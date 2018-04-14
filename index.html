@@ -153,8 +153,10 @@
           }
           });
         
-        document.onmousedown = function() {
-          socket.emit('createBullet', player);
+        document.onmousedown = function(evt) {
+          if(evt.which === 1) {
+            socket.emit('createBullet', player);
+          }
         }
         
         function bulletHandler(bullets) {
@@ -192,6 +194,10 @@
               
               socket.emit('playerInfo', player.element, player.x, player.y, player.angle)
             });
+        
+        document.addEventListener("contextmenu", function(e){
+          e.preventDefault();
+        }, false);
         
       });
     </script>
