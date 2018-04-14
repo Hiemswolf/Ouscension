@@ -49,7 +49,7 @@ io.on('connection', function(socket){
 
 function Update() {
   if(lastUpdate + 40 <= new Date().getTime()) {
-    io.emit('loop');
+    io.emit('loop', bullets);
     
     lastUpdate = new Date().getTime();
   }
