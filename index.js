@@ -35,7 +35,7 @@ io.on('connection', function(socket){
     document.getElementById('bulletContainer').appendChild(element);
           */
     bullets[bullets.length] = bullet;
-  }
+  });
             
   socket.on('playerInfo', function(val, x , y, angle) {
     io.emit('showPlayer', val, x, y, angle);
