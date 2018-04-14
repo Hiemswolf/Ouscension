@@ -158,13 +158,11 @@
         }
         
         function bulletHandler(bullets) {
-          console.log("woof");
           for(i = 0; i < bullets.length; i++) {
             //bullets[i].x++;
-            console.log("meow");
+            
             if(createdSelf && bullets[i].element !== null) {
               if($("#" + bullets[i].element).length == 0) {
-                console.log("mew");
                 var element = document.createElement("div");
                 element.className = "bullet";
                 element.id = bullets[i].element;
