@@ -61,9 +61,6 @@
           player.w = 25;
           player.h = 25;
         
-        var bulletCounter = 0;
-        var bullets = [];
-        
         
         
         function checkCollision (a,b) {
@@ -157,27 +154,8 @@
           }
           });
         
-        function newBullet() {
-          
-            bulletCounter++;
-            var id = player.element + "bullet" + bulletCounter;
-          
-            var bullet = createSprite(id, player.x + player.w / 2, player.y + player.h / 2, 5, 5);
-            bullet.angle = player.angle;    
-          
-            var element = document.createElement("div");
-            element.className = "bullet";
-            element.id = id;
-            element.style.left = '-50px';
-            element.style.top = '-50px';
-            element.style.transform = "rotate(" + bullet.angle + "deg)";
-            document.getElementById('bulletContainer').appendChild(element);
-          
-            bullets[bullets.length] = bullet;
-        }
-        
         document.onmousedown = function() {
-          newBullet();
+          socket.emit('newBullet', player);
         }
         
         function bulletHandler() {
