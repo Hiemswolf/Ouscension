@@ -125,7 +125,6 @@
         
             socket.on('loadNewChar', function(value) {
                 if(createdSelf === false) {
-                  console.log("Meow");
                   createdSelf = true;
                   player.element = value;
                   //player.name = usr;
@@ -161,9 +160,10 @@
         function bulletHandler(bullets) {
           for(i = 0; i < bullets.length; i++) {
             //bullets[i].x++;
-            
+            console.log("meow");
             if(createdSelf && bullets[i].element !== null) {
               if($("#" + bullets[i].element).length == 0) {
+                console.log("mew");
                 var element = document.createElement("div");
                 element.className = "bullet";
                 element.id = bullets[i].element;
