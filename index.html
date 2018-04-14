@@ -158,17 +158,30 @@
           socket.emit('newBullet', player);
         }
         
-        function bulletHandler() {
+        function bulletHandler(bullets) {
           for(i = 0; i < bullets.length; i++) {
-            bullets[i].x++;
+            //bullets[i].x++;
+            
+            if(createdSelf && bullets[i].element !== null) {
+              if($("#" + bullets[i].element).length == 0) {
+                var element = document.createElement("div");
+                element.className = "bullet";
+                element.id = bullets[i].element;
+                element.style.left = '-50px';
+                element.style.top = '-50px';
+                element.style.transform = "rotate(" + bullets[i].angle + "deg)";
+                document.getElementById('bulletContainer').appendChild(element);
+              }
+            }
+            
             setPosition(bullets[i]);
           }
         }
         
             //Update
-            socket.on('loop', function() {
+            socket.on('loop', function(bullets) {
               handleControls();
-              bulletHandler();
+              bulletHandler(bullets);
               
               socket.emit('playerInfo', player.element, player.x, player.y, player.angle)
             });
