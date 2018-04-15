@@ -27,11 +27,13 @@ io.on('connection', function(socket){
     bullet.angle = player.angle;    
     bullet.lifeTimer = 40;
     
-    bullet.mx = (Math.floor(Math.abs(player.angle) * 1.112) + 100) / 100;
-    bullet.my = 3 - bullet.mx;
+    var speed = 5;
     
-    console.log(bullet.mx);
-    console.log(bullet.my);
+    bullet.mx = 5 * Math.cos(angle * Math.PI / 180);
+    bullet.my = 5 * Math.sin(angle * Math.PI / 180);
+    
+    console.log('x: ' + bullet.mx);
+    console.log('y: ' + bullet.my);
     
     bullets[bullets.length] = bullet;
   });
