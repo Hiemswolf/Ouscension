@@ -79,8 +79,8 @@
         function setPosition(sprite) { if(createdSelf) {
           
             var e = document.getElementById(sprite.element);
-                e.style.left = sprite.x + "px";
-                e.style.top = sprite.y + "px";
+                e.style.left = sprite.x + player.x + "px";
+                e.style.top = sprite.y + player.y + "px";
             }
             }
             document.onkeydown = function(evt) {
