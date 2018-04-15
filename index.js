@@ -57,13 +57,15 @@ function Update() {
   if(lastUpdate + 40 <= new Date().getTime()) {
     for(i = 0; i < bullets.length; i++) {
       
+      bullets[i].x += bullets[i].mx;
+      bullets[i].y += bullets[i].my;
+      
       bullets[i].lifeTimer--;
       if(bullets[i].lifeTimer < -5) {
         bullets.splice(i, 1);
       }
       
-      bullets[i].x += bullets[i].mx;
-      bullets[i].y += bullets[i].my;
+      i--;
     }
     
     io.emit('loop', bullets);
