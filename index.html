@@ -119,7 +119,7 @@
             }
         
         document.onmousemove = function(evt) {
-          var angle = Math.atan2(evt.y, evt.x) * (180 / Math.PI);
+          var angle = Math.atan2((evt.y + screenY / 2), (evt.x + screenX / 2)) * (180 / Math.PI);
           player.angle = angle;
         };
         
