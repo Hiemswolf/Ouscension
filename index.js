@@ -57,6 +57,7 @@ function createSprite(element, x, y, w, h) {
 
 function Update() {
   if(lastUpdate + 40 <= new Date().getTime()) {
+    console.log(bullets.length);
     for(i = 0; i < bullets.length; i++) {
       
       bullets[i].x += bullets[i].mx;
