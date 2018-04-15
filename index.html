@@ -153,8 +153,9 @@
               document.getElementById('playerContainer').appendChild(element);
             }
             if(player.element != value) {
-              document.getElementById(value).style.left = x + 'px';
-              document.getElementById(value).style.top = y + 'px';
+              var element = document.getElementById(value);
+              element.style.left = x - player.x + screenX / 2 + "px";
+              element.style.top = y - player.y + screenY / 2 + "px";
             }
             document.getElementById(value).style.transform = "rotate(" + angle + "deg)";
           }
