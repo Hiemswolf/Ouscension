@@ -28,7 +28,7 @@ io.on('connection', function(socket){
     bullet.lifeTimer = 40;
     
     bullet.mx = (Math.floor(Math.abs(player.angle) * 1.112) + 100) / 100;
-    bullet.my = 1 - bullet.mx;
+    bullet.my = 3 - bullet.mx;
     
     console.log(bullet.mx);
     console.log(bullet.my);
