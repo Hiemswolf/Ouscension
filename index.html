@@ -94,17 +94,21 @@
                 return result;
             }
         function setPosition(sprite) { if(createdSelf) {
+          var e = document.getElementById(sprite.element);
           
-            var e = document.getElementById(sprite.element);
+          if(player.world === sprite.world) {
                 e.style.left = sprite.x - player.x + screenX / 2 + "px";
                 e.style.top = sprite.y - player.y + screenY / 2 + "px";
             }
-            }
+          } else {
+            e.style.display == 'none';
+          }
+        }
             document.onkeydown = function(evt) {
                 toggleKey(evt.keyCode, true)
               if(evt.keyCode == eKey) {
                 if(checkCollision(player, portal1)) {
-                  player.y = 0;
+                  player.world = portal1.teleport;
                 }
               }
             };
