@@ -30,6 +30,9 @@ io.on('connection', function(socket){
     bullet.mx = (Math.floor(player.angle * 1.112) - 100) / 100;
     bullet.my = 2 - bullet.mx;
     
+    console.log(bullet.mx);
+    console.log(bullet.my);
+    
     bullets[bullets.length] = bullet;
   });
             
