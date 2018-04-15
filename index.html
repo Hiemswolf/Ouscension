@@ -17,12 +17,20 @@
                 position: absolute;
                 z-index: 10;
       }
+      .portal {
+                width: 20px;
+                height: 20px;
+                background: #000000;
+                position: absolute;
+                z-index: 5;
+      }
     </style>
   </head>
   <body>
     
     <div id="playerContainer"></div>
     <div id="bulletContainer"></div>
+    <div id="portalContainer"></div>
     
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -60,6 +68,14 @@
           player.moveSpeed = 20;
           player.w = 25;
           player.h = 25;
+          player.world = 'Hub';
+        
+        var portal1 = createSprite('portal1', screenX / 2, screenY / 2 - 100, 20, 20);
+        var element = document.createElement('div');
+        element.className = 'portal';
+        //element.innerHTML = "portal";
+        element.id = 'portal1';
+        document.getElementById('portalContainer').appendChild(element);
         
         
         
@@ -199,6 +215,7 @@
             socket.on('loop', function(bullets) {
               handleControls();
               bulletHandler(bullets);
+              setPosition(portal1);
               
               socket.emit('playerInfo', player.element, player.x, player.y, player.angle)
             });
