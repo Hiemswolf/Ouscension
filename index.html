@@ -18,8 +18,8 @@
                 z-index: 10;
       }
       .portal {
-                width: 20px;
-                height: 20px;
+                width: 30px;
+                height: 30px;
                 background: #000000;
                 position: absolute;
                 z-index: 5;
@@ -236,8 +236,6 @@
               for(i = 0; i < portals.length; i++) {
                 setPosition(portals[i]);
               }
-              
-              console.log(player.world + ' ' + portal1.world + ' ' + portal1.teleport);
               
               socket.emit('playerInfo', player.element, player.x, player.y, player.angle)
             });
