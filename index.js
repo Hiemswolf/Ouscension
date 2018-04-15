@@ -61,7 +61,7 @@ createPortal('Hub', 'Dungeon1', 0, -100);
 
 function createPortal(world, teleport, x , y) {
   itemCounter++;
-  var portal = createSprite('portal' + itemCounter, x, y, 20, 20);
+  var portal = createSprite('portal' + itemCounter, x, y, 30, 30);
   portal.world = world;
   portal.teleport = teleport;
   
