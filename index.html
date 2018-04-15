@@ -94,8 +94,9 @@
           var e = document.getElementById(sprite.element);
           
           if(player.world === sprite.world) {
-                e.style.left = sprite.x - player.x + screenX / 2 + "px";
-                e.style.top = sprite.y - player.y + screenY / 2 + "px";
+              e.style.left = sprite.x - player.x + screenX / 2 + "px";
+              e.style.top = sprite.y - player.y + screenY / 2 + "px";
+              e.style.display = 'block';
           } else {
             e.style.display = 'none';
           }
@@ -202,7 +203,7 @@
                 var element = document.createElement('div');
                 element.className = 'bullet';
                 element.id = bullets[i].element;
-                element.style.transform = 'angle(' + bullets[i].angle + 'deg)';
+                element.style.transform = 'rotate(' + bullets[i].angle + 'deg)';
                 document.getElementById('bulletContainer').appendChild(element);
               }
             }
@@ -245,8 +246,6 @@
               handleControls();
               bulletHandler(bullets);
               portalHandler();
-              
-              console.log(portals);
               
               socket.emit('playerInfo', player.element, player.x, player.y, player.angle)
             });
