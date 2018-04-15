@@ -63,14 +63,14 @@
             }
         
         var player = new Object();
-          player.x = screenX / 2;
-          player.y = screenY / 2;
+          player.x = 0;
+          player.y = 0;
           player.moveSpeed = 20;
           player.w = 25;
           player.h = 25;
           player.world = 'Hub';
         
-        var portal1 = createSprite('portal1', screenX / 2, screenY / 2 - 100, 20, 20);
+        var portal1 = createSprite('portal1', 0, -100, 20, 20);
         var element = document.createElement('div');
         element.className = 'portal';
         //element.innerHTML = "portal";
@@ -95,8 +95,8 @@
         function setPosition(sprite) { if(createdSelf) {
           
             var e = document.getElementById(sprite.element);
-                e.style.left = sprite.x - player.x + screenX / 2 + "px";
-                e.style.top = sprite.y - player.y + screenY / 2 + "px";
+                e.style.left = sprite.x - player.x + screenX + "px";
+                e.style.top = sprite.y - player.y + screenY + "px";
             }
             }
             document.onkeydown = function(evt) {
