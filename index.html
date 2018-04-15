@@ -47,6 +47,8 @@
         var sKey = 83;
         var dKey = 68;
         
+        var eKey = 69;
+        
         var controller = new Object();
         
             var screenX = 0;
@@ -100,6 +102,11 @@
             }
             document.onkeydown = function(evt) {
                 toggleKey(evt.keyCode, true)
+              if(evt.keyCode == eKey) {
+                if(checkCollision(player, portal1)) {
+                  player.y = 0;
+                }
+              }
             };
             document.onkeyup = function(evt) {
                 toggleKey(evt.keyCode, false)
