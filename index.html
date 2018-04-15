@@ -70,7 +70,7 @@
           player.moveSpeed = 20;
           player.w = 25;
           player.h = 25;
-          player.world = 'Hub';
+          player.world = 'Hub_gg';
         
         var element = document.createElement('div');
         element.className = 'portal';
@@ -104,7 +104,7 @@
           }
         }}
             document.onkeydown = function(evt) {
-                toggleKey(evt.keyCode, true)
+                toggleKey(evt.keyCode, true);
               if(evt.keyCode == eKey) {
                 if(checkCollision(player, portal1)) {
                   player.world = portal1.teleport;
