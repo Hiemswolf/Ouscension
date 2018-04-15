@@ -72,6 +72,8 @@
           player.h = 25;
           player.world = 'Hub';
         
+        var portal1;
+        
         var element = document.createElement('div');
         element.className = 'portal';
         //element.innerHTML = "portal";
@@ -221,7 +223,9 @@
         }
         
             //Update
-            socket.on('loop', function(bullets, portal1) {
+            socket.on('loop', function(bullets, portal1a) {
+              portal1 = portal1a;
+              
               handleControls();
               bulletHandler(bullets);
               setPosition(portal1);
