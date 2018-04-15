@@ -202,6 +202,7 @@
                 var element = document.createElement('div');
                 element.className = 'bullet';
                 element.id = bullets[i].element;
+                element.style.transform = 'angle(' + bullet.angle + 'deg)';
                 document.getElementById('bulletContainer').appendChild(element);
               }
             }
