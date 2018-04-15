@@ -63,7 +63,7 @@ function Update() {
       bullets[i].y += bullets[i].my;
       
       bullets[i].lifeTimer--;
-      if(bullets[i].lifeTimer < -5) {
+      if(bullets[i].lifeTimer < -1) {
         bullets.splice(i, 1);
         i--;
       }
