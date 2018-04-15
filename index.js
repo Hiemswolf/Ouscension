@@ -66,9 +66,8 @@ function Update() {
       bullets[i].lifeTimer--;
       if(bullets[i].lifeTimer < -5) {
         bullets.splice(i, 1);
+        i--;
       }
-      
-      i--;
     }
     
     io.emit('loop', bullets);
