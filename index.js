@@ -26,15 +26,10 @@ io.on('connection', function(socket){
     var bullet = createSprite(itemCounter, player.x + player.w / 2, player.y + player.h / 2, 5, 5);
     bullet.angle = player.angle;    
     bullet.lifeTimer = 40;
-          
-    /*var element = document.createElement("div");
-    element.className = "bullet";
-    element.id = itemCounter;
-    element.style.left = '-50px';
-    element.style.top = '-50px';
-    element.style.transform = "rotate(" + bullet.angle + "deg)";
-    document.getElementById('bulletContainer').appendChild(element);
-          */
+    
+    bullet.mx = (Math.floor(player.angle * 1.112) - 100) / 100;
+    bullet.my = 200 - bullet.mx;
+    
     bullets[bullets.length] = bullet;
   });
             
