@@ -124,17 +124,22 @@
         };
         
             socket.on('loadNewChar', function(value) {
-                if(createdSelf === false) {
-                  createdSelf = true;
-                  player.element = value;
-                  //player.name = usr;
-                }
+              
                 var element = document.createElement('div');
                 element.className = 'player';
                 //element.innerHTML = usr;
                 element.id = value;
                 element.style.left = '-50px';
                 element.style.top = '-50px';
+              
+                if(createdSelf === false) {
+                  createdSelf = true;
+                  player.element = value;
+                  
+                  element.style.left = screenX / 2 + 'px';
+                  element.style.top = screenY / 2 + 'px';
+                }
+              
                 document.getElementById('playerContainer').appendChild(element);
               });
         
@@ -147,8 +152,10 @@
               element.id = value;
               document.getElementById('playerContainer').appendChild(element);
             }
-            document.getElementById(value).style.left = x + 'px';
-            document.getElementById(value).style.top = y + 'px';
+            if(player.element != value) {
+              document.getElementById(value).style.left = x + 'px';
+              document.getElementById(value).style.top = y + 'px';
+            }
             document.getElementById(value).style.transform = "rotate(" + angle + "deg)";
           }
           });
