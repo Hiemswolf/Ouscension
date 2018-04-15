@@ -72,7 +72,7 @@
           player.h = 25;
           player.world = 'Hub';
         
-        var portal1;
+        var portals = [];
         
         var element = document.createElement('div');
         element.className = 'portal';
@@ -108,8 +108,12 @@
             document.onkeydown = function(evt) {
                 toggleKey(evt.keyCode, true);
               if(evt.keyCode == eKey) {
-                if(checkCollision(player, portal1)) {
-                  player.world = portal1.teleport;
+                for(i = 0; i < portals.length; i++) {
+                  if(portals[i].world === player.world) {
+                    if(checkCollision(player, portals[i])) {
+                      player.world = portals[i].teleport;
+                    }
+                  }
                 }
               }
             };
@@ -223,12 +227,15 @@
         }
         
             //Update
-            socket.on('loop', function(bullets, portal1a) {
-              portal1 = portal1a;
+            socket.on('loop', function(bullets, portalsSetter) {
+              portals = portalsSetter;
               
               handleControls();
               bulletHandler(bullets);
-              setPosition(portal1);
+              
+              for(i = 0; i < portals.length; i++) {
+                setPosition(portals[i]);
+              }
               
               console.log(player.world + ' ' + portal1.world + ' ' + portal1.teleport);
               
