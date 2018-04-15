@@ -218,7 +218,7 @@
         }
         
             //Update
-            socket.on('loop', function(bullets) {
+            socket.on('loop', function(bullets, portal1) {
               handleControls();
               bulletHandler(bullets);
               setPosition(portal1);
