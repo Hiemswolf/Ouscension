@@ -202,7 +202,7 @@
                 var element = document.createElement('div');
                 element.className = 'bullet';
                 element.id = bullets[i].element;
-                element.style.transform = 'angle(' + bullet.angle + 'deg)';
+                element.style.transform = 'angle(' + bullets[i].angle + 'deg)';
                 document.getElementById('bulletContainer').appendChild(element);
               }
             }
@@ -245,6 +245,8 @@
               handleControls();
               bulletHandler(bullets);
               portalHandler();
+              
+              console.log(portals);
               
               socket.emit('playerInfo', player.element, player.x, player.y, player.angle)
             });
