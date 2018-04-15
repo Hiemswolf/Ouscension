@@ -70,7 +70,7 @@
           player.moveSpeed = 20;
           player.w = 25;
           player.h = 25;
-          player.world = 'Hub_gg';
+          player.world = 'Hub';
         
         var element = document.createElement('div');
         element.className = 'portal';
@@ -225,6 +225,8 @@
               handleControls();
               bulletHandler(bullets);
               setPosition(portal1);
+              
+              console.log(player.world + ' ' + portal1.world + ' ' + portal1.teleport);
               
               socket.emit('playerInfo', player.element, player.x, player.y, player.angle)
             });
