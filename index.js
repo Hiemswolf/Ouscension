@@ -7,6 +7,7 @@ var itemCounter = 0;
 var lastUpdate = new Date().getTime();
 
 var bullets = [];
+var portals = [];
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
@@ -56,9 +57,16 @@ function createSprite(element, x, y, w, h) {
   return result;
 }
 
-var portal1 = createSprite('portal1', 0, -100, 20, 20);
-  portal1.world = 'Hub';
-  portal1.teleport = 'Dungeon1';
+createPortal('Hub', 'Dungeon1', 0, -100);
+
+function createPortal(world, teleport, x , y) {
+  itemCounter++;
+  var portal = createSprite('portal' + itemCounter, x, y, 20, 20);
+  portal.world = world;
+  portal.teleport = teleport;
+  
+  portals[portals.length] = portal;
+}
 
 function Update() {
   if(lastUpdate + 40 <= new Date().getTime()) {
@@ -74,7 +82,7 @@ function Update() {
       }
     }
     
-    io.emit('loop', bullets, portal1);
+    io.emit('loop', bullets, portals);
     
     lastUpdate = new Date().getTime();
   }
