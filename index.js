@@ -55,6 +55,9 @@ function createSprite(element, x, y, w, h) {
   return result;
 }
 
+var portal1 = createSprite('portal1', 0, -100, 20, 20);
+  portal1.world = 'Hub';
+
 function Update() {
   if(lastUpdate + 40 <= new Date().getTime()) {
     for(i = 0; i < bullets.length; i++) {
@@ -69,7 +72,7 @@ function Update() {
       }
     }
     
-    io.emit('loop', bullets);
+    io.emit('loop', bullets, portal1);
     
     lastUpdate = new Date().getTime();
   }
