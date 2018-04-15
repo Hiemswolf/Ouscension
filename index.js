@@ -58,6 +58,7 @@ function createSprite(element, x, y, w, h) {
 }
 
 createPortal('Hub', 'Dungeon1', 0, -100);
+createPortal('Dungeon1', 'Hub', 200, 0);
 
 function createPortal(world, teleport, x , y) {
   itemCounter++;
