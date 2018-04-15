@@ -26,6 +26,7 @@ io.on('connection', function(socket){
     var bullet = createSprite(itemCounter, player.x + player.w / 2, player.y + player.h / 2, 5, 5);
     bullet.angle = player.angle;    
     bullet.lifeTimer = 40;
+    bullet.world = player.world;
     
     var speed = 5;
     
