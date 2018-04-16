@@ -18,8 +18,8 @@
                 z-index: 10;
       }
       .portal {
-                width: 30px;
-                height: 30px;
+                width: 40px;
+                height: 40px;
                 background: #000000;
                 color: rgb(200, 200, 200);
                 text-align: center;
@@ -103,12 +103,17 @@
         function setPosition(sprite) { if(createdSelf) {
           var e = document.getElementById(sprite.element);
           
+          if(sprite.element === player.element) {
+            e.style.left = screenX / 2 - 12.5 + "px";
+            e.style.top = screenY / 2 - 12.5 + "px";
+          } else {
           if(player.world === sprite.world) {
               e.style.left = sprite.x - player.x + screenX / 2 + "px";
               e.style.top = sprite.y - player.y + screenY / 2 + "px";
               e.style.display = 'block';
           } else {
             e.style.display = 'none';
+          }
           }
         }}
             document.onkeydown = function(evt) {
