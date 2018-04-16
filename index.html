@@ -3,6 +3,9 @@
   <head>
     <title>Ouscension</title>
     <style>
+      body {
+                overflow: hidden;
+      }
       .player {
                 width: 25px;
                 height: 25px;
@@ -201,6 +204,12 @@
             document.getElementById(playerSprite.element).style.transform = 'rotate(' + playerSprite.angle + 'deg)';
           }
           });
+        
+        socket.on('deletePlayer', function(value) { 
+          var element = document.getElementById(value);
+          element.style.display = 'none';
+          element.parentNode.removeChild(element);
+        }
         
         document.onmousedown = function(evt) {
           if(evt.which === 1) {
