@@ -60,6 +60,7 @@ io.on('connection', function(socket){
       }
     }
     
+    dungeons--;
     if(dungeons < 1) {
       createDungeon('choose', 5);
     }
@@ -104,7 +105,7 @@ createDungeon('choose', 5);
 
 function createDungeon(name, length) {
   if(name === 'choose') {
-    var names = ['alpha', 'beta', 'delta', 'zeta', 'yotta'];
+    var names = ['Alpha', 'Beta', 'Delta', 'Zeta', 'Yotta'];
     name = names[Math.floor(Math.random() * 4)];
   }
   
