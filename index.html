@@ -104,8 +104,8 @@
           var e = document.getElementById(sprite.element);
           
           if(sprite.element === player.element) {
-            e.style.left = screenX / 2 - 12.5 + "px";
-            e.style.top = screenY / 2 - 12.5 + "px";
+            e.style.left = screenX / 2 + "px";
+            e.style.top = screenY / 2 + "px";
           } else {
           if(player.world === sprite.world) {
               e.style.left = sprite.x - player.x + screenX / 2 + "px";
