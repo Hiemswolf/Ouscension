@@ -44,4 +44,4 @@ var handlers {
         }
 };
 
-module.exports = handlers;
+//module.exports = handlers;
