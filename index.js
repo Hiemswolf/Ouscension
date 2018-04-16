@@ -8,6 +8,7 @@ var lastUpdate = new Date().getTime();
 
 var bullets = [];
 var portals = [];
+var floors = [];
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
@@ -69,6 +70,17 @@ function createPortal(world, teleport, x , y) {
   portals[portals.length] = portal;
 }
 
+createFloor('Hub', -250, -250);
+createFloor('Dungeon1', -250, -250);
+
+function createFloor(world, x, y) {
+  itemCounter++;
+  var floor = createSprite('floor' + itemCounter, x, y, 500, 500);
+  floor.world = world;
+  
+  floors[floors.length] = floor;
+}
+
 function Update() {
   if(lastUpdate + 40 <= new Date().getTime()) {
     for(i = 0; i < bullets.length; i++) {
@@ -83,7 +95,7 @@ function Update() {
       }
     }
     
-    io.emit('loop', bullets, portals);
+    io.emit('loop', bullets, portals, floors);
     
     lastUpdate = new Date().getTime();
   }
