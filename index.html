@@ -184,7 +184,7 @@
         
             socket.on('showPlayer', function(playerSprite){
           if(createdSelf && playerSprite.element !== null) {
-            if($("#" + playerSprite.value).length == 0) {
+            if($("#" + playerSprite.element).length == 0) {
               var element = document.createElement('div');
               element.className = 'player';
               //element.innerHTML = name;
