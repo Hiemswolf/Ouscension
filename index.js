@@ -84,13 +84,13 @@ function createFloor(world, x, y) {
 createDungeon('Dungeon1', 5);
 
 function createDungeon(name, length) {
-  createPortal('Hub', name, (Math.floor(Math.random() * 5) -1) * 60, -100);
+  createPortal('Hub', name, (Math.floor(Math.random() * 5) - 1) * 60, -100);
   
   createFloor(name, -250, -250);
   var floorX = 0;
   var floorY = 0;
   
-  for(i = 0; i < length - 1; i++) {
+  for(i = 0; i < length; i++) {
     var change = Math.floor(Math.random() * 4);
     if(change === 0) {floorX++}
     if(change === 1) {floorX--}
