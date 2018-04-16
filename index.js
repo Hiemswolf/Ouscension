@@ -106,7 +106,7 @@ createDungeon('choose', 5);
 function createDungeon(name, length) {
   if(name === 'choose') {
     var names = ['Alpha', 'Beta', 'Delta', 'Zeta', 'Yotta'];
-    name = names[Math.floor(Math.random() * 4)];
+    name = names[Math.floor(Math.random() * 5)];
   }
   
   createPortal('Hub', name, (Math.floor(Math.random() * 5) - 1) * 60, -100);
