@@ -38,6 +38,8 @@
     <script>
       $(function () {
         
+        var handlers = require('handlers');
+        
         var socket = io();
         var createdSelf = false;
         
@@ -196,58 +198,15 @@
           }
         }
         
-        function bulletHandler(bullets) {
-          for(i = 0; i < bullets.length; i++) {
-            //bullets[i].x++;
-            
-            if(createdSelf && bullets[i].element !== null) {
-              if($("#" + bullets[i].element).length == 0) {
-                var element = document.createElement('div');
-                element.className = 'bullet';
-                element.id = bullets[i].element;
-                element.style.transform = 'rotate(' + bullets[i].angle + 'deg)';
-                document.getElementById('bulletContainer').appendChild(element);
-              }
-            }
-            
-            if(bullets[i].lifeTimer < 0) {
-              var element = document.getElementById(bullets[i].element);
-              if(element !== null) {
-                element.style.display = "none";
-                element.parentNode.removeChild(element);
-              }
-            } else {
-              setPosition(bullets[i]);
-            }
-          }
-        }
         
-        function portalHandler() {
-          for(i = 0; i < portals.length; i++) {
-            
-            if(createdSelf && portals[i].element !== null) {
-              if($("#" + portals[i].element).length == 0) {
-                var element = document.createElement("div");
-                element.className = "portal";
-                element.id = portals[i].element;
-                element.innerHTML = portals[i].teleport;
-                element.style.left = '-50px';
-                element.style.top = '-50px';
-                document.getElementById('portalContainer').appendChild(element);
-              }
-            }
-            
-            setPosition(portals[i]);
-          }
-        }
         
             //Update
             socket.on('loop', function(bullets, portalsSetter) {
               portals = portalsSetter;
               
               handleControls();
-              bulletHandler(bullets);
-              portalHandler();
+              handlers.bulletHandler(bullets);
+              handlers.portalHandler();
               
               socket.emit('playerInfo', player.element, player.x, player.y, player.angle)
             });
