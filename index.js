@@ -42,6 +42,10 @@ io.on('connection', function(socket){
     io.emit('showPlayer', playerSprite);
   });
   
+  socket.on('dungeonComplete', function(dungeon) {
+    io.emit('playerDungeonComplete', dungeon);
+  });
+  
   socket.on('disconnect', function() {
     io.emit('deletePlayer', socket.number);
   });
