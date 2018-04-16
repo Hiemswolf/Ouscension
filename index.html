@@ -40,6 +40,7 @@
     <div id="playerContainer"></div>
     <div id="bulletContainer"></div>
     <div id="portalContainer"></div>
+    <div id="floorContainer"></div>
     
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -82,6 +83,7 @@
           player.world = 'Hub';
         
         var portals = [];
+        var floors = [];
         
         
         
@@ -248,15 +250,35 @@
           }
         }
         
+        function floorHandler() {
+          for(i = 0; i < floors.length; i++) {
+            
+            if(createdSelf && floors[i].element !== null) {
+              if($("#" + floors[i].element).length == 0) {
+                var element = document.createElement("div");
+                element.className = "floor";
+                element.id = floors[i].element;
+                element.style.left = '-50px';
+                element.style.top = '-50px';
+                document.getElementById('floorContainer').appendChild(element);
+              }
+            }
+            
+            setPosition(floors[i]);
+          }
+        }
+        
         
         
             //Update
-            socket.on('loop', function(bullets, portalsSetter) {
+            socket.on('loop', function(bullets, portalsSetter, floorSetter) {
               portals = portalsSetter;
+              floors = floorsSetter;
               
               handleControls();
               bulletHandler(bullets);
               portalHandler();
+              floorHandler();
               
               socket.emit('playerInfo', player.element, player.x, player.y, player.angle)
             });
