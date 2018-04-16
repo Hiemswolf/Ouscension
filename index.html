@@ -182,7 +182,7 @@
                 document.getElementById('playerContainer').appendChild(element);
               });
         
-            socket.on('showPlayer', function(value, x , y, angle, world){
+            socket.on('showPlayer', function(playerSprite){
           if(createdSelf && value !== null) {
             if($("#" + value).length == 0) {
               var element = document.createElement('div');
@@ -191,14 +191,8 @@
               element.id = value;
               document.getElementById('playerContainer').appendChild(element);
             }
-            if(player.world === world) {
-              if(player.element != value) {
-                var element = document.getElementById(value);
-                element.style.left = x - player.x + screenX / 2 + "px";
-                element.style.top = y - player.y + screenY / 2 + "px";
-              }
-              document.getElementById(value).style.transform = "rotate(" + angle + "deg)";
-            }
+            
+            setPosition(playerSprite);
           }
           });
         
@@ -307,7 +301,7 @@
               
               blocker(player);
               
-              socket.emit('playerInfo', player.element, player.x, player.y, player.angle, player.world)
+              socket.emit('playerInfo', player)
             });
         
         document.addEventListener("contextmenu", function(e){
