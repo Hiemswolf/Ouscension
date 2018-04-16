@@ -268,7 +268,24 @@
           }
         }
         
-        
+        function blocker(sprite) {
+          if(sprite.preX === undefined) {
+            sprite.preX = sprite.x;
+            sprite.preY = sprite.Y;
+          }
+          
+          for(i = 0; i < floors.length; i++) {
+            if(sprite.world === floors[i].world) {
+              if(checkCollision(sprite, floors[i])) {
+                sprite.x = sprite.preX;
+                sprite.y = sprite.preY;
+              }
+            }
+          }
+          
+          sprite.preX = sprite.x;
+          sprite.preY = sprite.y;
+        }
         
             //Update
             socket.on('loop', function(bullets, portalsSetter, floorsSetter) {
@@ -279,6 +296,8 @@
               bulletHandler(bullets);
               portalHandler();
               floorHandler();
+              
+              blocker(player);
               
               socket.emit('playerInfo', player.element, player.x, player.y, player.angle)
             });
