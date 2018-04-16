@@ -47,7 +47,7 @@ io.on('connection', function(socket){
   });
   
   socket.on('disconnect', function() {
-    io.emit('deletePlayer', socket.number);
+    io.emit('delete', socket.number);
   });
 });
 
