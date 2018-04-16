@@ -194,7 +194,7 @@
                 document.getElementById('playerContainer').appendChild(element);
               });
         
-            socket.on('showPlayer', function(playerSprite){
+            socket.on('showPlayer', function(playerSprite) {
           if(createdSelf && playerSprite.element !== null && playerSprite.element !== undefined) {
             if($("#" + playerSprite.element).length == 0) {
               var element = document.createElement('div');
@@ -214,6 +214,14 @@
           element.style.display = 'none';
           element.parentNode.removeChild(element);
         });
+        
+        socket.on('playerDungeonComplete', function(dungeon) {
+          if(player.world === dungeon) {
+            player.world = 'Hub';
+            player.x = 0;
+            player.y = 0;
+          }
+        }
         
         document.onmousedown = function(evt) {
           if(evt.which === 1) {
