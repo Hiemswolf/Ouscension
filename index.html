@@ -209,7 +209,7 @@
           }
           });
         
-        socket.on('deletePlayer', function(value) { 
+        socket.on('delete', function(value) { 
           var element = document.getElementById(value);
           element.style.display = 'none';
           element.parentNode.removeChild(element);
