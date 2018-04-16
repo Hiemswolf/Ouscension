@@ -125,9 +125,13 @@
                 for(i = 0; i < portals.length; i++) {
                   if(portals[i].world === player.world) {
                     if(checkCollision(player, portals[i])) {
-                      player.world = portals[i].teleport;
-                      player.x = 0;
-                      player.y = 0;
+                      if(portals[i].world !== 'Hub') {
+                        socket.emit('dungeonComplete', portals[i].world);
+                      } else {
+                        player.world = portals[i].teleport;
+                        player.x = 0;
+                        player.y = 0;
+                      }
                     }
                   }
                 }
