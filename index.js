@@ -44,6 +44,19 @@ io.on('connection', function(socket){
   
   socket.on('dungeonComplete', function(dungeon) {
     io.emit('playerDungeonComplete', dungeon);
+    for(i = 0; i < portals.length; i++) {
+      if(portals[i].world === dungeon || portals[i].teleport === dungeon) {
+        io.emit('delete', portals[i].element);
+        portals.splice(i, 1);
+      }
+    }
+    for(i = 0; i < floors.length; i++) {
+      if(floors[i].world === dungeon) {
+        io.emit('delete', floors[i].element);
+        floors.splice(i, 1);
+      }
+    }
+    createDungeon('Dungeon1', 5);
   });
   
   socket.on('disconnect', function() {
@@ -62,9 +75,6 @@ function createSprite(element, x, y, w, h) {
   return result;
 }
 
-//createPortal('Hub', 'Dungeon1', 0, -100);
-//createPortal('Dungeon1', 'Hub', 200, 0);
-
 function createPortal(world, teleport, x , y) {
   itemCounter++;
   var portal = createSprite('portal' + itemCounter, x, y, 40, 40);
@@ -75,7 +85,6 @@ function createPortal(world, teleport, x , y) {
 }
 
 createFloor('Hub', -250, -250);
-//createFloor('Dungeon1', -250, -250);
 
 function createFloor(world, x, y) {
   itemCounter++;
