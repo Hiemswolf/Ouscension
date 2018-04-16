@@ -58,8 +58,8 @@ function createSprite(element, x, y, w, h) {
   return result;
 }
 
-createPortal('Hub', 'Dungeon1', 0, -100);
-createPortal('Dungeon1', 'Hub', 200, 0);
+//createPortal('Hub', 'Dungeon1', 0, -100);
+//createPortal('Dungeon1', 'Hub', 200, 0);
 
 function createPortal(world, teleport, x , y) {
   itemCounter++;
@@ -71,7 +71,7 @@ function createPortal(world, teleport, x , y) {
 }
 
 createFloor('Hub', -250, -250);
-createFloor('Dungeon1', -250, -250);
+//createFloor('Dungeon1', -250, -250);
 
 function createFloor(world, x, y) {
   itemCounter++;
@@ -81,6 +81,30 @@ function createFloor(world, x, y) {
   floors[floors.length] = floor;
 }
 
+createDungeon('Dungeon1', 5);
+
+function createDungeon(name, length) {
+  createPortal('Hub', name, (Math.floor(Math.random() * 5) -1) * 60, -100);
+  
+  createFloor(name, -250, -250);
+  var floorX = 0;
+  var floorY = 0;
+  
+  for(i = 0; i < length - 1; i++) {
+    var change = Math.floor(Math.random() * 4);
+    if(change === 0) {floorX++}
+    if(change === 1) {floorX--}
+    if(change === 2) {floorY++}
+    if(change === 3) {floorY--}
+    
+    createFloor(name, floorX * 500 - 250, floorY * 500 - 250);
+  }
+  
+  createPortal(name, 'Hub', floorX * 500 - 15, floorY * 500 - 15);
+}
+
+
+//loop
 function Update() {
   if(lastUpdate + 40 <= new Date().getTime()) {
     for(i = 0; i < bullets.length; i++) {
