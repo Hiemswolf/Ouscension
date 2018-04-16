@@ -63,7 +63,7 @@ function createSprite(element, x, y, w, h) {
 
 function createPortal(world, teleport, x , y) {
   itemCounter++;
-  var portal = createSprite('portal' + itemCounter, x, y, 30, 30);
+  var portal = createSprite('portal' + itemCounter, x, y, 40, 40);
   portal.world = world;
   portal.teleport = teleport;
   
