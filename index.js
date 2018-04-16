@@ -38,8 +38,8 @@ io.on('connection', function(socket){
     bullets[bullets.length] = bullet;
   });
             
-  socket.on('playerInfo', function(val, x , y, angle) {
-    io.emit('showPlayer', val, x, y, angle);
+  socket.on('playerInfo', function(val, x , y, angle, world) {
+    io.emit('showPlayer', val, x, y, angle, world);
   });
   
   socket.on('disconnect', function() {
