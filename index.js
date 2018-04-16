@@ -89,17 +89,17 @@ function createDungeon(name, length) {
   createFloor(name, -250, -250);
   var floorX = 0;
   var floorY = 0;
-  
+  console.log('moew');
   for(i = 0; i < length; i++) {
     var change = Math.floor(Math.random() * 4);
     if(change === 0) {floorX++}
     if(change === 1) {floorX--}
     if(change === 2) {floorY++}
     if(change === 3) {floorY--}
-    
+    console.log('mew');
     createFloor(name, floorX * 500 - 250, floorY * 500 - 250);
   }
-  
+  console.log('mmmmeow');
   createPortal(name, 'Hub', floorX * 500 - 15, floorY * 500 - 15);
 }
 
