@@ -274,13 +274,19 @@
             sprite.preY = sprite.Y;
           }
           
+          var onFloor = false;
+          
           for(i = 0; i < floors.length; i++) {
             if(sprite.world === floors[i].world) {
-              if(!checkCollision(sprite, floors[i])) {
-                sprite.x = sprite.preX;
-                sprite.y = sprite.preY;
+              if(checkCollision(sprite, floors[i])) {
+                onFloor = true;
               }
             }
+          }
+          
+          if(onFloor) {
+            sprite.x = sprite.preX;
+            sprite.y = sprite.preY;
           }
           
           sprite.preX = sprite.x;
