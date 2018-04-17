@@ -68,6 +68,16 @@ io.on('connection', function(socket){
     }
   });
   
+  socket.on('deleteEnemy', function(value) {
+    for(i = 0; i < enemies.length; i++) {
+      if(enemies[i].element === value) {
+        enemies.splice(i, 1);
+      }
+    }
+    
+    io.emit('delete', value);
+  });
+  
   socket.on('deleteForAll', function(value) {
     io.emit('delete', value);
   });
@@ -76,6 +86,8 @@ io.on('connection', function(socket){
     io.emit('delete', socket.number);
   });
 });
+
+
 
 function createSprite(element, x, y, w, h) {
   var result = new Object();
