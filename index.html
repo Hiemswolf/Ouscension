@@ -320,7 +320,7 @@
             if(createdSelf && enemies[i].element !== null) {
               if($("#" + enemies[i].element).length == 0) {
                 var element = document.createElement("div");
-                element.className = "floor";
+                element.className = "enemy";
                 element.id = enemies[i].element;
                 element.style.left = '-50px';
                 element.style.top = '-50px';
