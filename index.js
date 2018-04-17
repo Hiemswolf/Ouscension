@@ -31,6 +31,7 @@ io.on('connection', function(socket){
     bullet.angle = player.angle;    
     bullet.lifeTimer = 40;
     bullet.world = player.world;
+    bullet.owner = player.element;
     
     var speed = 5;
     
