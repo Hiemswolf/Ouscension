@@ -61,6 +61,13 @@ io.on('connection', function(socket){
         i--;
       }
     }
+    for(i = 0; i < enemies.length; i++) {
+      if(enemies[i].world === dungeon) {
+        io.emit('delete', enemies[i].element);
+        enemies.splice(i, 1);
+        i--;
+      }
+    }
     
     dungeons--;
     if(dungeons < 1) {
@@ -72,6 +79,16 @@ io.on('connection', function(socket){
     for(i = 0; i < enemies.length; i++) {
       if(enemies[i].element === value) {
         enemies.splice(i, 1);
+      }
+    }
+    
+    io.emit('delete', value);
+  });
+  
+  socket.on('deleteBullet', function(value) {
+    for(i = 0; i < bullets.length; i++) {
+      if(bullets[i].element === value) {
+        bullets.splice(i, 1);
       }
     }
     
