@@ -101,6 +101,14 @@ function createFloor(world, x, y) {
   floors[floors.length] = floor;
 }
 
+function createEnemy(world, x , y) {
+  itemCounter++;
+  var enemy = createSprite('enemy' + itemCounter, x, y, 30, 30);
+  enemy.world = world;
+  
+  enemies[enemies.length] = enemy;
+}
+
 createDungeon('choose', 5);
 
 function createDungeon(name, length) {
@@ -122,6 +130,10 @@ function createDungeon(name, length) {
     if(change === 2) {floorY++}
     if(change === 3) {floorY--}
     createFloor(name, floorX * 500 - 250, floorY * 500 - 250);
+    
+    if(Math.floor(Math.random() * 2) === 0) {
+      createEnemy(name, floorX * 500 - 15, floorY * 500 - 15);
+    }
   }
   createPortal(name, 'Hub', floorX * 500 - 15, floorY * 500 - 15);
   dungeons++;
@@ -143,7 +155,7 @@ function Update() {
       }
     }
     
-    io.emit('loop', bullets, portals, floors);
+    io.emit('loop', bullets, portals, floors, enemies);
     
     lastUpdate = new Date().getTime();
   }
