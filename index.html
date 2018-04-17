@@ -77,6 +77,8 @@
                 screenY = y;
             }
         
+        var players = [];
+        
         var player = new Object();
           player.x = 0;
           player.y = 0;
@@ -204,7 +206,19 @@
               document.getElementById('playerContainer').appendChild(element);
             }
             
-            setPosition(playerSprite);
+            var inPlayerArray = false;
+            for(i = 0; i < players.length; i++) {
+              if(playerSprite.element === players[i].element) {
+                inPlayerArray = true;
+                players[i] = playerSprite;
+              }
+            }
+            
+            if(inPlayerArray === false) {
+              players[players.length] = playerSprite;
+            }
+            
+            //setPosition(playerSprite);
             document.getElementById(playerSprite.element).style.transform = 'rotate(' + playerSprite.angle + 'deg)';
           }
           });
@@ -328,6 +342,9 @@
               
               blocker(player);
               
+              for(i = 0; i < players.length; i++) {
+                setPosition(players[i]);
+              }
               socket.emit('playerInfo', player)
             });
         
