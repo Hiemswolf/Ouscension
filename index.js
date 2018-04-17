@@ -9,6 +9,7 @@ var lastUpdate = new Date().getTime();
 var bullets = [];
 var portals = [];
 var floors = [];
+var enemies = [];
 var dungeons = 0;
 
 app.get('/', function(req, res){
