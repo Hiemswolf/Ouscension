@@ -151,6 +151,16 @@
             document.onkeyup = function(evt) {
                 toggleKey(evt.keyCode, false)
             };
+            document.onmousemove = function(evt) {
+              var angle = Math.atan2((evt.y - screenY / 2), (evt.x - screenX / 2)) * (180 / Math.PI);
+              player.angle = angle;
+            };
+            document.onmousedown = function(evt) {
+              if(evt.which === 1) {
+                socket.emit('createBullet', player);
+              }
+            }
+            
             function toggleKey(keyCode, isPressed) {
                 if(keyCode == wKey) {
                     controller.w = isPressed;
@@ -179,11 +189,6 @@
                     player.x += player.moveSpeed;
                 }
             }
-        
-        document.onmousemove = function(evt) {
-          var angle = Math.atan2((evt.y - screenY / 2), (evt.x - screenX / 2)) * (180 / Math.PI);
-          player.angle = angle;
-        };
         
             socket.on('loadNewChar', function(value) {
               
@@ -227,7 +232,6 @@
               players[players.length] = playerSprite;
             }
             
-            //setPosition(playerSprite);
             document.getElementById(playerSprite.element).style.transform = 'rotate(' + playerSprite.angle + 'deg)';
           }
           });
@@ -245,12 +249,6 @@
             player.y = 0;
           }
         });
-        
-        document.onmousedown = function(evt) {
-          if(evt.which === 1) {
-            socket.emit('createBullet', player);
-          }
-        }
         
         function bulletHandler(bullets) {
           for(i = 0; i < bullets.length; i++) {
