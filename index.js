@@ -68,6 +68,10 @@ io.on('connection', function(socket){
     }
   });
   
+  socket.on('deleteForAll', function(value) {
+    io.emit('delete', value);
+  });
+  
   socket.on('disconnect', function() {
     io.emit('delete', socket.number);
   });
