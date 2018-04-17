@@ -95,6 +95,7 @@
           player.h = 25;
           player.world = 'Hub';
         
+        var bullets = [];
         var portals = [];
         var floors = [];
         var enemies = [];
@@ -250,7 +251,7 @@
           }
         });
         
-        function bulletHandler(bullets) {
+        function bulletHandler() {
           for(i = 0; i < bullets.length; i++) {
             
             if(createdSelf && bullets[i].element !== null) {
@@ -327,6 +328,16 @@
             }
             
             setPosition(enemies[i]);
+            
+            for(j = 0; j < bullets.length; j++) {
+              if(bullets[j].owner === player.element) {
+                if(bullets[j].world === enemies[i].world) {
+                  if(checkCollision(bullets[j], enemies[i])) {
+                    socket.emit('deleteEnemy', enemies[i].element);
+                  }
+                }
+              }
+            }
           }
         }
         
@@ -356,13 +367,14 @@
         }
         
             //Update
-            socket.on('loop', function(bullets, portalsSetter, floorsSetter, enemiesSetter) {
+            socket.on('loop', function(bulletsSetter, portalsSetter, floorsSetter, enemiesSetter) {
+              bullets = bulletsSetter
               portals = portalsSetter;
               floors = floorsSetter;
               enemies = enemiesSetter;
               
               handleControls();
-              bulletHandler(bullets);
+              bulletHandler();
               portalHandler();
               floorHandler();
               enemyHandler();
