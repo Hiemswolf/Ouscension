@@ -36,6 +36,13 @@
                 position: absolute;
                 z-index: 0;
       }
+      .enemy {
+                width: 30px;
+                height: 30px;
+                background: rgb(255, 0, 0);
+                position: absolute;
+                z-index: 50;
+      }
     </style>
   </head>
   <body>
@@ -44,6 +51,7 @@
     <div id="bulletContainer"></div>
     <div id="portalContainer"></div>
     <div id="floorContainer"></div>
+    <div id="enemyContainer"></div>
     
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -89,6 +97,7 @@
         
         var portals = [];
         var floors = [];
+        var enemies = [];
         
         
         
@@ -305,6 +314,24 @@
           }
         }
         
+        function enemyHandler() {
+          for(i = 0; i < enemies.length; i++) {
+            
+            if(createdSelf && enemies[i].element !== null) {
+              if($("#" + enemies[i].element).length == 0) {
+                var element = document.createElement("div");
+                element.className = "floor";
+                element.id = enemies[i].element;
+                element.style.left = '-50px';
+                element.style.top = '-50px';
+                document.getElementById('enemyContainer').appendChild(element);
+              }
+            }
+            
+            setPosition(enemies[i]);
+          }
+        }
+        
         function blocker(sprite) {
           if(sprite.preX === undefined) {
             sprite.preX = sprite.x;
@@ -331,14 +358,16 @@
         }
         
             //Update
-            socket.on('loop', function(bullets, portalsSetter, floorsSetter) {
+            socket.on('loop', function(bullets, portalsSetter, floorsSetter, enemiesSetter) {
               portals = portalsSetter;
               floors = floorsSetter;
+              enemies = enemiesSetter;
               
               handleControls();
               bulletHandler(bullets);
               portalHandler();
               floorHandler();
+              enemyHandler();
               
               blocker(player);
               
