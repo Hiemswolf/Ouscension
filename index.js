@@ -135,6 +135,31 @@ function createSprite(element, x, y, w, h) {
   return result;
 }
 
+function blocker(sprite) {
+          if(sprite.preX === undefined) {
+            sprite.preX = sprite.x;
+            sprite.preY = sprite.Y;
+          }
+          
+          var onFloor = false;
+          
+          for(i = 0; i < floors.length; i++) {
+            if(sprite.world === floors[i].world) {
+              if(checkCollision(sprite, floors[i])) {
+                onFloor = true;
+              }
+            }
+          }
+          
+          if(!onFloor) {
+            sprite.x = sprite.preX;
+            sprite.y = sprite.preY;
+          }
+          
+          sprite.preX = sprite.x;
+          sprite.preY = sprite.y;
+        }
+
 function createPortal(world, teleport, x , y) {
   itemCounter++;
   var portal = createSprite('portal' + itemCounter, x, y, 40, 40);
@@ -208,6 +233,8 @@ function enemyHandler() {
         break;
       }
     }
+    
+    blocker(enemies[i]);
   }
 }
 
