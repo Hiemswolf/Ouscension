@@ -220,11 +220,12 @@ function createDungeon(name, length) {
 
 function enemyHandler() {
   for(i = 0; i < enemies.length; i++) {
+    var walked;
     
     enemies[i].x += Math.floor(Math.random() * 5) - 2;
     enemies[i].y += Math.floor(Math.random() * 5) - 2;
     
-    var walked = false;
+    walked = false;
     for(j = 0; j < players.length; j++) {
       if(walked === false) {
         if(players[j].world === enemies[i].world) {
