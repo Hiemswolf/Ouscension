@@ -206,10 +206,11 @@ function enemyHandler() {
           distance = tempDistance;
           enemies[i].chaseX = players[j].x;
           enemies[i].chaseY = players[j].Y;
+          console.log('mew');
         }
       }
     }
-    
+    console.log('meow');
     enemies[i].angle = Math.atan2((enemies[i].chaseY - enemies[i].y), (enemies[i].chaseX - enemies[i].x)) * (180 / Math.PI);
     enemies[i].x += 5 * Math.cos(enemies[i].angle * Math.PI / 180);
     enemies[i].y += 5 * Math.sin(enemies[i].angle * Math.PI / 180);
