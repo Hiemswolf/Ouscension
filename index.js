@@ -199,7 +199,7 @@ function enemyHandler() {
     for(j = 0; j < players.length; j++) {
       if(players[j].world === enemies[i].world) {
         
-        var tempDistance = Math.sqrt(Math.pow(enemies[i].x - players[j].x, 2) + Math.pow(enemies[i].x - players[j].x, 2));
+        var tempDistance = Math.sqrt(Math.pow(enemies[i].x - players[j].x, 2) + Math.pow(enemies[i].y - players[j].y, 2));
         if(tempDistance < distance) {
           distance = tempDistance;
           enemies[i].chaseX = players[j].x;
