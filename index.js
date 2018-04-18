@@ -35,8 +35,6 @@ io.on('connection', function(socket){
     bullet.world = player.world;
     bullet.owner = player.element;
     
-    var speed = 5;
-    
     bullet.mx = 5 * Math.cos(bullet.angle * Math.PI / 180);
     bullet.my = 5 * Math.sin(bullet.angle * Math.PI / 180);
     
