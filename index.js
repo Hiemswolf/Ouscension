@@ -200,6 +200,7 @@ function enemyHandler() {
       if(players[j].world === enemies[i].world) {
         
         var tempDistance = Math.sqrt(Math.pow(enemies[i].x - players[j].x, 2) + Math.pow(enemies[i].y - players[j].y, 2));
+        console.log(tempDistance);
         if(tempDistance < distance) {
           distance = tempDistance;
           enemies[i].chaseX = players[j].x;
@@ -208,7 +209,7 @@ function enemyHandler() {
         }
       }
     }
-    console.log(distance);
+    
     if(enemies[i].chaseX != undefined) {
       enemies[i].angle = Math.atan2((enemies[i].chaseY - enemies[i].y), (enemies[i].chaseX - enemies[i].x)) * (180 / Math.PI);
       enemies[i].x += 5 * Math.cos(enemies[i].angle * Math.PI / 180);
