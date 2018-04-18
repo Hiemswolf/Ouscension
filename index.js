@@ -140,7 +140,7 @@ function blocker(sprite) {
             sprite.preX = sprite.x;
             sprite.preY = sprite.Y;
           }
-          
+          console.log('meow');
           var onFloor = false;
           
           for(i = 0; i < floors.length; i++) {
@@ -150,14 +150,15 @@ function blocker(sprite) {
               }
             }
           }
-          
+          console.log('mew');
           if(!onFloor) {
             sprite.x = sprite.preX;
             sprite.y = sprite.preY;
           }
-          
+          console.log('woof');
           sprite.preX = sprite.x;
           sprite.preY = sprite.y;
+          console.log('yee');
         }
 
 function createPortal(world, teleport, x , y) {
@@ -238,7 +239,7 @@ function enemyHandler() {
       }
     }
     
-    //blocker(enemies[i]);
+    blocker(enemies[i]);
   }
 }
 
