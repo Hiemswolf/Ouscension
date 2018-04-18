@@ -224,13 +224,16 @@ function enemyHandler() {
     enemies[i].x += Math.floor(Math.random() * 5) - 2;
     enemies[i].y += Math.floor(Math.random() * 5) - 2;
     
+    var walked = false;
     for(j = 0; j < players.length; j++) {
-      if(players[j].world === enemies[i].world) {
-        if(players[j].x > enemies[i].x) {enemies[i].x += 5}
-        if(players[j].x < enemies[i].x) {enemies[i].x -= 5}
-        if(players[j].y > enemies[i].y) {enemies[i].y += 5}
-        if(players[j].y < enemies[i].y) {enemies[i].y -= 5}
-        break;
+      if(walked === false) {
+        if(players[j].world === enemies[i].world) {
+          if(players[j].x > enemies[i].x) {enemies[i].x += 5}
+          if(players[j].x < enemies[i].x) {enemies[i].x -= 5}
+          if(players[j].y > enemies[i].y) {enemies[i].y += 5}
+          if(players[j].y < enemies[i].y) {enemies[i].y -= 5}
+          walked = true;
+        }
       }
     }
     
