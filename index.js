@@ -156,8 +156,6 @@ function createEnemy(world, x , y) {
   itemCounter++;
   var enemy = createSprite('enemy' + itemCounter, x, y, 30, 30);
   enemy.world = world;
-  enemy.chaseX = 'none';
-  enemy.chaseY = 'none';
   
   enemies[enemies.length] = enemy;
 }
@@ -212,8 +210,9 @@ function handleEnemies() {
       }
     }
     
-    //enemies[i].x += 5 * Math.cos(bullet.angle * Math.PI / 180);
-    //enemies[i].y += 5 * Math.sin(bullet.angle * Math.PI / 180);
+    enemies[i].angle = Math.atan2((enemies[i].chaseY - enemies[i].y), (enemies[i].chaseX - enemies[i].x)) * (180 / Math.PI);
+    enemies[i].x += 5 * Math.cos(enemies[i].angle * Math.PI / 180);
+    enemies[i].y += 5 * Math.sin(enemies[i].angle * Math.PI / 180);
   }
 }
 
