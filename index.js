@@ -120,6 +120,10 @@ io.on('connection', function(socket){
 //////////////////////////////////////////////////////////////////////////////
 
 
+function checkCollision (a,b) {
+  return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+}
+
 function createSprite(element, x, y, w, h) {
   var result = new Object();
   result.element = element;
