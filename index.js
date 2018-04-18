@@ -195,25 +195,13 @@ function enemyHandler() {
     enemies[i].x += Math.floor(Math.random() * 5) - 2;
     enemies[i].y += Math.floor(Math.random() * 5) - 2;
     
-    var distance = 1000;
     for(j = 0; j < players.length; j++) {
       if(players[j].world === enemies[i].world) {
-        
-        var tempDistance = Math.sqrt(Math.pow(enemies[i].x - players[j].x, 2) + Math.pow(enemies[i].y - players[j].y, 2));
-        console.log(tempDistance);
-        if(tempDistance < distance) {
-          distance = tempDistance;
-          enemies[i].chaseX = players[j].x;
-          enemies[i].chaseY = players[j].Y;
-          console.log('mew');
-        }
+        if(players[j].x > enemies[i].x) {enemies[i].x += 5}
+        if(players[j].x < enemies[i].x) {enemies[i].x += 5}
+        if(players[j].y > enemies[i].y) {enemies[i].y += 5}
+        if(players[j].y < enemies[i].y) {enemies[i].y += 5}
       }
-    }
-    
-    if(enemies[i].chaseX != undefined) {
-      enemies[i].angle = Math.atan2((enemies[i].chaseY - enemies[i].y), (enemies[i].chaseX - enemies[i].x)) * (180 / Math.PI);
-      enemies[i].x += 5 * Math.cos(enemies[i].angle * Math.PI / 180);
-      enemies[i].y += 5 * Math.sin(enemies[i].angle * Math.PI / 180);
     }
   }
 }
