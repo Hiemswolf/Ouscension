@@ -191,7 +191,7 @@ function createDungeon(name, length) {
 }
 
 
-function handleEnemies() {
+function enemyHandler() {
   for(i = 0; i < enemies.length; i++) {
     
     enemies[i].x += Math.floor(Math.random() * 5) - 2;
@@ -231,6 +231,8 @@ function Update() {
         i--;
       }
     }
+    
+    enemyHandler();
     
     io.emit('loop', bullets, portals, floors, enemies);
     
