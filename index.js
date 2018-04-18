@@ -136,7 +136,7 @@ function createSprite(element, x, y, w, h) {
 }
 
 function blocker(sprite) {
-          if(sprite.preX === undefined) {
+          if(sprite.preX === undefined || sprite.preX === null) {
             sprite.preX = sprite.x;
             sprite.preY = sprite.Y;
           }
