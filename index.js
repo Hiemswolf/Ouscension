@@ -6,6 +6,8 @@ var port = process.env.PORT || 3000;
 var itemCounter = 0;
 var lastUpdate = new Date().getTime();
 
+var players = [];
+
 var bullets = [];
 var portals = [];
 var floors = [];
@@ -42,6 +44,18 @@ io.on('connection', function(socket){
   });
             
   socket.on('playerInfo', function(playerSprite) {
+    
+    var inPlayerArray = false;
+    for(i = 0; i < players.length; i++) {
+      if(playerSprite.element === players[i].element) {
+        inPlayerArray = true;
+        players[i] = playerSprite;
+      }
+    }
+    if(inPlayerArray === false) {
+      players[players.length] = playerSprite;
+    }
+    
     io.emit('showPlayer', playerSprite);
   });
   
@@ -105,6 +119,8 @@ io.on('connection', function(socket){
 });
 
 
+//////////////////////////////////////////////////////////////////////////////
+
 
 function createSprite(element, x, y, w, h) {
   var result = new Object();
@@ -140,6 +156,8 @@ function createEnemy(world, x , y) {
   itemCounter++;
   var enemy = createSprite('enemy' + itemCounter, x, y, 30, 30);
   enemy.world = world;
+  enemy.chaseX = 'none';
+  enemy.chaseY = 'none';
   
   enemies[enemies.length] = enemy;
 }
@@ -172,6 +190,31 @@ function createDungeon(name, length) {
   }
   createPortal(name, 'Hub', floorX * 500 - 15, floorY * 500 - 15);
   dungeons++;
+}
+
+
+function handleEnemies() {
+  for(i = 0; i < enemies.length; i++) {
+    
+    enemies[i].x += Math.floor(Math.random() * 5) - 2;
+    enemies[i].y += Math.floor(Math.random() * 5) - 2;
+    
+    var distance = 1000;
+    for(j = 0; j < players.length; j++) {
+      if(players[j].world === enemies[i].world) {
+        
+        var tempDistance = Math.sqrt(Math.abs(Math.pow(enemies[i].x - players[j].x, 2) + Math.pow(enemies[i].x - players[j].x, 2)));
+        if(tempDistance < distance) {
+          distance = tempDistance;
+          enemies[i].chaseX = players[j].x;
+          enemies[i].chaseY = players[j].Y;
+        }
+      }
+    }
+    
+    //enemies[i].x += 5 * Math.cos(bullet.angle * Math.PI / 180);
+    //enemies[i].y += 5 * Math.sin(bullet.angle * Math.PI / 180);
+  }
 }
 
 
