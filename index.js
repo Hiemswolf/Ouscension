@@ -238,7 +238,7 @@ function enemyHandler() {
       }
     }
     
-    blocker(enemies[i]);
+    //blocker(enemies[i]);
   }
 }
 
