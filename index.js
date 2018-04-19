@@ -83,7 +83,7 @@ io.on('connection', function(socket){
     
     dungeons--;
     if(dungeons < 1) {
-      createDungeon('choose', 5);
+      createDungeon('choose', Math.floor(Math.random() * 6) + 5);
     }
   });
   
