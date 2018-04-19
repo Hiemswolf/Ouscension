@@ -228,9 +228,6 @@ function enemyHandler() {
     
     var walked;
     
-    enemies[i].x += Math.floor(Math.random() * 5) - 2;
-    enemies[i].y += Math.floor(Math.random() * 5) - 2;
-    
     walked = false;
     for(j = 0; j < players.length; j++) {
       if(walked === false) {
