@@ -316,7 +316,7 @@
         function enemyHandler() {
           for(i = 0; i < enemies.length; i++) {
             
-            if(createdSelf && enemies[i].element !== null) {
+            if(enemies[i].element !== null) {
               if($("#" + enemies[i].element).length == 0) {
                 var element = document.createElement("div");
                 element.className = "enemy";
@@ -328,7 +328,6 @@
             }
             
             setPosition(enemies[i]);
-            console.log(enemies[i].element);
             document.getElementById(enemies[i].element).style.transform = 'rotate(' + enemies[i].angle + 'deg)';
             
             for(j = 0; j < bullets.length; j++) {
