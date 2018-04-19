@@ -221,6 +221,8 @@ function createDungeon(name, length) {
 
 function enemyHandler() {
   for(i = 0; i < enemies.length; i++) {
+    blocker(enemies[i]);
+    
     var walked;
     
     enemies[i].x += Math.floor(Math.random() * 5) - 2;
@@ -239,7 +241,7 @@ function enemyHandler() {
       }
     }
     
-    blocker(enemies[i]);
+    
   }
 }
 
