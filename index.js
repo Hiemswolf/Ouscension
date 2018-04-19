@@ -140,25 +140,25 @@ function blocker(sprite) {
             sprite.preX = sprite.x;
             sprite.preY = sprite.Y;
           }
-          console.log('meow');
+  
           var onFloor = false;
           
-          for(i = 0; i < floors.length; i++) {
-            if(sprite.world === floors[i].world) {
-              if(checkCollision(sprite, floors[i])) {
+          for(o = 0; o < floors.length; o++) {
+            if(sprite.world === floors[o].world) {
+              if(checkCollision(sprite, floors[o])) {
                 onFloor = true;
               }
             }
           }
-          console.log('mew');
+  
           if(!onFloor) {
             sprite.x = sprite.preX;
             sprite.y = sprite.preY;
           }
-          console.log('woof');
+  
           sprite.preX = sprite.x;
           sprite.preY = sprite.y;
-          console.log('yee');
+  
         }
 
 function createPortal(world, teleport, x , y) {
