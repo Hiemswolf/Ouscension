@@ -231,12 +231,10 @@ function enemyHandler() {
     for(j = 0; j < players.length; j++) {
       if(walked === false) {
         if(players[j].world === enemies[i].world) {
-          if(players[j].x > enemies[i].x) {enemies[i].x += 5}
-          if(players[j].x < enemies[i].x) {enemies[i].x -= 5}
-          if(players[j].y > enemies[i].y) {enemies[i].y += 5}
-          if(players[j].y < enemies[i].y) {enemies[i].y -= 5}
-          
           enemies[i].angle = Math.atan2((players[j].y - enemies[i].y), (players[j].x - enemies[i].x)) * (180 / Math.PI);
+          
+          enemies[i].x += 5 * Math.cos(enemies[i].angle * Math.PI / 180);
+          enemies[i].y += 5 * Math.sin(enemies[i].angle * Math.PI / 180);
           
           walked = true;
         }
