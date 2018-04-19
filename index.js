@@ -87,10 +87,13 @@ io.on('connection', function(socket){
     }
   });
   
-  socket.on('deleteEnemy', function(value) {
+  socket.on('hurtEnemy', function(value) {
     for(i = 0; i < enemies.length; i++) {
       if(enemies[i].element === value) {
-        enemies.splice(i, 1);
+        enemies[i].hp--;
+        if(enemies[i].hp <= 0) {
+          enemies.splice(i, 1);
+        }
       }
     }
     
@@ -184,6 +187,7 @@ function createEnemy(world, x , y) {
   itemCounter++;
   var enemy = createSprite('enemy' + itemCounter, x, y, 30, 30);
   enemy.world = world;
+  enemy.hp = 5;
   
   enemies[enemies.length] = enemy;
 }
