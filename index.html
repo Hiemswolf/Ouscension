@@ -334,7 +334,7 @@
               if(bullets[j].owner === player.element) {
                 if(bullets[j].world === enemies[i].world) {
                   if(checkCollision(bullets[j], enemies[i])) {
-                    socket.emit('deleteEnemy', enemies[i].element);
+                    socket.emit('hurtEnemy', enemies[i].element);
                     socket.emit('deleteBullet', bullets[j].element);
                   }
                 }
