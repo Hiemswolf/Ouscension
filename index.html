@@ -328,6 +328,7 @@
             }
             
             setPosition(enemies[i]);
+            document.getElementById(enemies[i].element).style.transform = 'rotate(' + enemies[i].angle + 'deg)';
             
             for(j = 0; j < bullets.length; j++) {
               if(bullets[j].owner === player.element) {
