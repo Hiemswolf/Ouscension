@@ -381,8 +381,21 @@
           sprite.preY = sprite.y;
         }
 
+        function playerDamage() {
+          for(i = 0; i < enemies.length; i++) {
+            if(player.world === enemies[i].world) {
+              if(checkCollision(player, enemies[i])) {
+                player.x = 0;
+                player.y = 0;
+                player.world = "Hub";
+              }
+            }
+          }
+        }
+
             //Update
             socket.on('loop', function(bulletsSetter, portalsSetter, floorsSetter, enemiesSetter) {
+
               bullets = bulletsSetter
               portals = portalsSetter;
               floors = floorsSetter;
@@ -393,6 +406,7 @@
               portalHandler();
               floorHandler();
               enemyHandler();
+              playerDamage();
 
               blocker(player);
 
