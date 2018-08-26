@@ -1,2 +1,0 @@
-# Ouscension
-ouscension.herokuapp.com
