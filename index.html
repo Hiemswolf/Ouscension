@@ -108,6 +108,7 @@
           player.w = 25;
           player.h = 25;
           player.world = 'Hub';
+          player.invincibility = 0;
 
         var bullets = [];
         var portals = [];
@@ -157,6 +158,7 @@
                         player.world = portals[i].teleport;
                         player.x = 0;
                         player.y = 0;
+                        player.invincibility = 25;
                       }
                     }
                   }
@@ -391,12 +393,19 @@
         }
 
         function playerDamage() {
-          for(i = 0; i < enemies.length; i++) {
-            if(player.world === enemies[i].world) {
-              if(checkCollision(player, enemies[i])) {
-                player.x = 0;
-                player.y = 0;
-                player.world = "Hub";
+
+          if(player.invincibility > 0) {
+            player.invincibility--;
+          }
+
+          if(player.invincibility === 0) {
+            for(i = 0; i < enemies.length; i++) {
+              if(player.world === enemies[i].world) {
+                if(checkCollision(player, enemies[i])) {
+                  player.x = 0;
+                  player.y = 0;
+                  player.world = "Hub";
+                }
               }
             }
           }
