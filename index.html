@@ -217,13 +217,6 @@
 
             socket.on('loadNewChar', function(value) {
 
-                var element = document.createElement('div');
-                element.className = 'player';
-                //element.innerHTML = usr;
-                element.id = value;
-                element.style.left = '-50px';
-                element.style.top = '-50px';
-
                 if(createdSelf === false) {
                   createdSelf = true;
                   player.element = value;
@@ -407,6 +400,19 @@
                   player.world = "Hub";
                 }
               }
+            }
+          }
+        }
+
+        function playerCheck() {
+          for(i = 0; i < players.length; i++) {
+            if($("#" + players[i].element).length == 0) {
+              var element = document.createElement('div');
+              element.className = 'player';
+              //element.innerHTML = usr;
+              element.id = players[i].element;
+              element.style.left = '-50px';
+              element.style.top = '-50px';
             }
           }
         }
