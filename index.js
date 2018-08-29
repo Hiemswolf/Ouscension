@@ -251,10 +251,12 @@ function enemyHandler() {
       }
     }
 
-    enemies[i].angle = Math.atan2((closest.y - enemies[i].y), (closest.x - enemies[i].x)) * (180 / Math.PI);
+    if(closest !== undefined0) {
+      enemies[i].angle = Math.atan2((closest.y - enemies[i].y), (closest.x - enemies[i].x)) * (180 / Math.PI);
 
-    enemies[i].x += 5 * Math.cos(enemies[i].angle * Math.PI / 180);
-    enemies[i].y += 5 * Math.sin(enemies[i].angle * Math.PI / 180);
+      enemies[i].x += 5 * Math.cos(enemies[i].angle * Math.PI / 180);
+      enemies[i].y += 5 * Math.sin(enemies[i].angle * Math.PI / 180);
+    }
     blocker(enemies[i]);
   }
 }
