@@ -237,7 +237,10 @@ function enemyHandler() {
     for(j = 0; j < players.length; j++) {
       if(players[j].world === enemies[i].world) {
         targets[targets.length] = players[j];
-        
+
+        console.log(players[j].x);
+        console.log(enemies[i].x);
+
         targets[j].distance = Math.hypot(players[j].x - enemies[i].x, players[j].y - enemies[i].y);
       }
     }
