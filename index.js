@@ -232,21 +232,29 @@ function createDungeon(name, length) {
 function enemyHandler() {
   for(i = 0; i < enemies.length; i++) {
 
-    var walked = false;
+    var targets = [];
 
     for(j = 0; j < players.length; j++) {
-      if(walked === false) {
-        if(players[j].world === enemies[i].world) {
-          enemies[i].angle = Math.atan2((players[j].y - enemies[i].y), (players[j].x - enemies[i].x)) * (180 / Math.PI);
+      if(players[j].world === enemies[i].world) {
+        targets[targets.length] = player;
 
-          enemies[i].x += 5 * Math.cos(enemies[i].angle * Math.PI / 180);
-          enemies[i].y += 5 * Math.sin(enemies[i].angle * Math.PI / 180);
-
-          walked = true;
-        }
+        targets[j].distance = Math.sqrt(Math.pow(players[j].x - enemies[i].x, 2) + Math.pow(players[j].y - enemies[i].y, 2));
       }
     }
 
+    var closestDistance = 800;
+    var closest;
+    for(j = 0; j < targets.length; j++) {
+      if(targets[j].distance < closestDistance) {
+        closest = targets[j];
+        closestDistance = targets[j].distance;
+      }
+    }
+
+    enemies[i].angle = Math.atan2((closest.y - enemies[i].y), (closest.x - enemies[i].x)) * (180 / Math.PI);
+
+    enemies[i].x += 5 * Math.cos(enemies[i].angle * Math.PI / 180);
+    enemies[i].y += 5 * Math.sin(enemies[i].angle * Math.PI / 180);
     blocker(enemies[i]);
   }
 }
