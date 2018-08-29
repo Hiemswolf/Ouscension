@@ -238,8 +238,7 @@ function enemyHandler() {
       if(players[j].world === enemies[i].world) {
         targets[targets.length] = players[j];
 
-        console.log(players[j].x - enemies[i].x);
-        console.log(players[j].y - enemies[i].y);
+        console.log(Math.hypot(players[j].x - enemies[i].x, players[j].y - enemies[i].y));
 
         targets[j].distance = Math.hypot(players[j].x - enemies[i].x, players[j].y - enemies[i].y);
       }
