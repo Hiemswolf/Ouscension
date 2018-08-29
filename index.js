@@ -251,7 +251,7 @@ function enemyHandler() {
       }
     }
 
-    if(closest !== undefined0) {
+    if(closest !== undefined) {
       enemies[i].angle = Math.atan2((closest.y - enemies[i].y), (closest.x - enemies[i].x)) * (180 / Math.PI);
 
       enemies[i].x += 5 * Math.cos(enemies[i].angle * Math.PI / 180);
