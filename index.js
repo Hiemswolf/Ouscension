@@ -236,7 +236,7 @@ function enemyHandler() {
 
     for(j = 0; j < players.length; j++) {
       if(players[j].world === enemies[i].world) {
-        targets[targets.length] = player;
+        targets[targets.length] = players[j];
 
         targets[j].distance = Math.sqrt(Math.pow(players[j].x - enemies[i].x, 2) + Math.pow(players[j].y - enemies[i].y, 2));
       }
