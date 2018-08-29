@@ -217,6 +217,13 @@
 
             socket.on('loadNewChar', function(value) {
 
+              var element = document.createElement('div');
+              element.className = 'player';
+              //element.innerHTML = usr;
+              element.id = value;
+              element.style.left = '-50px';
+              element.style.top = '-50px';
+
                 if(createdSelf === false) {
                   createdSelf = true;
                   player.element = value;
