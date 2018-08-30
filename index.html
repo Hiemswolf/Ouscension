@@ -52,6 +52,10 @@
                 position: absolute;
                 z-index: 50;
       }
+      #mainGUI {
+        background: rgb(0, 0, 0);
+        position: absolute;
+      }
     </style>
   </head>
   <body>
@@ -65,6 +69,7 @@
     <div id="portalContainer"></div>
     <div id="floorContainer"></div>
     <div id="enemyContainer"></div>
+    <div id="mainGUI"></div>
 
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -99,7 +104,11 @@
                 screenY = y;
             }
 
-        var gameScreenX = screenX;
+        var gameScreenX = 3 * screenX / 4;
+
+        document.getElementById("mainGUI").style.left = gameScreenX + "px";
+        document.getElementById("mainGUI").style.width = screenX / 4 + "px";
+        document.getElementById("mainGUI").style.height = screenY + "px";
 
         var players = [];
 
