@@ -18,7 +18,7 @@
                 background: rgb(0, 255, 255);
                 background-image: url("https://image.ibb.co/h55aMn/player.gif");
                 position: absolute;
-                z-index: 1000000;
+                z-index: 1000;
       }
       .bullet {
                 width: 10px;
@@ -55,6 +55,8 @@
       #mainGUI {
         background: rgb(0, 0, 0);
         position: absolute;
+        opacity: 0.5;
+        z-index: 1000000;
       }
     </style>
   </head>
@@ -104,10 +106,10 @@
                 screenY = y;
             }
 
-        var gameScreenX = 3 * screenX / 4;
+        var gameScreenX = 5 * screenX / 6;
 
         document.getElementById("mainGUI").style.left = gameScreenX + "px";
-        document.getElementById("mainGUI").style.width = screenX / 4 + "px";
+        document.getElementById("mainGUI").style.width = screenX / 6 + "px";
         document.getElementById("mainGUI").style.height = screenY + "px";
 
         var players = [];
