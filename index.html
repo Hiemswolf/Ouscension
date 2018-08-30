@@ -99,6 +99,8 @@
                 screenY = y;
             }
 
+        var gameScreenX = screenX;
+
         var players = [];
 
         var player = new Object();
@@ -135,11 +137,11 @@
             var e = document.getElementById(sprite.element);
             if(e !== null || undefined) {
               if(sprite.element === player.element) {
-                e.style.left = screenX / 2 + "px";
+                e.style.left = gameScreenX / 2 + "px";
                 e.style.top = screenY / 2 + "px";
               } else {
                 if(player.world === sprite.world) {
-                  e.style.left = sprite.x - player.x + screenX / 2 + "px";
+                  e.style.left = sprite.x - player.x + gameScreenX / 2 + "px";
                   e.style.top = sprite.y - player.y + screenY / 2 + "px";
                   e.style.display = 'block';
                 } else {
@@ -172,7 +174,7 @@
                 toggleKey(evt.keyCode, false)
             };
             document.onmousemove = function(evt) {
-              var angle = Math.atan2((evt.y - screenY / 2), (evt.x - screenX / 2)) * (180 / Math.PI);
+              var angle = Math.atan2((evt.y - screenY / 2), (evt.x - gameScreenX / 2)) * (180 / Math.PI);
               player.angle = angle;
             };
             document.onmousedown = function(evt) {
@@ -231,7 +233,7 @@
                   createdSelf = true;
                   player.element = value;
 
-                  element.style.left = screenX / 2 + 'px';
+                  element.style.left = gameScreenX / 2 + 'px';
                   element.style.top = screenY / 2 + 'px';
                 }
 
