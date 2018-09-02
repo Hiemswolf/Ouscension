@@ -113,6 +113,18 @@
         document.getElementById("mainGUI").style.width = screenX / 6 + "px";
         document.getElementById("mainGUI").style.height = screenY + "px";
 
+        if(true) {
+          var slot = document.createElement("div");
+          slot.style.left = gameScreenX + screenX / 8 - 25 + "px";
+          slot.style.top = screenY / 2 - 25 + "px";
+          slot.style.width = 50 + "px";
+          slot.style.height = 50 + "px";
+          slot.style.background = "rgb(0, 0, 0)";
+          slot.style.borderRadius = "10px";
+
+          document.getElementById("mainGUI").appendChild(slot);
+        }
+
         var players = [];
 
         var player = new Object();
