@@ -117,10 +117,10 @@
 
         if(true) {
           var slot = document.createElement("div");
-          slot.style.left = gameScreenX + screenX / 12 - 25 + "px";
-          slot.style.top = screenY / 2 - 25 + "px";
-          slot.style.width = 50 + "px";
-          slot.style.height = 50 + "px";
+          slot.style.left = gameScreenX + screenX / 12 - (screenX * 0.026) / 2 + "px";
+          slot.style.top = screenY / 2 - (screenX * 0.026) / 2 + "px";
+          slot.style.width = screenX * 0.026 + "px";
+          slot.style.height = screenX * 0.026 + "px";
           slot.style.background = "rgb(0, 0, 0)";
           slot.style.borderRadius = "10px";
           slot.style.position = "absolute";
