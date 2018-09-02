@@ -73,6 +73,7 @@
     <div id="floorContainer"></div>
     <div id="enemyContainer"></div>
     <div id="mainGUI"></div>
+    <div id="inventorySlots"></div>
 
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -110,7 +111,7 @@
         var gameScreenX = 5 * screenX / 6;
 
         document.getElementById("mainGUI").style.left = gameScreenX + "px";
-        document.getElementById("mainGUI").style.left = 0 + "px";
+        document.getElementById("mainGUI").style.top = 0 + "px";
         document.getElementById("mainGUI").style.width = screenX / 6 + "px";
         document.getElementById("mainGUI").style.height = screenY + "px";
 
@@ -124,7 +125,7 @@
           slot.style.borderRadius = "10px";
           slot.style.position = "absolute";
 
-          document.getElementById("mainGUI").appendChild(slot);
+          document.getElementById("inventorySlots").appendChild(slot);
         }
 
         var players = [];
