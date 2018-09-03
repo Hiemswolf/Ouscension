@@ -262,8 +262,12 @@
               if(evt.which === 1) {
                 socket.emit('createBullet', player);
 
-                for(i = 0; i < invItems; i++) {
+                var mouse = createSprite('Mouse', evt.x, evt.y, 1, 1)
 
+                for(i = 0; i < invItems; i++) {
+                  if(checkCollision(invItems, mouse)) {
+                    unEquipWeapon
+                  }
                 }
               }
             }
@@ -562,11 +566,11 @@
           }
         }
 
-        function unEquipWeapon() {
+        function unEquipWeapon(id) {
           player.weapon = 'none';
 
-          if($("#item").length !== 0) {
-            var element = document.getElementById('item');
+          if($("#" + id).length !== 0) {
+            var element = document.getElementById(id);
 
             element.style.display = "none";
             element.parentNode.removeChild(element);
