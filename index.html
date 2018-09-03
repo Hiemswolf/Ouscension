@@ -156,6 +156,7 @@
         var portals = [];
         var floors = [];
         var enemies = [];
+        var items = [];
 
 
 
@@ -499,16 +500,20 @@
 
             element.style.display = "none";
             element.parentNode.removeChild(element);
+
+            socket.emit('itemDropped', player.world, player.x, player.y);
           }
         }
 
             //Update
-            socket.on('loop', function(bulletsSetter, portalsSetter, floorsSetter, enemiesSetter) {
+            socket.on('loop', function(bulletsSetter, portalsSetter, floorsSetter, enemiesSetter, itemsSetter) {
 
               bullets = bulletsSetter
               portals = portalsSetter;
               floors = floorsSetter;
               enemies = enemiesSetter;
+              items = itemsSetter;
+
 
               handleControls();
               bulletHandler();

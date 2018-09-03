@@ -12,6 +12,7 @@ var bullets = [];
 var portals = [];
 var floors = [];
 var enemies = [];
+var items = [];
 var dungeons = 0;
 
 app.get('/', function(req, res){
@@ -114,6 +115,10 @@ io.on('connection', function(socket){
     io.emit('delete', value);
   });
 
+  socket.on('itemDropped', function(world, x , y) {
+    createItem(world, x, y);
+  });
+
   socket.on('disconnect', function() {
     io.emit('delete', socket.number);
     for(i = 0; i < players.length; i++) {
@@ -169,6 +174,14 @@ function blocker(sprite) {
           sprite.preY = sprite.y;
 
         }
+
+function createItem(world, x, y) {
+  itemCounter++;
+  var item = createSprite('item' + itemCounter, x, y, 25, 25);
+  item.world = world;
+
+  items[items.length] = item;
+}
 
 function createPortal(world, teleport, x , y) {
   itemCounter++;
@@ -280,7 +293,7 @@ function Update() {
 
     enemyHandler();
 
-    io.emit('loop', bullets, portals, floors, enemies);
+    io.emit('loop', bullets, portals, floors, enemies, items);
 
     lastUpdate = new Date().getTime();
   }
