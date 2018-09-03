@@ -81,6 +81,13 @@ io.on('connection', function(socket){
         i--;
       }
     }
+    for(i = 0; i < items.length; i++) {
+      if(items[i].world === dungeon) {
+        io.emit('delete', items[i].element);
+        items.splice(i, 1);
+        i--;
+      }
+    }
 
     dungeons--;
     if(dungeons < 1) {
@@ -93,6 +100,10 @@ io.on('connection', function(socket){
       if(enemies[i].element === value) {
         enemies[i].hp--;
         if(enemies[i].hp <= 0) {
+          if(Math.floor(Math.random() * 8) === 0) {
+            createItem(enemies[i].world, enemies[i].x, enemies[i].y);
+          }
+
           enemies.splice(i, 1);
         }
       }
