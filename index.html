@@ -193,10 +193,12 @@
         }
             document.onkeydown = function(evt) {
               toggleKey(evt.keyCode, true);
-              if(evt.keyCode == eKey) {
+              if(evt.keyCode == qKey) {
                 unEquipWeapon();
               }
               if(evt.keyCode == eKey) {
+                equipWeapon();
+
                 for(i = 0; i < portals.length; i++) {
                   if(portals[i].world === player.world) {
                     if(checkCollision(player, portals[i])) {
@@ -473,7 +475,6 @@
         }
 
         //Weapon
-        equipWeapon();
         function equipWeapon() {
           if(player.weapon = 'none') {
             player.weapon = 'mint';
