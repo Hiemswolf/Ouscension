@@ -246,7 +246,7 @@
               if(evt.which === 1) {
                 socket.emit('createBullet', player);
 
-                var mouse = createSprite('Mouse', evt.x, evt.y, 1, 1)
+                var mouse = createSprite('Mouse', evt.x, evt.y, 1, 1);
 
                 for(i = 0; i < invItems[i]; i++) {
                   if(checkCollision(invItems[i], mouse)) {
