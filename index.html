@@ -151,6 +151,18 @@
         if(true) {
           var item = document.createElement("div");
           item.style.left = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2 + "px";
+          item.style.top = screenY / 2 - (screenX * 0.0208) / 2 + screenX * 0.0208 + "px";
+          item.style.width = screenX * 0.0208 + "px";
+          item.style.height = screenX * 0.0208 + "px";
+          item.className = "item";
+          item.id = 'item';
+
+          document.getElementById("inventorySlots").appendChild(item);
+        }
+
+        if(true) {
+          var item = document.createElement("div");
+          item.style.left = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2 + "px";
           item.style.top = screenY / 2 - (screenX * 0.0208) / 2 + "px";
           item.style.width = screenX * 0.0208 + "px";
           item.style.height = screenX * 0.0208 + "px";
@@ -520,7 +532,7 @@
 
                 var item = document.createElement("div");
                 item.style.left = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2 + "px";
-                item.style.top = screenY / 2 - (screenX * 0.0208) / 2 + "px";
+                item.style.top = screenY / 2 - (screenX * 0.0208) / 2 + screenX * 0.0208 + "px";
                 item.style.width = screenX * 0.0208 + "px";
                 item.style.height = screenX * 0.0208 + "px";
                 item.className = "item";
