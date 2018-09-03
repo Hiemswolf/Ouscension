@@ -161,30 +161,6 @@
           document.getElementById("inventorySlots").appendChild(slot);
         }
 
-        //Weapon
-        if(true) {
-          var invItem = {};
-          invItem.element = 'item';
-          invItem.x = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2;
-          invItem.y = screenY / 2 - (screenX * 0.0208) / 2 - (screenX * 0.026) * 1.25;
-          invItem.w = screenX * 0.0208;
-          invItem.h = screenX * 0.0208;
-
-          var item = document.createElement("div");
-          item.style.left = invItem.x + "px";
-          item.style.top = invItem.y + "px";
-          item.style.width = invItem.w + "px";
-          item.style.height = invItem.h + "px";
-          item.className = "item";
-          item.id = 'item';
-
-          document.getElementById("inventorySlots").appendChild(item);
-
-          socket.emit('deleteItem', items[i].element);
-
-          invItems[invItems] = invItem;
-        }
-
         var players = [];
 
         var player = new Object();
@@ -195,7 +171,7 @@
           player.h = 25;
           player.world = 'Hub';
           player.invincibility = 0;
-          player.weapon = "mint";
+          player.weapon = "none";
 
         var bullets = [];
         var portals = [];
