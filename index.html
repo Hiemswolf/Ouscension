@@ -139,7 +139,7 @@
         if(true) {
           var slot = document.createElement("div");
           slot.style.left = gameScreenX + screenX / 12 - (screenX * 0.026) / 2 + "px";
-          slot.style.top = screenY / 2 - (screenX * 0.026) / 2 + "px";
+          slot.style.top = screenY / 2 - (screenX * 0.026) / 2 - screenX * 0.026 + "px";
           slot.style.width = screenX * 0.026 + "px";
           slot.style.height = screenX * 0.026 + "px";
           slot.style.borderRadius = (screenX * 0.026) / 5 + "px";
@@ -149,21 +149,22 @@
         }
 
         if(true) {
-          var item = document.createElement("div");
-          item.style.left = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2 + "px";
-          item.style.top = screenY / 2 - (screenX * 0.0208) / 2 + screenX * 0.0208 + "px";
-          item.style.width = screenX * 0.0208 + "px";
-          item.style.height = screenX * 0.0208 + "px";
-          item.className = "item";
-          item.id = 'item';
+          var slot = document.createElement("div");
+          slot.style.left = gameScreenX + screenX / 12 - (screenX * 0.026) / 2 + "px";
+          slot.style.top = screenY / 2 - (screenX * 0.026) / 2 + "px";
+          slot.style.width = screenX * 0.026 + "px";
+          slot.style.height = screenX * 0.026 + "px";
+          slot.style.borderRadius = (screenX * 0.026) / 5 + "px";
+          slot.className = "inventorySlot";
 
-          document.getElementById("inventorySlots").appendChild(item);
+          document.getElementById("inventorySlots").appendChild(slot);
         }
 
+        //Weapon
         if(true) {
           var item = document.createElement("div");
           item.style.left = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2 + "px";
-          item.style.top = screenY / 2 - (screenX * 0.0208) / 2 + "px";
+          item.style.top = screenY / 2 - (screenX * 0.0208) / 2 - screenX * 0.0208 + "px";
           item.style.width = screenX * 0.0208 + "px";
           item.style.height = screenX * 0.0208 + "px";
           item.className = "item";
@@ -532,7 +533,7 @@
 
                 var item = document.createElement("div");
                 item.style.left = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2 + "px";
-                item.style.top = screenY / 2 - (screenX * 0.0208) / 2 + screenX * 0.0208 + "px";
+                item.style.top = screenY / 2 - (screenX * 0.0208) / 2 - screenX * 0.0208 + "px";
                 item.style.width = screenX * 0.0208 + "px";
                 item.style.height = screenX * 0.0208 + "px";
                 item.className = "item";
