@@ -248,13 +248,9 @@
 
                 var mouse = createSprite('Mouse', evt.x, evt.y, 1, 1);
 
-                console.log(invItems);
-
                 for(i = 0; i < invItems.length; i++) {
-                  console.log(mouse.x + ':' + mouse.y + '_' + invItems[i].x + ':' + invItems[i].y);
                   if(checkCollision(invItems[i], mouse)) {
-                    console.log('hi');
-                    unEquipWeapon(invItems[i].id);
+                    unEquipWeapon(invItems[i].element);
                   }
                 }
               }
