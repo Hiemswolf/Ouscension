@@ -115,7 +115,7 @@ io.on('connection', function(socket){
     io.emit('delete', value);
   });
 
-  socket.on('itemDropped', function(world, x , y) {
+  socket.on('itemDropped', function(world, x, y) {
     createItem(world, x, y);
   });
 

@@ -489,11 +489,13 @@
               var element = document.createElement('div');
               element.className = 'droppedItem';
               element.id = items[i].element;
-              element.style.left = items[i].x + 'px';
-              element.style.top = items[i].y + 'px';
+              element.style.left = '-50px';
+              element.style.top = '-50px';
 
               document.getElementById('items').appendChild(element);
             }
+
+            setPosition(items[i]);
           }
         }
 
