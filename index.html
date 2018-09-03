@@ -52,6 +52,17 @@
                 position: absolute;
                 z-index: 50;
       }
+      .inventorySlot {
+                background: rgb(0, 0, 0);
+                position: absolute;
+                z-index: 1000002;
+                opacity: 0.8;
+      }
+      .item {
+                background: rgb(255, 255, 0);
+                position: absolute;
+                z-index: 1000002;
+      }
       #mainGUI {
         background: rgb(0, 0, 0);
         position: absolute;
@@ -115,18 +126,29 @@
         document.getElementById("mainGUI").style.width = screenX / 6 + "px";
         document.getElementById("mainGUI").style.height = screenY + "px";
 
+        //Weapon Slot
         if(true) {
           var slot = document.createElement("div");
           slot.style.left = gameScreenX + screenX / 12 - (screenX * 0.026) / 2 + "px";
           slot.style.top = screenY / 2 - (screenX * 0.026) / 2 + "px";
           slot.style.width = screenX * 0.026 + "px";
           slot.style.height = screenX * 0.026 + "px";
-          slot.style.background = "rgb(0, 0, 0)";
           slot.style.borderRadius = (screenX * 0.026) / 5 + "px";
-          slot.style.position = "absolute";
-          slot.style.opacity = "0.8";
+          slot.class = "inventorySlot";
 
           document.getElementById("inventorySlots").appendChild(slot);
+        }
+
+        //Weapon
+        if(true) {
+          var item = document.createElement("div");
+          item.style.left = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2 + "px";
+          item.style.top = screenY / 2 - (screenX * 0.0208) / 2 + "px";
+          item.style.width = screenX * 0.0208 + "px";
+          item.style.height = screenX * 0.0208 + "px";
+          item.class = "item";
+
+          document.getElementById("inventorySlots").appendChild(item);
         }
 
         var players = [];
