@@ -536,7 +536,10 @@
           }
 
           for(i = 0; i < invItems.length; i++) {
-            setPosition(invItems[i]);
+            var e = document.getElementById(invItems[i].element);
+
+            e.style.left = sprite.x - player.x + gameScreenX / 2 + "px";
+            e.style.top = sprite.y - player.y + screenY / 2 + "px";
           }
         }
 
