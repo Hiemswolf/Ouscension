@@ -92,6 +92,7 @@
     <div id="enemyContainer"></div>
     <div id="mainGUI"></div>
     <div id="inventorySlots"></div>
+    <div id="items"></div>
 
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -490,6 +491,8 @@
               element.id = items[i].element;
               element.style.left = items[i].x + 'px';
               element.style.top = items[i].y + 'px';
+
+              document.getElementById('items').appendChild(element);
             }
           }
         }
