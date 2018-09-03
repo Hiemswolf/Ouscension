@@ -250,7 +250,7 @@
 
                 console.log(invItems);
 
-                for(i = 0; i < invItems[i].length; i++) {
+                for(i = 0; i < invItems.length; i++) {
                   console.log(mouse.x + ':' + mouse.y + '_' + invItems[i].x + ':' + invItems[i].y);
                   if(checkCollision(invItems[i], mouse)) {
                     console.log('hi');
