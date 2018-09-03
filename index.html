@@ -180,6 +180,8 @@
         var items = [];
         var invItems = [];
 
+        var pickupItem = 'none';
+
 
 
         function checkCollision (a,b) {
@@ -241,6 +243,15 @@
             document.onmousemove = function(evt) {
               var angle = Math.atan2((evt.y - screenY / 2), (evt.x - gameScreenX / 2)) * (180 / Math.PI);
               player.angle = angle;
+
+              if(pickupItem !== 'none') {
+                for(i = 0; i < invItems.length; i++) {
+                  if(invItems[i].element === pickupItem) {
+                    invItems[i].x = evt.x - invItems[i].w / 2;
+                    invItems[i].y = evt.y - invItems[i].h / 2;
+                  }
+                }
+              }
             };
             document.onmousedown = function(evt) {
               if(evt.which === 1) {
@@ -250,7 +261,12 @@
 
                 for(i = 0; i < invItems.length; i++) {
                   if(checkCollision(invItems[i], mouse)) {
-                    unEquipWeapon(invItems[i].element);
+                    if(pickupItem === 'none') {
+                      pickupItem = invItems[i].element;
+                    } else {
+                      pickupItem = 'none';
+                      unEquipWeapon(invItems[i].element);
+                    }
                   }
                 }
               }
@@ -517,6 +533,10 @@
             }
 
             setPosition(items[i]);
+          }
+
+          for(i = 0; i < invItems.length; i++) {
+            setPosition(invItems[i]);
           }
         }
 
