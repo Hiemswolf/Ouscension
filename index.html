@@ -342,8 +342,10 @@
 
         socket.on('delete', function(value) {
           var element = document.getElementById(value);
-          element.style.display = 'none';
-          element.parentNode.removeChild(element);
+          if(element !== null) {
+            element.style.display = 'none';
+            element.parentNode.removeChild(element);
+          }
         });
 
         socket.on('playerDungeonComplete', function(dungeon) {
