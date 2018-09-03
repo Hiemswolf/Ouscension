@@ -68,7 +68,7 @@
                 width: 25px;
                 height: 25px;
                 position: absolute;
-                z-index: 1000002;
+                z-index: 1;
       }
       #mainGUI {
         background: rgb(0, 0, 0);
@@ -148,6 +148,18 @@
           document.getElementById("inventorySlots").appendChild(slot);
         }
 
+        if(true) {
+          var item = document.createElement("div");
+          item.style.left = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2 + "px";
+          item.style.top = screenY / 2 - (screenX * 0.0208) / 2 + "px";
+          item.style.width = screenX * 0.0208 + "px";
+          item.style.height = screenX * 0.0208 + "px";
+          item.className = "item";
+          item.id = 'item';
+
+          document.getElementById("inventorySlots").appendChild(item);
+        }
+
         var players = [];
 
         var player = new Object();
@@ -158,7 +170,7 @@
           player.h = 25;
           player.world = 'Hub';
           player.invincibility = 0;
-          player.weapon = "none";
+          player.weapon = "mint";
 
         var bullets = [];
         var portals = [];
@@ -502,17 +514,23 @@
         //Weapon
         function equipWeapon() {
           if(player.weapon === 'none') {
-            player.weapon = 'mint';
+            for(i = 0; i < items.length; i++) {
+              if(checkCollision(player, items[i])) {
+                player.weapon = 'mint';
 
-            var item = document.createElement("div");
-            item.style.left = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2 + "px";
-            item.style.top = screenY / 2 - (screenX * 0.0208) / 2 + "px";
-            item.style.width = screenX * 0.0208 + "px";
-            item.style.height = screenX * 0.0208 + "px";
-            item.className = "item";
-            item.id = 'item';
+                var item = document.createElement("div");
+                item.style.left = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2 + "px";
+                item.style.top = screenY / 2 - (screenX * 0.0208) / 2 + "px";
+                item.style.width = screenX * 0.0208 + "px";
+                item.style.height = screenX * 0.0208 + "px";
+                item.className = "item";
+                item.id = 'item';
 
-            document.getElementById("inventorySlots").appendChild(item);
+                document.getElementById("inventorySlots").appendChild(item);
+
+                socket.emit('deleteItem', items[i].element);
+              }
+            }
           }
         }
 

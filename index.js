@@ -111,6 +111,16 @@ io.on('connection', function(socket){
     io.emit('delete', value);
   });
 
+  socket.on('deleteItem', function(value) {
+    for(i = 0; i < items.length; i++) {
+      if(items[i].element === value) {
+        items.splice(i, 1);
+      }
+    }
+
+    io.emit('delete', value);
+  });
+
   socket.on('deleteForAll', function(value) {
     io.emit('delete', value);
   });
