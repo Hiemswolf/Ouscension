@@ -191,6 +191,7 @@
         var floors = [];
         var enemies = [];
         var items = [];
+        var invItems = [];
 
 
 
@@ -260,6 +261,10 @@
             document.onmousedown = function(evt) {
               if(evt.which === 1) {
                 socket.emit('createBullet', player);
+
+                for(i = 0; i < invItems; i++) {
+
+                }
               }
             }
 
@@ -532,17 +537,26 @@
               if(checkCollision(player, items[i])) {
                 player.weapon = 'mint';
 
+                var item = createSprite('item',
+                gameScreenX + screenX / 12 - (screenX * 0.0208) / 2,
+                screenY / 2 - (screenX * 0.0208) / 2 - (screenX * 0.026) * 1.25,
+                screenX * 0.0208,
+                screenX * 0.0208
+                );
+
                 var item = document.createElement("div");
-                item.style.left = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2 + "px";
-                item.style.top = screenY / 2 - (screenX * 0.0208) / 2 - (screenX * 0.026) * 1.25 + "px";
-                item.style.width = screenX * 0.0208 + "px";
-                item.style.height = screenX * 0.0208 + "px";
+                item.style.left = item.x + "px";
+                item.style.top = item.y + "px";
+                item.style.width = item.w + "px";
+                item.style.height = item.h + "px";
                 item.className = "item";
                 item.id = 'item';
 
                 document.getElementById("inventorySlots").appendChild(item);
 
                 socket.emit('deleteItem', items[i].element);
+
+                invItems[invItems] = item;
               }
             }
           }
@@ -550,12 +564,14 @@
 
         function unEquipWeapon() {
           player.weapon = 'none';
-
+          
           if($("#item").length !== 0) {
             var element = document.getElementById('item');
 
             element.style.display = "none";
             element.parentNode.removeChild(element);
+
+
 
             socket.emit('itemDropped', player.world, player.x, player.y);
           }
