@@ -537,18 +537,18 @@
               if(checkCollision(player, items[i])) {
                 player.weapon = 'mint';
 
-                var item = {};
-                item.element = 'item';
-                item.x = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2;
-                item.y = screenY / 2 - (screenX * 0.0208) / 2 - (screenX * 0.026) * 1.25;
-                item.w = screenX * 0.0208;
-                item.h = screenX * 0.0208;
+                var invItem = {};
+                invItem.element = 'item';
+                invItem.x = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2;
+                invItem.y = screenY / 2 - (screenX * 0.0208) / 2 - (screenX * 0.026) * 1.25;
+                invItem.w = screenX * 0.0208;
+                invItem.h = screenX * 0.0208;
 
                 var item = document.createElement("div");
-                item.style.left = item.x + "px";
-                item.style.top = item.y + "px";
-                item.style.width = item.w + "px";
-                item.style.height = item.h + "px";
+                item.style.left = invItem.x + "px";
+                item.style.top = invItem.y + "px";
+                item.style.width = invItem.w + "px";
+                item.style.height = invItem.h + "px";
                 item.className = "item";
                 item.id = 'item';
 
@@ -556,7 +556,7 @@
 
                 socket.emit('deleteItem', items[i].element);
 
-                invItems[invItems] = item;
+                invItems[invItems] = invItem;
               }
             }
           }
