@@ -210,6 +210,7 @@ function createPortal(world, teleport, x , y) {
   var portal = createSprite('portal' + itemCounter, x, y, 40, 40);
   portal.world = world;
   portal.teleport = teleport;
+  portal.angle = 0;
 
   portals[portals.length] = portal;
 }
@@ -314,6 +315,10 @@ function Update() {
     }
 
     enemyHandler();
+
+    for(i = 0; i < portals.length; i++) {
+      portals[i].angle += 9;
+    }
 
     io.emit('loop', bullets, portals, floors, enemies, items);
 

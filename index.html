@@ -32,7 +32,6 @@
                 height: 40px;
                 background: #000000;
                 background-image: url("https://image.ibb.co/kboGpe/Portal.gif");
-                color: rgb(200, 200, 200);
                 text-align: center;
                 position: absolute;
                 z-index: 5;
@@ -399,13 +398,16 @@
 
         function portalHandler() {
           for(i = 0; i < portals.length; i++) {
+            if($("#" + portals[i].element).length !== 0) {
+              document.getElementById(portals[i]).style.transform = 'rotate(' + portal[i].angle + 'deg)';
+            }
 
             if(createdSelf && portals[i].element !== null) {
               if($("#" + portals[i].element).length == 0) {
                 var element = document.createElement("div");
                 element.className = "portal";
                 element.id = portals[i].element;
-                element.innerHTML = portals[i].teleport;
+                //element.innerHTML = portals[i].teleport;
                 element.style.left = '-50px';
                 element.style.top = '-50px';
                 document.getElementById('portalContainer').appendChild(element);
