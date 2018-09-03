@@ -399,7 +399,7 @@
         function portalHandler() {
           for(i = 0; i < portals.length; i++) {
             if($("#" + portals[i].element).length !== 0) {
-              document.getElementById(portals[i]).style.transform = 'rotate(' + portal[i].angle + 'deg)';
+              document.getElementById(portals[i].element).style.transform = 'rotate(' + portals[i].angle + 'deg)';
             }
 
             if(createdSelf && portals[i].element !== null) {
