@@ -249,6 +249,7 @@
                 var mouse = createSprite('Mouse', evt.x, evt.y, 1, 1);
 
                 for(i = 0; i < invItems[i]; i++) {
+                  console.log(mouse.x + ':' + mouse.y + '_' + invItems[i].x + ':' + invItems[i].y);
                   if(checkCollision(invItems[i], mouse)) {
                     console.log('hi');
                     unEquipWeapon(invItems[i].id);
