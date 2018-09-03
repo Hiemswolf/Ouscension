@@ -63,6 +63,13 @@
                 position: absolute;
                 z-index: 1000002;
       }
+      .droppedItem {
+                background: rgb(255, 255, 0);
+                width: 25px;
+                height: 25px;
+                position: absolute;
+                z-index: 1000002;
+      }
       #mainGUI {
         background: rgb(0, 0, 0);
         position: absolute;
@@ -475,6 +482,18 @@
           }
         }
 
+        function itemHandler() {
+          for(i = 0; i < items.length; i++) {
+            if($("#" + items[i].element).length == 0) {
+              var element = document.createElement('div');
+              element.className = 'droppedItem';
+              element.id = items[i].element;
+              element.style.left = items[i].x + 'px';
+              element.style.top = items[i].y + 'px';
+            }
+          }
+        }
+
         //Weapon
         function equipWeapon() {
           if(player.weapon === 'none') {
@@ -522,6 +541,7 @@
               enemyHandler();
               playerDamage();
               playerCheck();
+              itemHandler();
 
               blocker(player);
 
