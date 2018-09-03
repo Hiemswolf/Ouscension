@@ -229,9 +229,6 @@
         }
             document.onkeydown = function(evt) {
               toggleKey(evt.keyCode, true);
-              if(evt.keyCode == qKey) {
-                unEquipWeapon();
-              }
               if(evt.keyCode == eKey) {
                 equipWeapon();
 
@@ -264,9 +261,9 @@
 
                 var mouse = createSprite('Mouse', evt.x, evt.y, 1, 1)
 
-                for(i = 0; i < invItems; i++) {
-                  if(checkCollision(invItems, mouse)) {
-                    unEquipWeapon();
+                for(i = 0; i < invItems[i]; i++) {
+                  if(checkCollision(invItems[i], mouse)) {
+                    unEquipWeapon(invItems[i].id);
                   }
                 }
               }
