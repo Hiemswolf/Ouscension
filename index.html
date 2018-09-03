@@ -537,12 +537,12 @@
               if(checkCollision(player, items[i])) {
                 player.weapon = 'mint';
 
-                var item = createSprite('item',
-                gameScreenX + screenX / 12 - (screenX * 0.0208) / 2,
-                screenY / 2 - (screenX * 0.0208) / 2 - (screenX * 0.026) * 1.25,
-                screenX * 0.0208,
-                screenX * 0.0208
-                );
+                var item = {};
+                item.element = 'item';
+                item.x = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2;
+                item.y = screenY / 2 - (screenX * 0.0208) / 2 - (screenX * 0.026) * 1.25;
+                item.w = screenX * 0.0208;
+                item.h = screenX * 0.0208;
 
                 var item = document.createElement("div");
                 item.style.left = item.x + "px";
@@ -564,7 +564,7 @@
 
         function unEquipWeapon() {
           player.weapon = 'none';
-          
+
           if($("#item").length !== 0) {
             var element = document.getElementById('item');
 
