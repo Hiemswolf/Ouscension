@@ -102,6 +102,7 @@
         var dKey = 68;
 
         var eKey = 69;
+        var qKey = 81;
         var shiftKey = 16;
 
         var controller = new Object();
@@ -139,18 +140,6 @@
           document.getElementById("inventorySlots").appendChild(slot);
         }
 
-        //Weapon
-        if(true) {
-          var item = document.createElement("div");
-          item.style.left = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2 + "px";
-          item.style.top = screenY / 2 - (screenX * 0.0208) / 2 + "px";
-          item.style.width = screenX * 0.0208 + "px";
-          item.style.height = screenX * 0.0208 + "px";
-          item.className = "item";
-
-          document.getElementById("inventorySlots").appendChild(item);
-        }
-
         var players = [];
 
         var player = new Object();
@@ -161,6 +150,7 @@
           player.h = 25;
           player.world = 'Hub';
           player.invincibility = 0;
+          player.weapon = "none";
 
         var bullets = [];
         var portals = [];
@@ -202,7 +192,10 @@
           }
         }
             document.onkeydown = function(evt) {
-                toggleKey(evt.keyCode, true);
+              toggleKey(evt.keyCode, true);
+              if(evt.keyCode == eKey) {
+                unEquipWeapon();
+              }
               if(evt.keyCode == eKey) {
                 for(i = 0; i < portals.length; i++) {
                   if(portals[i].world === player.world) {
@@ -476,6 +469,35 @@
               element.style.left = '-50px';
               element.style.top = '-50px';
             }
+          }
+        }
+
+        //Weapon
+        equipWeapon();
+        function equipWeapon() {
+          if(player.weapon = 'none') {
+            player.weapon = 'mint';
+
+            var item = document.createElement("div");
+            item.style.left = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2 + "px";
+            item.style.top = screenY / 2 - (screenX * 0.0208) / 2 + "px";
+            item.style.width = screenX * 0.0208 + "px";
+            item.style.height = screenX * 0.0208 + "px";
+            item.className = "item";
+            item.id = 'item';
+
+            document.getElementById("inventorySlots").appendChild(item);
+          }
+        }
+
+        function unEquipWeapon() {
+          player.weapon = 'none';
+
+          if($("#item").length !== 0) {
+            var element = document.getElementById('item');
+
+            element.style.display = "none";
+            element.parentNode.removeChild(element);
           }
         }
 
