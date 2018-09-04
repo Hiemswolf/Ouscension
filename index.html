@@ -590,7 +590,12 @@
             element.style.display = "none";
             element.parentNode.removeChild(element);
 
-
+            for(i = 0; i < invItems.length; i++) {
+              if(invItems[i].element === id) {
+                invItems.splice(i, 1);
+                break;
+              }
+            }
 
             socket.emit('itemDropped', player.world, player.x, player.y);
           }
