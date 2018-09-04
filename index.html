@@ -261,12 +261,13 @@
                 for(i = 0; i < invItems.length; i++) {
                   if(checkCollision(invItems[i], mouse)) {
                     if(pickupItem === 'none') {
-                      console.log(invItems[i].element);
                       pickupItem = invItems[i].element;
                     } else {
-                      console.log('none');
-                      pickupItem = 'none';
-                      unEquipWeapon(invItems[i].element);
+                      var gameScreen = createSprite('screen', 0, 0, gameScreenX, screenY);
+                      if(checkCollision(gameScreen, invItems[i])) {
+                        pickupItem = 'none';
+                        unEquipWeapon(invItems[i].element);
+                      }
                     }
                   }
                 }
