@@ -159,7 +159,8 @@
 
 
         //Weapon Slot
-        if(true) {
+        createSlot('WeaponSlot', gameScreenX + screenX / 12 - (screenX * 0.026) / 2, screenY / 2 - (screenX * 0.026) / 2 - (screenX * 0.026) * 1.25, screenX * 0.026, screenX * 0.026);
+        /*if(true) {
           var slotSprite = createSprite('WeaponSlot',
           gameScreenX + screenX / 12 - (screenX * 0.026) / 2,
           screenY / 2 - (screenX * 0.026) / 2 - (screenX * 0.026) * 1.25,
@@ -180,7 +181,7 @@
           document.getElementById("inventorySlots").appendChild(slot);
 
           invSlots[invSlots.length] = slotSprite;
-        }
+        }*/
 
         //Extra Slot
         if(true) {
@@ -295,6 +296,25 @@
                   }
                 }
               }
+            }
+
+            function createSlot(element, x, y, w, h) {
+              var slotSprite = createSprite(element, x, y, w, h);
+
+              slotSprite.itemX = x + w / 2 - screenX * 0.0104;
+              slotSprite.itemY = y + h / 2 - screenX * 0.0104;
+
+              var slot = document.createElement("div");
+              slot.style.left = slotSprite.x + "px";
+              slot.style.top = slotSprite.y + "px";
+              slot.style.width = slotSprite.w + "px";
+              slot.style.height = slotSprite.h + "px";
+              slot.style.borderRadius = (screenX * 0.026) / 5 + "px";
+              slot.className = "inventorySlot";
+              slot.id = slotSprite.element;
+              document.getElementById("inventorySlots").appendChild(slot);
+
+              invSlots[invSlots.length] = slotSprite;
             }
 
             function toggleKey(keyCode, isPressed) {
