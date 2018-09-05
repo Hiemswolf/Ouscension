@@ -166,6 +166,9 @@
           screenX * 0.026,
           screenX * 0.026);
 
+          slotSprite.itemX = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2;
+          slotSprite.itemY = screenY / 2 - (screenX * 0.0208) / 2 - (screenX * 0.026) * 1.25;
+
           var slot = document.createElement("div");
           slot.style.left = slotSprite.x + "px";
           slot.style.top = slotSprite.y + "px";
@@ -283,8 +286,8 @@
                         for(j = 0; j < invSlots.length; j++) {
                           if(checkCollision(invSlots[j], mouse)) {
                             pickupItem = 'none';
-                            invItems[i].x = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2;
-                            invItems[i].y = screenY / 2 - (screenX * 0.0208) / 2 - (screenX * 0.026) * 1.25;
+                            invItems[i].x = invSlots.itemX;
+                            invItems[i].y = invSlots.itemY;
                           }
                         }
                       }
