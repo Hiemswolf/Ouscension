@@ -286,8 +286,8 @@
                         for(j = 0; j < invSlots.length; j++) {
                           if(checkCollision(invSlots[j], mouse)) {
                             pickupItem = 'none';
-                            invItems[i].x = invSlots.itemX;
-                            invItems[i].y = invSlots.itemY;
+                            invItems[i].x = invSlots[j].itemX;
+                            invItems[i].y = invSlots[j].itemY;
                           }
                         }
                       }
