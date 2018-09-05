@@ -160,31 +160,10 @@
 
         //Weapon Slot
         createSlot('WeaponSlot', gameScreenX + screenX / 12 - (screenX * 0.026) / 2, screenY / 2 - (screenX * 0.026) / 2 - (screenX * 0.026) * 1.25, screenX * 0.026, screenX * 0.026);
+
+        //Extra Slots
+        createSlot('Slot1', gameScreenX + screenX / 12 - (screenX * 0.026) / 2, screenY / 2 - (screenX * 0.026) / 2, screenX * 0.026, screenX * 0.026);
         /*if(true) {
-          var slotSprite = createSprite('WeaponSlot',
-          gameScreenX + screenX / 12 - (screenX * 0.026) / 2,
-          screenY / 2 - (screenX * 0.026) / 2 - (screenX * 0.026) * 1.25,
-          screenX * 0.026,
-          screenX * 0.026);
-
-          slotSprite.itemX = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2;
-          slotSprite.itemY = screenY / 2 - (screenX * 0.0208) / 2 - (screenX * 0.026) * 1.25;
-
-          var slot = document.createElement("div");
-          slot.style.left = slotSprite.x + "px";
-          slot.style.top = slotSprite.y + "px";
-          slot.style.width = slotSprite.w + "px";
-          slot.style.height = slotSprite.h + "px";
-          slot.style.borderRadius = (screenX * 0.026) / 5 + "px";
-          slot.className = "inventorySlot";
-          slot.id = slotSprite.element;
-          document.getElementById("inventorySlots").appendChild(slot);
-
-          invSlots[invSlots.length] = slotSprite;
-        }*/
-
-        //Extra Slot
-        if(true) {
           var slot = document.createElement("div");
           slot.style.left = gameScreenX + screenX / 12 - (screenX * 0.026) / 2 + "px";
           slot.style.top = screenY / 2 - (screenX * 0.026) / 2 + "px";
@@ -194,7 +173,7 @@
           slot.className = "inventorySlot";
 
           document.getElementById("inventorySlots").appendChild(slot);
-        }
+        }*/
 
 
 
