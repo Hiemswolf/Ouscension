@@ -136,15 +136,23 @@
 
         //Weapon Slot
         if(true) {
+          var slotSprite = createSprite('WeaponSlot',
+          gameScreenX + screenX / 12 - (screenX * 0.026) / 2,
+          screenY / 2 - (screenX * 0.026) / 2 - (screenX * 0.026) * 1.25,
+          screenX * 0.026,
+          screenX * 0.026);
+
           var slot = document.createElement("div");
-          slot.style.left = gameScreenX + screenX / 12 - (screenX * 0.026) / 2 + "px";
-          slot.style.top = screenY / 2 - (screenX * 0.026) / 2 - (screenX * 0.026) * 1.25 + "px";
-          slot.style.width = screenX * 0.026 + "px";
-          slot.style.height = screenX * 0.026 + "px";
+          slot.style.left = slotSprite.x + "px";
+          slot.style.top = slotSprite.y + "px";
+          slot.style.width = slotSprite.w + "px";
+          slot.style.height = slotSprite.h + "px";
           slot.style.borderRadius = (screenX * 0.026) / 5 + "px";
           slot.className = "inventorySlot";
-
+          slot.id = slotSprite.element;
           document.getElementById("inventorySlots").appendChild(slot);
+
+          invSlots[invSlots.length] = slotSprite;
         }
 
         //Extra Slot
@@ -178,6 +186,7 @@
         var enemies = [];
         var items = [];
         var invItems = [];
+        var invSlots = [];
 
         var pickupItem = 'none';
 
@@ -264,9 +273,17 @@
                       pickupItem = invItems[i].element;
                     } else {
                       var gameScreen = createSprite('screen', 0, 0, gameScreenX, screenY);
+
                       if(checkCollision(gameScreen, invItems[i])) {
                         pickupItem = 'none';
                         unEquipWeapon(invItems[i].element);
+                      } else {
+                        for(j = 0; j < invSlots.length; i++) {
+                          if(checkCollision(invSlots[j], mouse)) {
+                            invItems[i].x = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2;
+                            invItems[i].y = screenY / 2 - (screenX * 0.0208) / 2 - (screenX * 0.026) * 1.25;
+                          }
+                        }
                       }
                     }
                   }
