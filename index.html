@@ -134,6 +134,30 @@
         document.getElementById("mainGUI").style.width = screenX / 6 + "px";
         document.getElementById("mainGUI").style.height = screenY + "px";
 
+        var players = [];
+
+        var player = new Object();
+          player.x = 0;
+          player.y = 0;
+          player.moveSpeed = 20;
+          player.w = 25;
+          player.h = 25;
+          player.world = 'Hub';
+          player.invincibility = 0;
+          player.weapon = "none";
+
+        var bullets = [];
+        var portals = [];
+        var floors = [];
+        var enemies = [];
+        var items = [];
+        var invItems = [];
+        var invSlots = [];
+
+        var pickupItem = 'none';
+
+
+
         //Weapon Slot
         if(true) {
           var slotSprite = createSprite('WeaponSlot',
@@ -167,28 +191,6 @@
 
           document.getElementById("inventorySlots").appendChild(slot);
         }
-
-        var players = [];
-
-        var player = new Object();
-          player.x = 0;
-          player.y = 0;
-          player.moveSpeed = 20;
-          player.w = 25;
-          player.h = 25;
-          player.world = 'Hub';
-          player.invincibility = 0;
-          player.weapon = "none";
-
-        var bullets = [];
-        var portals = [];
-        var floors = [];
-        var enemies = [];
-        var items = [];
-        var invItems = [];
-        var invSlots = [];
-
-        var pickupItem = 'none';
 
 
 
