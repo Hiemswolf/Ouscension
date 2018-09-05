@@ -282,6 +282,7 @@
                       } else {
                         for(j = 0; j < invSlots.length; j++) {
                           if(checkCollision(invSlots[j], mouse)) {
+                            pickupItem = 'none';
                             invItems[i].x = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2;
                             invItems[i].y = screenY / 2 - (screenX * 0.0208) / 2 - (screenX * 0.026) * 1.25;
                           }
