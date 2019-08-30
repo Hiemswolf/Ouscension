@@ -52,7 +52,6 @@
                 z-index: 50;
       }
       .inventorySlot {
-                background: rgb(0, 0, 0);
                 position: absolute;
                 z-index: 1000002;
                 opacity: 0.8;
@@ -159,7 +158,7 @@
 
 
         //Weapon Slot
-        createSlot('WeaponSlot', gameScreenX + screenX / 12 - (screenX * 0.026) / 2, screenY / 2 - (screenX * 0.026) / 2 - (screenX * 0.026) * 1.25, screenX * 0.026, screenX * 0.026, 'rgb(50, 50, 50)');
+        createSlot('WeaponSlot', gameScreenX + screenX / 12 - (screenX * 0.026) / 2, screenY / 2 - (screenX * 0.026) / 2 - (screenX * 0.026) * 1.25, screenX * 0.026, screenX * 0.026, 'rgb(100, 100, 100)');
 
         //Extra Slots
         createSlot('Slot1', gameScreenX + screenX / 12 - (screenX * 0.026) / 2, screenY / 2 - (screenX * 0.026) / 2, screenX * 0.026, screenX * 0.026, 'rgb(0, 0, 0)');
@@ -279,7 +278,7 @@
               slot.style.height = slotSprite.h + "px";
               slot.style.borderRadius = (screenX * 0.026) / 5 + "px";
               slot.className = "inventorySlot";
-              slot.style.color = color;
+              slot.style.background = color;
               slot.id = slotSprite.element;
               document.getElementById("inventorySlots").appendChild(slot);
 
