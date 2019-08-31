@@ -441,6 +441,9 @@
                 element.id = floors[i].element;
                 element.style.left = '-50px';
                 element.style.top = '-50px';
+                if(player.world == 'Hub') {
+                  element.style.image = 'url("https://piskel-imgstore-b.appspot.com/img/27cf1200-cc49-11e9-8fa5-8f99fe5b287f.gif")'
+                }
                 document.getElementById('floorContainer').appendChild(element);
               }
             }
