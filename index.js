@@ -51,24 +51,6 @@ io.on('connection', function(socket){
     }
   });
 
-  function createMintBullet(player) {
-    itemCounter++;
-
-    var bullet = createSprite(itemCounter, player.x + player.w / 2, player.y + player.h / 2, 5, 5);
-    bullet.angle = player.angle;
-    bullet.world = player.world;
-    bullet.owner = player.element;
-    bullet.type = 'mint';
-
-    bullet.mx = 5 * Math.cos(bullet.angle * Math.PI / 180);
-    bullet.my = 5 * Math.sin(bullet.angle * Math.PI / 180);
-    bullet.rotSpeed = 0;
-
-    bullet.lifeTimer = 40;
-
-    bullets[bullets.length] = bullet;
-  }
-
   socket.on('playerInfo', function(playerSprite) {
 
     var inPlayerArray = false;
@@ -223,6 +205,24 @@ function blocker(sprite) {
           sprite.preY = sprite.y;
 
         }
+        
+function createMintBullet(player) {
+  itemCounter++;
+
+  var bullet = createSprite(itemCounter, player.x + player.w / 2, player.y + player.h / 2, 5, 5);
+  bullet.angle = player.angle;
+  bullet.world = player.world;
+  bullet.owner = player.element;
+  bullet.type = 'mint';
+
+  bullet.mx = 5 * Math.cos(bullet.angle * Math.PI / 180);
+  bullet.my = 5 * Math.sin(bullet.angle * Math.PI / 180);
+  bullet.rotSpeed = 0;
+
+  bullet.lifeTimer = 40;
+
+  bullets[bullets.length] = bullet;
+}
 
 function createItem(world, x, y) {
   itemCounter++;
