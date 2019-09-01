@@ -212,7 +212,11 @@ function createMintBullet(player) {
   var bullet = createSprite(itemCounter, player.x + player.w / 2, player.y + player.h / 2, 5, 5);
   bullet.angle = player.angle;
   bullet.world = player.world;
-  bullet.owner = player.element;
+  if(player.owner !== null) {
+    bullet.owner = player.owner
+  } else {
+    bullet.owner = player.element;
+  }
   bullet.type = 'mint';
 
   bullet.mx = 5 * Math.cos(bullet.angle * Math.PI / 180);
