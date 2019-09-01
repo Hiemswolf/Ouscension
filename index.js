@@ -343,10 +343,10 @@ function Update() {
       bullets[i].lifeTimer--;
       if(bullets[i].lifeTimer < -1) {
         if(bullets[i].bulletType === 'lifeSaver') {
-          for(j = 0; j < 6; j++) {
-            bullets[i].angle += 30;
+          //for(j = 0; j < 6; j++) {
+            //bullets[i].angle += 30;
             createMintBullet(bullets[i]);
-          }
+          //}
         }
 
         bullets.splice(i, 1);
