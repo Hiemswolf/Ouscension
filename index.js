@@ -293,6 +293,13 @@ function enemyHandler() {
 
       enemies[i].x += 5 * Math.cos(enemies[i].angle * Math.PI / 180);
       enemies[i].y += 5 * Math.sin(enemies[i].angle * Math.PI / 180);
+
+      for(j = 0; j < enemies.length; j++) {
+        if(enemies[i].element != enemies[j].element && enemies[i].world === enemies[j].world) {
+          enemies[i].x += Math.pow(enemies[i].x - enemies[j].x, 2);
+          enemies[i].y += Math.pow(enemies[i].y - enemies[j].y, 2);
+        }
+      }
     }
     blocker(enemies[i]);
   }
