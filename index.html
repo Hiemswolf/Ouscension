@@ -578,10 +578,12 @@
               if(checkCollision(player, items[i])) {
                 //player.weapon = 'mint';
 
+                invSlots[1].isHolding = true;
+
                 var invItem = {};
                 invItem.element = 'item';
                 invItem.x = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2;
-                invItem.y = screenY / 2 - (screenX * 0.0208) / 2 - (screenX * 0.026);
+                invItem.y = screenY / 2 - (screenX * 0.0208) / 2;
                 invItem.w = screenX * 0.0208;
                 invItem.h = screenX * 0.0208;
 
