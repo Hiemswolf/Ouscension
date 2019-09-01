@@ -39,6 +39,7 @@ io.on('connection', function(socket){
       bullet.angle = player.angle;
       bullet.world = player.world;
       bullet.owner = player.element;
+      bullet.type = bulletType;
 
       bullet.mx = 2 * Math.cos(bullet.angle * Math.PI / 180);
       bullet.my = 2 * Math.sin(bullet.angle * Math.PI / 180);
@@ -57,6 +58,7 @@ io.on('connection', function(socket){
     bullet.angle = player.angle;
     bullet.world = player.world;
     bullet.owner = player.element;
+    bullet.type = 'mint';
 
     bullet.mx = 5 * Math.cos(bullet.angle * Math.PI / 180);
     bullet.my = 5 * Math.sin(bullet.angle * Math.PI / 180);
@@ -342,11 +344,11 @@ function Update() {
 
       bullets[i].lifeTimer--;
       if(bullets[i].lifeTimer < -1) {
-        if(bullets[i].bulletType === 'lifeSaver') {
-          //for(j = 0; j < 6; j++) {
-            //bullets[i].angle += 30;
+        if(bullets[i].type === 'lifeSaver') {
+          for(j = 0; j < 6; j++) {
+            bullets[i].angle += 30;
             createMintBullet(bullets[i]);
-          //}
+          }
         }
 
         bullets.splice(i, 1);
