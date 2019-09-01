@@ -41,9 +41,9 @@ io.on('connection', function(socket){
       bullet.owner = player.element;
       bullet.type = bulletType;
 
-      bullet.mx = 2 * Math.cos(bullet.angle * Math.PI / 180);
-      bullet.my = 2 * Math.sin(bullet.angle * Math.PI / 180);
-      bullet.rotSpeed = (360 + Math.random() * 30) / 20;
+      bullet.mx = 4 * Math.cos(bullet.angle * Math.PI / 180);
+      bullet.my = 4 * Math.sin(bullet.angle * Math.PI / 180);
+      bullet.rotSpeed = (360 + Math.random() * 60) / 20;
 
       bullet.lifeTimer = 20;
 
