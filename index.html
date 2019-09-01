@@ -275,6 +275,8 @@
               slotSprite.itemX = x + w / 2 - screenX * 0.0104;
               slotSprite.itemY = y + h / 2 - screenX * 0.0104;
 
+              slotSprite.isHolding = false;
+
               var slot = document.createElement("div");
               slot.style.left = slotSprite.x + "px";
               slot.style.top = slotSprite.y + "px";
@@ -284,7 +286,6 @@
               slot.className = "inventorySlot";
               slot.style.background = color;
               slot.id = slotSprite.element;
-              slot.isHolding = false;
               document.getElementById("inventorySlots").appendChild(slot);
 
               invSlots[invSlots.length] = slotSprite;
