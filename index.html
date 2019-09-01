@@ -584,7 +584,6 @@
 
                 var invItem = {};
                 invItem.element = 'item' + invItemNumber;
-                invItemNumber++;
                 invItem.x = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2;
                 invItem.y = screenY / 2 - (screenX * 0.0208) / 2;
                 invItem.w = screenX * 0.0208;
@@ -597,7 +596,9 @@
                 item.style.width = invItem.w + "px";
                 item.style.height = invItem.h + "px";
                 item.className = "item";
-                item.id = 'item';
+                item.id = 'item' + invItemNumber;
+
+                invItemNumber++;
 
                 document.getElementById("inventorySlots").appendChild(item);
 
@@ -629,17 +630,6 @@
           }
         }
 
-        function updateScreenSize() {
-          var w = window;
-          d = document;
-          e = d.documentElement;
-          g = d.getElementsByTagName('body')[0];
-          x = w.innerWidth || e.clientWidth || g.clientWidth;
-          y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-          screenX = x;
-          screenY = y;
-          gameScreenX = 5 * screenX / 6;
-        }
             //Update
             socket.on('loop', function(bulletsSetter, portalsSetter, floorsSetter, enemiesSetter, itemsSetter) {
 
@@ -649,7 +639,6 @@
               enemies = enemiesSetter;
               items = itemsSetter;
 
-              updateScreenSize();
               handleControls();
               bulletHandler();
               portalHandler();
