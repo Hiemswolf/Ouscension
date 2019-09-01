@@ -238,7 +238,17 @@
             };
             document.onmousedown = function(evt) {
               if(evt.which === 1) {
-                socket.emit('createBullet', player);
+                if(player.weapon === 'none') {
+                  socket.emit('createBullet', player);
+                }
+                if(player.weapon === 'mint') {
+                  var preAngle = player.angle;
+                  player.angle += Math.random() * 30 - 15
+                  socket.emit('createBullet', player);
+                  player.angle += Math.random() * 30 - 15
+                  socket.emit('createBullet', player);
+                  player.angle = preAngle;
+                }
 
                 var mouse = createSprite('Mouse', evt.x, evt.y, 1, 1);
 
@@ -246,6 +256,9 @@
                   if(checkCollision(invItems[i], mouse)) {
                     if(pickupItem === 'none') {
                       invItems[i].holder.isHolding = false;
+                      if(invItems[i].holder.element === 'WeaponSlot') {
+                        player.weapon = 'none';
+                      }
 
                       pickupItem = invItems[i].element;
                     } else {
@@ -262,6 +275,9 @@
                             invItems[i].y = invSlots[j].itemY;
                             invSlots[j].isHolding = true;
                             invItems[i].holder = invSlots[j];
+                            if(j === 0) {
+                              player.weapon = 'mint';
+                            }
                           }
                         }
                       }
