@@ -256,7 +256,7 @@ function createDungeon(name, length) {
     if(change === 3) {floorY--}
     createFloor(name, floorX * 500 - 250, floorY * 500 - 250);
 
-    for(j = 0; j < Math.floor(Math.random() * 4); j++){
+    for(j = 0; j < Math.floor(Math.random() * 3); j++){
       createEnemy(name, floorX * 500 - 15, floorY * 500 - 15);
     }
   }
@@ -291,8 +291,8 @@ function enemyHandler() {
     if(closest !== undefined) {
       enemies[i].angle = Math.atan2((closest.y - enemies[i].y), (closest.x - enemies[i].x)) * (180 / Math.PI);
 
-      enemies[i].x += 5 * Math.cos(enemies[i].angle * Math.PI / 180);
-      enemies[i].y += 5 * Math.sin(enemies[i].angle * Math.PI / 180);
+      enemies[i].x += 10 * Math.cos(enemies[i].angle * Math.PI / 180);
+      enemies[i].y += 10 * Math.sin(enemies[i].angle * Math.PI / 180);
 
       for(j = 0; j < enemies.length; j++) {
         if(enemies[i].element != enemies[j].element && enemies[i].world === enemies[j].world) {
