@@ -56,14 +56,14 @@
                 z-index: 1000002;
                 opacity: 0.8;
       }
-      .item {
+      .mintItem {
                 background-image: url("https://piskel-imgstore-b.appspot.com/img/37dcbefa-cd01-11e9-ba60-0f8b12268432.gif");
                 background-repeat: no-repeat;
                 background-size:100% 100%;
                 position: absolute;
                 z-index: 1000002;
       }
-      .droppedItem {
+      .mintDropped {
                 background-image: url("https://piskel-imgstore-b.appspot.com/img/37dcbefa-cd01-11e9-ba60-0f8b12268432.gif");
                 background-repeat: no-repeat;
                 background-size:100% 100%;
@@ -72,12 +72,21 @@
                 position: absolute;
                 z-index: 1;
       }
-      .lifesaver {
+      .lifeSaverItem {
+                background-image: url("https://piskel-imgstore-b.appspot.com/img/497b8f68-cd0b-11e9-adee-f34f731bf23e.gif");
+                background-repeat: no-repeat;
+                background-size:100% 100%;
+                position: absolute;
+                z-index: 1000002;
+      }
+      .lifeSaverDropped {
                 width: 25px;
                 height: 25px;
-                background: rgb(200, 200, 200);
+                background-image: url('https://piskel-imgstore-b.appspot.com/img/497b8f68-cd0b-11e9-adee-f34f731bf23e.gif');
+                background-repeat: no-repeat;
+                background-size:100% 100%;
                 position: absolute;
-                z-index: 51;
+                z-index: 1;
       }
       #mainGUI {
         background: rgb(0, 0, 0);
@@ -290,7 +299,7 @@
                             invSlots[j].isHolding = true;
                             invItems[i].holder = invSlots[j];
                             if(j === 0) {
-                              player.weapon = 'lifeSaver';
+                              player.weapon = invItems[i].type;
                             }
                           }
                         }
@@ -435,7 +444,7 @@
             }
 
             var element = document.getElementById(bullets[i].element);
-            
+
             if(bullets[i].lifeTimer < 0) {
               if(element !== null) {
                 element.style.display = "none";
@@ -582,7 +591,7 @@
           for(i = 0; i < items.length; i++) {
             if($("#" + items[i].element).length == 0) {
               var element = document.createElement('div');
-              element.className = 'droppedItem';
+              element.className = items[i].type + 'Dropped';
               element.id = items[i].element;
               element.style.left = '-50px';
               element.style.top = '-50px';
@@ -619,13 +628,14 @@
                 invItem.w = screenX * 0.0208;
                 invItem.h = screenX * 0.0208;
                 invItem.holder = invSlots[1];
+                invItem.type = items[i].type;
 
                 var item = document.createElement("div");
                 item.style.left = invItem.x + "px";
                 item.style.top = invItem.y + "px";
                 item.style.width = invItem.w + "px";
                 item.style.height = invItem.h + "px";
-                item.className = "item";
+                item.className = items[i].type + 'Item';
                 item.id = 'item' + invItemNumber;
 
                 invItemNumber++;
@@ -641,6 +651,7 @@
         }
 
         function unEquipWeapon(id) {
+          var itemType;
           player.weapon = 'none';
 
           if($("#" + id).length !== 0) {
@@ -651,12 +662,14 @@
 
             for(i = 0; i < invItems.length; i++) {
               if(invItems[i].element === id) {
+                itemType = invItems[i].type
+
                 invItems.splice(i, 1);
                 break;
               }
             }
 
-            socket.emit('itemDropped', player.world, player.x, player.y);
+            socket.emit('itemDropped', player.world, player.x, player.y, itemType);
           }
         }
 

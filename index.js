@@ -41,11 +41,11 @@ io.on('connection', function(socket){
       bullet.owner = player.element;
       bullet.type = bulletType;
 
+      bullet.lifeTimer = 15;
+
       bullet.mx = 4 * Math.cos(bullet.angle * Math.PI / 180);
       bullet.my = 4 * Math.sin(bullet.angle * Math.PI / 180);
-      bullet.rotSpeed = (360 + Math.random() * 60) / 20;
-
-      bullet.lifeTimer = 20;
+      bullet.rotSpeed = (360 + Math.random() * 60) / bullet.lifeTimer;
 
       bullets[bullets.length] = bullet;
     }
@@ -111,7 +111,11 @@ io.on('connection', function(socket){
         if(enemies[i].hp <= 0) {
           //should be 8
           if(Math.floor(Math.random() * 8) === 0) {
-            createItem(enemies[i].world, enemies[i].x, enemies[i].y);
+            createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'mint');
+          } else {
+            if(Math.floor(Math.random() * 8) === 0) {
+              createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'lifeSaver');
+            }
           }
 
           enemies.splice(i, 1);
@@ -146,8 +150,8 @@ io.on('connection', function(socket){
     io.emit('delete', value);
   });
 
-  socket.on('itemDropped', function(world, x, y) {
-    createItem(world, x, y);
+  socket.on('itemDropped', function(world, x, y, type) {
+    createItem(world, x, y, type);
   });
 
   socket.on('disconnect', function() {
@@ -228,10 +232,11 @@ function createMintBullet(player) {
   bullets[bullets.length] = bullet;
 }
 
-function createItem(world, x, y) {
+function createItem(world, x, y, type) {
   itemCounter++;
   var item = createSprite('item' + itemCounter, x, y, 25, 25);
   item.world = world;
+  item.type = type;
 
   items[items.length] = item;
 }
