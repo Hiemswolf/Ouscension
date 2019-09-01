@@ -20,13 +20,6 @@
                 position: absolute;
                 z-index: 1000;
       }
-      .bullet {
-                width: 10px;
-                height: 5px;
-                background: #00ff00;
-                position: absolute;
-                z-index: 10;
-      }
       .portal {
                 width: 40px;
                 height: 40px;
@@ -56,6 +49,13 @@
                 z-index: 1000002;
                 opacity: 0.8;
       }
+      .mint {
+                width: 10px;
+                height: 5px;
+                background: #00ff00;
+                position: absolute;
+                z-index: 10;
+      }
       .mintItem {
                 background-image: url("https://piskel-imgstore-b.appspot.com/img/37dcbefa-cd01-11e9-ba60-0f8b12268432.gif");
                 background-repeat: no-repeat;
@@ -71,6 +71,15 @@
                 height: 25px;
                 position: absolute;
                 z-index: 1;
+      }
+      .lifeSaver {
+                width: 25px;
+                height: 25px;
+                background-image: url('https://piskel-imgstore-b.appspot.com/img/497b8f68-cd0b-11e9-adee-f34f731bf23e.gif');
+                background-repeat: no-repeat;
+                background-size:100% 100%;
+                position: absolute;
+                z-index: 10;
       }
       .lifeSaverItem {
                 background-image: url("https://piskel-imgstore-b.appspot.com/img/497b8f68-cd0b-11e9-adee-f34f731bf23e.gif");
@@ -184,6 +193,7 @@
 
         //Extra Slots
         createSlot('Slot1', gameScreenX + screenX / 12 - (screenX * 0.026) / 2, screenY / 2 - (screenX * 0.026) / 2, screenX * 0.026, screenX * 0.026, 'rgb(0, 0, 0)');
+        createSlot('Slot2', gameScreenX + screenX / 12 - (screenX * 0.026) / 2, screenY / 2 - (screenX * 0.026) / 2 + (screenX * 0.026) * 1.25, screenX * 0.026, screenX * 0.026, 'rgb(0, 0, 0)');
 
 
 
@@ -437,7 +447,7 @@
             if(createdSelf && bullets[i].element !== null) {
               if($("#" + bullets[i].element).length == 0) {
                 var element = document.createElement('div');
-                element.className = 'bullet';
+                element.className = bullet.type;
                 element.id = bullets[i].element;
                 document.getElementById('bulletContainer').appendChild(element);
               }
