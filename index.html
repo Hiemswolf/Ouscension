@@ -571,6 +571,7 @@
 
         //Weapon
         function equipWeapon() {
+          console.log(invSlots[0].isHolding + ': 0 | 1 :'invSlots[1].isHolding);
           if(invSlots[1].isHolding === false) {
             for(i = 0; i < items.length; i++) {
               if(checkCollision(player, items[i])) {
