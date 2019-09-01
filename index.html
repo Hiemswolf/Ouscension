@@ -72,6 +72,13 @@
                 position: absolute;
                 z-index: 1;
       }
+      .lifesaver {
+                width: 25px;
+                height: 25px;
+                background: rgb(200, 200, 200);
+                position: absolute;
+                z-index: 51;
+      }
       #mainGUI {
         background: rgb(0, 0, 0);
         position: absolute;
@@ -243,15 +250,18 @@
             document.onmousedown = function(evt) {
               if(evt.which === 1) {
                 if(player.weapon === 'none') {
-                  socket.emit('createBullet', player);
+                  socket.emit('createBullet', player, 'mint');
                 }
                 if(player.weapon === 'mint') {
                   var preAngle = player.angle;
                   player.angle += Math.random() * 30 - 15
-                  socket.emit('createBullet', player);
+                  socket.emit('createBullet', player, 'mint');
                   player.angle += Math.random() * 30 - 15
-                  socket.emit('createBullet', player);
+                  socket.emit('createBullet', player, 'mint');
                   player.angle = preAngle;
+                }
+                if(player.weapon === 'lifeSaver') {
+                  socket.emit('createBullet', player, 'lifeSaver');
                 }
 
                 var mouse = createSprite('Mouse', evt.x, evt.y, 1, 1);
@@ -280,7 +290,7 @@
                             invSlots[j].isHolding = true;
                             invItems[i].holder = invSlots[j];
                             if(j === 0) {
-                              player.weapon = 'mint';
+                              player.weapon = 'lifeSaver';
                             }
                           }
                         }

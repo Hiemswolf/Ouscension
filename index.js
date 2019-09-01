@@ -27,20 +27,45 @@ io.on('connection', function(socket){
     io.emit('loadNewChar', socket.number);
   });
 
-  socket.on('createBullet', function(player) {
+  socket.on('createBullet', function(player, bulletType) {
+    if(bulletType === 'mint') {
+      createMintBullet(player);
+    }
+
+    if(bulletType === 'lifeSaver') {
+      itemCounter++;
+
+      var bullet = createSprite(itemCounter, player.x + player.w / 2, player.y + player.h / 2, 5, 5);
+      bullet.angle = player.angle;
+      bullet.world = player.world;
+      bullet.owner = player.element;
+
+      bullet.mx = 2 * Math.cos(bullet.angle * Math.PI / 180);
+      bullet.my = 2 * Math.sin(bullet.angle * Math.PI / 180);
+      bullet.rotSpeed = 360 + Math.random() * 30;
+
+      bullet.lifeTimer = 20;
+
+      bullets[bullets.length] = bullet;
+    }
+  });
+
+  function createMintBullet(player) {
     itemCounter++;
 
     var bullet = createSprite(itemCounter, player.x + player.w / 2, player.y + player.h / 2, 5, 5);
     bullet.angle = player.angle;
-    bullet.lifeTimer = 40;
     bullet.world = player.world;
     bullet.owner = player.element;
 
     bullet.mx = 5 * Math.cos(bullet.angle * Math.PI / 180);
     bullet.my = 5 * Math.sin(bullet.angle * Math.PI / 180);
+    bullet.rotSpeed = 0;
+
+    bullet.lifeTimer = 40;
 
     bullets[bullets.length] = bullet;
-  });
+  }
 
   socket.on('playerInfo', function(playerSprite) {
 
@@ -313,9 +338,17 @@ function Update() {
 
       bullets[i].x += bullets[i].mx;
       bullets[i].y += bullets[i].my;
+      bullets[i].angle += bullets[i].rotSpeed;
 
       bullets[i].lifeTimer--;
       if(bullets[i].lifeTimer < -1) {
+        if(bullets[i].bulletType === 'lifeSaver') {
+          for(j = 0; j < 6; j++) {
+            bullets[i].angle += 30;
+            createMintBullet(bullets[i]);
+          }
+        }
+
         bullets.splice(i, 1);
         i--;
       }
