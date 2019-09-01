@@ -256,7 +256,7 @@ function createDungeon(name, length) {
     if(change === 3) {floorY--}
     createFloor(name, floorX * 500 - 250, floorY * 500 - 250);
 
-    if(Math.floor(Math.random() * 2) === 0) {
+    for(i = 0, i < Math.floor(Math.random() * 4), i++) {
       createEnemy(name, floorX * 500 - 15, floorY * 500 - 15);
     }
   }
