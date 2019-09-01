@@ -101,7 +101,7 @@ io.on('connection', function(socket){
         enemies[i].hp--;
         if(enemies[i].hp <= 0) {
           //should be 8
-          if(Math.floor(Math.random() * 1) === 0) {
+          if(Math.floor(Math.random() * 8) === 0) {
             createItem(enemies[i].world, enemies[i].x, enemies[i].y);
           }
 
