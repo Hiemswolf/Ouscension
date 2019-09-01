@@ -235,6 +235,8 @@
               }
             };
             document.onmousedown = function(evt) {
+              console.log(pickupItem);
+
               if(evt.which === 1) {
                 socket.emit('createBullet', player);
 
