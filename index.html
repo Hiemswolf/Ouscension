@@ -624,38 +624,42 @@
 
         //Weapon
         function equipWeapon() {
-          if(invSlots[1].isHolding === false) {
-            for(i = 0; i < items.length; i++) {
-              if(checkCollision(player, items[i])) {
-                //player.weapon = 'mint';
+          for(s = 0; s < invSlots.length; s++) {
+            if(invSlots[s].isHolding === false) {
+              for(i = 0; i < items.length; i++) {
+                if(checkCollision(player, items[i])) {
+                  //player.weapon = 'mint';
 
-                invSlots[1].isHolding = true;
+                  invSlots[s].isHolding = true;
 
-                var invItem = {};
-                invItem.element = 'item' + invItemNumber;
-                invItem.x = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2;
-                invItem.y = screenY / 2 - (screenX * 0.0208) / 2;
-                invItem.w = screenX * 0.0208;
-                invItem.h = screenX * 0.0208;
-                invItem.holder = invSlots[1];
-                invItem.type = items[i].type;
+                  var invItem = {};
+                  invItem.element = 'item' + invItemNumber;
+                  invItem.x = gameScreenX + screenX / 12 - (screenX * 0.0208) / 2;
+                  invItem.y = screenY / 2 - (screenX * 0.0208) / 2;
+                  invItem.w = screenX * 0.0208;
+                  invItem.h = screenX * 0.0208;
+                  invItem.holder = invSlots[s];
+                  invItem.type = items[i].type;
 
-                var item = document.createElement("div");
-                item.style.left = invItem.x + "px";
-                item.style.top = invItem.y + "px";
-                item.style.width = invItem.w + "px";
-                item.style.height = invItem.h + "px";
-                item.className = items[i].type + 'Item';
-                item.id = 'item' + invItemNumber;
+                  var item = document.createElement("div");
+                  item.style.left = invItem.x + "px";
+                  item.style.top = invItem.y + "px";
+                  item.style.width = invItem.w + "px";
+                  item.style.height = invItem.h + "px";
+                  item.className = items[i].type + 'Item';
+                  item.id = 'item' + invItemNumber;
 
-                invItemNumber++;
+                  invItemNumber++;
 
-                document.getElementById("inventorySlots").appendChild(item);
+                  document.getElementById("inventorySlots").appendChild(item);
 
-                socket.emit('deleteItem', items[i].element);
+                  socket.emit('deleteItem', items[i].element);
 
-                invItems[invItems.length] = invItem;
+                  invItems[invItems.length] = invItem;
+                  break;
+                }
               }
+              break;
             }
           }
         }
