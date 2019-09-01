@@ -434,8 +434,9 @@
               }
             }
 
+            var element = document.getElementById(bullets[i].element);
+            
             if(bullets[i].lifeTimer < 0) {
-              var element = document.getElementById(bullets[i].element);
               if(element !== null) {
                 element.style.display = "none";
                 element.parentNode.removeChild(element);
