@@ -235,8 +235,6 @@
               }
             };
             document.onmousedown = function(evt) {
-              console.log(pickupItem);
-
               if(evt.which === 1) {
                 socket.emit('createBullet', player);
 
@@ -588,6 +586,7 @@
                 invItem.y = screenY / 2 - (screenX * 0.0208) / 2;
                 invItem.w = screenX * 0.0208;
                 invItem.h = screenX * 0.0208;
+                invItem.holder = invSlots[1];
 
                 var item = document.createElement("div");
                 item.style.left = invItem.x + "px";
