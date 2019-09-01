@@ -447,7 +447,7 @@
             if(createdSelf && bullets[i].element !== null) {
               if($("#" + bullets[i].element).length == 0) {
                 var element = document.createElement('div');
-                element.className = bullet.type;
+                element.className = bullets[i].type;
                 element.id = bullets[i].element;
                 document.getElementById('bulletContainer').appendChild(element);
               }
