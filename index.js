@@ -205,7 +205,7 @@ function blocker(sprite) {
           sprite.preY = sprite.y;
 
         }
-        
+
 function createMintBullet(player) {
   itemCounter++;
 
@@ -346,7 +346,7 @@ function Update() {
       if(bullets[i].lifeTimer < -1) {
         if(bullets[i].type === 'lifeSaver') {
           for(j = 0; j < 6; j++) {
-            bullets[i].angle += 30;
+            bullets[i].angle += 60;
             createMintBullet(bullets[i]);
           }
         }
