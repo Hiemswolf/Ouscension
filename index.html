@@ -289,7 +289,6 @@
                   if(checkCollision(invItems[i], mouse)) {
                     if(pickupItem === 'none') {
                       invItems[i].holder.isHolding = false;
-                      console.log(invItems[i].holder.element);
                       if(invItems[i].holder.element === 'WeaponSlot') {
                         player.weapon = 'none';
                       }
@@ -667,7 +666,6 @@
 
         function unEquipWeapon(id) {
           var itemType;
-          player.weapon = 'none';
 
           if($("#" + id).length !== 0) {
             var element = document.getElementById(id);
