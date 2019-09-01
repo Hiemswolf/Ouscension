@@ -430,7 +430,6 @@
                 var element = document.createElement('div');
                 element.className = 'bullet';
                 element.id = bullets[i].element;
-                element.style.transform = 'rotate(' + bullets[i].angle + 'deg)';
                 document.getElementById('bulletContainer').appendChild(element);
               }
             }
@@ -442,6 +441,7 @@
                 element.parentNode.removeChild(element);
               }
             } else {
+              element.style.transform = 'rotate(' + bullets[i].angle + 'deg)';
               setPosition(bullets[i]);
             }
           }

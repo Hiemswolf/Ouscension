@@ -42,7 +42,7 @@ io.on('connection', function(socket){
 
       bullet.mx = 2 * Math.cos(bullet.angle * Math.PI / 180);
       bullet.my = 2 * Math.sin(bullet.angle * Math.PI / 180);
-      bullet.rotSpeed = 360 + Math.random() * 30;
+      bullet.rotSpeed = (360 + Math.random() * 30) / 20;
 
       bullet.lifeTimer = 20;
 
