@@ -473,7 +473,7 @@
         });
 
         function bulletHandler() {
-          if(createdSelf && mouse.x != undefined) {
+          if(createdSelf && mouse != undefined) {
             player.mouse.y = mouse.y + player.y - screenY / 2;
             player.mouse.x = mouse.x + player.x - gameScreenX / 2;
           }
