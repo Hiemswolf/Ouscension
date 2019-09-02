@@ -44,6 +44,16 @@ io.on('connection', function(socket){
       players[players.length] = playerSprite;
     }
 
+    for(i = 0; i < bullets.length; i++) {
+      if(bullets[i].type === 'blueMint' && playerSprite.element === bullets[i].owner) {
+        var angle = Math.atan2((playerSprite.mouse.y - bullets[i].y), (playerSprite.mouse.x - bullets[i].x)) * (180 / Math.PI);
+        bullets[i].angle = angle;
+
+        bullets[i].x += 5 * Math.cos(bullets[i].angle * Math.PI / 180);
+        bullets[i].y += 5 * Math.sin(bullets[i].angle * Math.PI / 180);
+      }
+    }
+
     io.emit('showPlayer', playerSprite);
   });
 
@@ -116,16 +126,6 @@ io.on('connection', function(socket){
     }
 
     io.emit('delete', value);
-  });
-
-  socket.on('updateBlueBullets', function(updatedBlueBullets) {
-    for(i = 0; i < updatedBlueBullets.length; i++) {
-      for(j = 0; j < bullets.length; j++) {
-        if(updatedBlueBullets[i].element === bullets[j].element) {
-          bullets[j] = updatedBlueBullets[i];
-        }
-      }
-    }
   });
 
   socket.on('deleteItem', function(value) {

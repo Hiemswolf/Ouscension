@@ -280,6 +280,8 @@
             };
             document.onmousemove = function(evt) {
               mouse = createSprite('Mouse', evt.x, evt.y, 1, 1);
+              player.mouse.y = mouse.y + player.y - screenY / 2;
+              player.mouse.x = mouse.x + player.x - gameScreenX / 2;
 
               var angle = Math.atan2((evt.y - screenY / 2), (evt.x - gameScreenX / 2)) * (180 / Math.PI);
               player.angle = angle;
@@ -470,7 +472,6 @@
         });
 
         function bulletHandler() {
-          var updatedBlueBullets = [];
           for(i = 0; i < bullets.length; i++) {
 
             if(createdSelf && bullets[i].element !== null) {
@@ -490,21 +491,10 @@
                 element.parentNode.removeChild(element);
               }
             } else {
-              if(bullets[i].type === 'blueMint' && player.element === bullets[i].owner) {
-                var angle = Math.atan2((mouse.y + player.y - bullets[i].y - screenY / 2), (mouse.x + player.x - bullets[i].x - gameScreenX / 2)) * (180 / Math.PI);
-                bullets[i].angle = angle;
-
-                bullets[i].x += 5 * Math.cos(bullets[i].angle * Math.PI / 180);
-                bullets[i].y += 5 * Math.sin(bullets[i].angle * Math.PI / 180);
-
-                updatedBlueBullets[updatedBlueBullets.length] = bullets[i];
-              }
-
               element.style.transform = 'rotate(' + bullets[i].angle + 'deg)';
               setPosition(bullets[i]);
             }
           }
-          socket.emit('updateBlueBullets', updatedBlueBullets);
         }
 
         function portalHandler() {
