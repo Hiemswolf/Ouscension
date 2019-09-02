@@ -47,7 +47,7 @@ io.on('connection', function(socket){
     for(i = 0; i < bullets.length; i++) {
       if(bullets[i].type === 'blueMint' && playerSprite.element === bullets[i].owner) {
         var angle = Math.atan2((playerSprite.mouse.y - bullets[i].y), (playerSprite.mouse.x - bullets[i].x)) * (180 / Math.PI);
-        bullets[i].angle += angle * 0.1;
+        bullets[i].angle += (angle - bullets[i].angle) * 0.1;
 
         bullets[i].x += 5 * Math.cos(bullets[i].angle * Math.PI / 180);
         bullets[i].y += 5 * Math.sin(bullets[i].angle * Math.PI / 180);
