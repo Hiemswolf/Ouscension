@@ -28,27 +28,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('createBullet', function(player, bulletType) {
-    if(bulletType === 'mint') {
-      createMintBullet(player);
-    }
-
-    if(bulletType === 'lifeSaver') {
-      itemCounter++;
-
-      var bullet = createSprite(itemCounter, player.x + player.w / 2, player.y + player.h / 2, 5, 5);
-      bullet.angle = player.angle;
-      bullet.world = player.world;
-      bullet.owner = player.element;
-      bullet.type = bulletType;
-
-      bullet.lifeTimer = 15;
-
-      bullet.mx = 4 * Math.cos(bullet.angle * Math.PI / 180);
-      bullet.my = 4 * Math.sin(bullet.angle * Math.PI / 180);
-      bullet.rotSpeed = (360 + Math.random() * 60) / bullet.lifeTimer;
-
-      bullets[bullets.length] = bullet;
-    }
+    createBullet(player, bulletType);
   });
 
   socket.on('playerInfo', function(playerSprite) {
@@ -115,6 +95,8 @@ io.on('connection', function(socket){
           } else {
             if(Math.floor(Math.random() * 8) === 0) {
               createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'lifeSaver');
+            } else {
+              createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'blueMint');
             }
           }
 
@@ -210,7 +192,7 @@ function blocker(sprite) {
 
         }
 
-function createMintBullet(player) {
+function createBullet(player, type) {
   itemCounter++;
 
   var bullet = createSprite(itemCounter, player.x + player.w / 2, player.y + player.h / 2, 5, 5);
@@ -221,13 +203,31 @@ function createMintBullet(player) {
   } else {
     bullet.owner = player.element;
   }
-  bullet.type = 'mint';
+  bullet.type = type;
 
-  bullet.mx = 5 * Math.cos(bullet.angle * Math.PI / 180);
-  bullet.my = 5 * Math.sin(bullet.angle * Math.PI / 180);
-  bullet.rotSpeed = 0;
+  if(type === 'mint') {
+    bullet.mx = 6 * Math.cos(bullet.angle * Math.PI / 180);
+    bullet.my = 6 * Math.sin(bullet.angle * Math.PI / 180);
+    bullet.rotSpeed = 0;
 
-  bullet.lifeTimer = 40;
+    bullet.lifeTimer = 60;
+  }
+
+  if(bulletType === 'lifeSaver') {
+    bullet.lifeTimer = 20;
+
+    bullet.mx = 4 * Math.cos(bullet.angle * Math.PI / 180);
+    bullet.my = 4 * Math.sin(bullet.angle * Math.PI / 180);
+    bullet.rotSpeed = (360 + Math.random() * 60) / bullet.lifeTimer;
+  }
+
+  if(bulletType === 'blueMint') {
+    bullet.lifeTimer = 120;
+
+    bullet.mx = 0;
+    bullet.my = 0;
+    bullet.rotSpeed = 0;
+  }
 
   bullets[bullets.length] = bullet;
 }
@@ -356,7 +356,7 @@ function Update() {
         if(bullets[i].type === 'lifeSaver') {
           for(j = 0; j < 6; j++) {
             bullets[i].angle += 60;
-            createMintBullet(bullets[i]);
+            createBullet(bullets[i], type);
           }
         }
 
