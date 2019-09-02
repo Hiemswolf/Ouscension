@@ -283,8 +283,6 @@
             };
             document.onmousemove = function(evt) {
               mouse = createSprite('Mouse', evt.x, evt.y, 1, 1);
-              player.mouse.y = mouse.y + player.y - screenY / 2;
-              player.mouse.x = mouse.x + player.x - gameScreenX / 2;
 
               var angle = Math.atan2((evt.y - screenY / 2), (evt.x - gameScreenX / 2)) * (180 / Math.PI);
               player.angle = angle;
@@ -727,6 +725,9 @@
               floors = floorsSetter;
               enemies = enemiesSetter;
               items = itemsSetter;
+
+              player.mouse.y = mouse.y + player.y - screenY / 2;
+              player.mouse.x = mouse.x + player.x - gameScreenX / 2;
 
               handleControls();
               bulletHandler();
