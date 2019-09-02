@@ -75,14 +75,14 @@
       .lifeSaver {
                 width: 25px;
                 height: 25px;
-                background-image: url('https://piskel-imgstore-b.appspot.com/img/497b8f68-cd0b-11e9-adee-f34f731bf23e.gif');
+                background-image: url('https://piskel-imgstore-b.appspot.com/img/fb5cda8c-cd14-11e9-8a31-27fde8acf637.gif');
                 background-repeat: no-repeat;
                 background-size:100% 100%;
                 position: absolute;
                 z-index: 10;
       }
       .lifeSaverItem {
-                background-image: url("https://piskel-imgstore-b.appspot.com/img/497b8f68-cd0b-11e9-adee-f34f731bf23e.gif");
+                background-image: url("https://piskel-imgstore-b.appspot.com/img/fb5cda8c-cd14-11e9-8a31-27fde8acf637.gif");
                 background-repeat: no-repeat;
                 background-size:100% 100%;
                 position: absolute;
@@ -91,7 +91,7 @@
       .lifeSaverDropped {
                 width: 25px;
                 height: 25px;
-                background-image: url('https://piskel-imgstore-b.appspot.com/img/497b8f68-cd0b-11e9-adee-f34f731bf23e.gif');
+                background-image: url('https://piskel-imgstore-b.appspot.com/img/fb5cda8c-cd14-11e9-8a31-27fde8acf637.gif');
                 background-repeat: no-repeat;
                 background-size:100% 100%;
                 position: absolute;
@@ -273,9 +273,9 @@
                 }
                 if(player.weapon === 'mint') {
                   var preAngle = player.angle;
-                  player.angle += Math.random() * 60 - 30;
+                  player.angle += Math.random() * 40 - 20;
                   socket.emit('createBullet', player, 'mint');
-                  player.angle += Math.random() * 60 - 30;
+                  player.angle += Math.random() * 40 - 20;
                   socket.emit('createBullet', player, 'mint');
                   player.angle = preAngle;
                 }
