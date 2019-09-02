@@ -496,13 +496,14 @@
 
                 bullets[i].x += 5 * Math.cos(bullets[i].angle * Math.PI / 180);
                 bullets[i].y += 5 * Math.sin(bullets[i].angle * Math.PI / 180);
+
+                updatedBlueBullets[updatedBlueBullets.length] = bullets[i];
               }
 
               element.style.transform = 'rotate(' + bullets[i].angle + 'deg)';
               setPosition(bullets[i]);
             }
           }
-          console.log(updatedBlueBullets);
           socket.emit('updateBlueBullets', updatedBlueBullets);
         }
 
