@@ -502,6 +502,7 @@
               setPosition(bullets[i]);
             }
           }
+          console.log(updatedBlueBullets);
           socket.emit('updateBlueBullets', updatedBlueBullets);
         }
 
