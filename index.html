@@ -491,7 +491,7 @@
                 element.parentNode.removeChild(element);
               }
             } else {
-              if(bullets[i].type === 'blueMint' && player.element === bullet.owner) {
+              if(bullets[i].type === 'blueMint' && player.element === bullets[i].owner) {
                 var angle = Math.atan2((player.y - bullets[i].y), (player.x - bullets[i].x)) * (180 / Math.PI);
                 bullets[i].angle += (angle - bullets[i].angle) * 0.1;
 
