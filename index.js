@@ -332,8 +332,8 @@ function enemyHandler() {
 
       for(j = 0; j < enemies.length; j++) {
         if(enemies[i].element != enemies[j].element && enemies[i].world === enemies[j].world) {
-          enemies[i].x += 5 / (enemies[i].x - enemies[j].x);
-          enemies[i].y += 5 / (enemies[i].y - enemies[j].y);
+          enemies[i].x += 10 / (enemies[i].x - enemies[j].x);
+          enemies[i].y += 10 / (enemies[i].y - enemies[j].y);
         }
       }
     }
