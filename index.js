@@ -122,7 +122,7 @@ io.on('connection', function(socket){
     for(i = 0; i < updatedBlueBullets.length; i++) {
       for(j = 0; j < bullets.length; j++) {
         if(updatedBlueBullets[i].element === bullets[j].element) {
-          bullets[j] = updatedBlueBullets;
+          bullets[j] = updatedBlueBullets[i];
         }
       }
     }
