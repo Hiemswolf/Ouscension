@@ -126,8 +126,6 @@ io.on('connection', function(socket){
         }
       }
     }
-
-    io.emit('delete', value);
   });
 
   socket.on('deleteItem', function(value) {
