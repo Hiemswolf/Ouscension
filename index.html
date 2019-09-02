@@ -273,9 +273,9 @@
                 }
                 if(player.weapon === 'mint') {
                   var preAngle = player.angle;
-                  player.angle += Math.random() * 40 - 20;
+                  player.angle += Math.random() * 30 - 15;
                   socket.emit('createBullet', player, 'mint');
-                  player.angle += Math.random() * 40 - 20;
+                  player.angle += Math.random() * 30 - 15;
                   socket.emit('createBullet', player, 'mint');
                   player.angle = preAngle;
                 }
