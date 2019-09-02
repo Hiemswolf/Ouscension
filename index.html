@@ -473,9 +473,10 @@
         });
 
         function bulletHandler() {
-          player.mouse.y = mouse.y + player.y - screenY / 2;
-          player.mouse.x = mouse.x + player.x - gameScreenX / 2;
-
+          if(createdSelf && mouse.x != undefined) {
+            player.mouse.y = mouse.y + player.y - screenY / 2;
+            player.mouse.x = mouse.x + player.x - gameScreenX / 2;
+          }
           for(i = 0; i < bullets.length; i++) {
 
             if(createdSelf && bullets[i].element !== null) {
