@@ -356,7 +356,7 @@ function Update() {
         if(bullets[i].type === 'lifeSaver') {
           for(j = 0; j < 6; j++) {
             bullets[i].angle += 60;
-            createBullet(bullets[i], type);
+            createBullet(bullets[i], 'mint');
           }
         }
 
