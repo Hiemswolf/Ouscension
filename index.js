@@ -118,6 +118,18 @@ io.on('connection', function(socket){
     io.emit('delete', value);
   });
 
+  socket.on('updateBlueBullets', function(updatedBlueBullets) {
+    for(i = 0; i < updatedBlueBullets.length; i++) {
+      for(j = 0; j < bullets.length; j++) {
+        if(updatedBlueBullets[i].element === bullets[j].element) {
+          bullets[j] = updatedBlueBullets;
+        }
+      }
+    }
+
+    io.emit('delete', value);
+  });
+
   socket.on('deleteItem', function(value) {
     for(i = 0; i < items.length; i++) {
       if(items[i].element === value) {

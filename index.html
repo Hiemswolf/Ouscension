@@ -98,11 +98,9 @@
                 z-index: 1;
       }
       .blueMint {
-                width: 25px;
-                height: 25px;
-                background-image: url('https://piskel-imgstore-b.appspot.com/img/02ce5a23-cd9f-11e9-a8a5-0f5e8ece36f2.gif');
-                background-repeat: no-repeat;
-                background-size:100% 100%;
+                width: 10px;
+                height: 5px;
+                background: #00ffff;
                 position: absolute;
                 z-index: 10;
       }
@@ -472,6 +470,7 @@
         });
 
         function bulletHandler() {
+          var updatedBlueBullets = [];
           for(i = 0; i < bullets.length; i++) {
 
             if(createdSelf && bullets[i].element !== null) {
@@ -492,7 +491,7 @@
               }
             } else {
               if(bullets[i].type === 'blueMint' && player.element === bullets[i].owner) {
-                var angle = Math.atan2((player.y - bullets[i].y), (player.x - bullets[i].x)) * (180 / Math.PI);
+                var angle = Math.atan2((mouse.y - bullets[i].y), (mouse.x - bullets[i].x)) * (180 / Math.PI);
                 bullets[i].angle += (angle - bullets[i].angle) * 0.1;
 
                 bullets[i].x += 5 * Math.cos(bullets[i].angle * Math.PI / 180);
@@ -503,6 +502,7 @@
               setPosition(bullets[i]);
             }
           }
+          socket.emit('updateBlueBullets', updatedBlueBullets);
         }
 
         function portalHandler() {
