@@ -492,7 +492,7 @@
             } else {
               if(bullets[i].type === 'blueMint' && player.element === bullets[i].owner) {
                 var angle = Math.atan2((mouse.y - bullets[i].y), (mouse.x - bullets[i].x)) * (180 / Math.PI);
-                bullets[i].angle += (angle - bullets[i].angle) * 0.1;
+                bullets[i].angle = angle;
 
                 bullets[i].x += 5 * Math.cos(bullets[i].angle * Math.PI / 180);
                 bullets[i].y += 5 * Math.sin(bullets[i].angle * Math.PI / 180);
