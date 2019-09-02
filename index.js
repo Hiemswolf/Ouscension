@@ -199,7 +199,7 @@ function createBullet(player, type) {
   bullet.angle = player.angle;
   bullet.world = player.world;
   if(player.owner != undefined) {
-    bullet.owner = player.owner
+    bullet.owner = player.owner;
   } else {
     bullet.owner = player.element;
   }
@@ -213,7 +213,7 @@ function createBullet(player, type) {
     bullet.lifeTimer = 60;
   }
 
-  if(bulletType === 'lifeSaver') {
+  if(type === 'lifeSaver') {
     bullet.lifeTimer = 20;
 
     bullet.mx = 4 * Math.cos(bullet.angle * Math.PI / 180);
@@ -221,7 +221,7 @@ function createBullet(player, type) {
     bullet.rotSpeed = (360 + Math.random() * 60) / bullet.lifeTimer;
   }
 
-  if(bulletType === 'blueMint') {
+  if(type === 'blueMint') {
     bullet.lifeTimer = 120;
 
     bullet.mx = 0;
