@@ -49,8 +49,8 @@ io.on('connection', function(socket){
         var angle = Math.atan2((playerSprite.mouse.y - bullets[i].y), (playerSprite.mouse.x - bullets[i].x)) * (180 / Math.PI);
         bullets[i].rotSpeed = (angle - bullets[i].angle) * 0.05 + bullets[i].rotSpeed * 0.5;
 
-        bullets[i].x += 5 * Math.cos(bullets[i].angle * Math.PI / 180);
-        bullets[i].y += 5 * Math.sin(bullets[i].angle * Math.PI / 180);
+        bullets[i].x += 8 * Math.cos(bullets[i].angle * Math.PI / 180);
+        bullets[i].y += 8 * Math.sin(bullets[i].angle * Math.PI / 180);
       }
     }
 
@@ -216,8 +216,8 @@ function createBullet(player, type) {
   bullet.type = type;
 
   if(type === 'mint') {
-    bullet.mx = 6 * Math.cos(bullet.angle * Math.PI / 180);
-    bullet.my = 6 * Math.sin(bullet.angle * Math.PI / 180);
+    bullet.mx = 10 * Math.cos(bullet.angle * Math.PI / 180);
+    bullet.my = 10 * Math.sin(bullet.angle * Math.PI / 180);
     bullet.rotSpeed = 0;
 
     bullet.lifeTimer = 60;
@@ -232,7 +232,7 @@ function createBullet(player, type) {
   }
 
   if(type === 'blueMint') {
-    bullet.lifeTimer = 120;
+    bullet.lifeTimer = 180;
 
     bullet.mx = 0;
     bullet.my = 0;
