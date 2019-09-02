@@ -106,7 +106,9 @@ io.on('connection', function(socket){
             if(Math.floor(Math.random() * 8) === 0) {
               createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'lifeSaver');
             } else {
-              createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'blueMint');
+              if(Math.floor(Math.random() * 8) === 0) {
+                createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'blueMint');
+              }
             }
           }
 
@@ -232,7 +234,7 @@ function createBullet(player, type) {
   }
 
   if(type === 'blueMint') {
-    bullet.lifeTimer = 180;
+    bullet.lifeTimer = 150;
 
     bullet.mx = 0;
     bullet.my = 0;
