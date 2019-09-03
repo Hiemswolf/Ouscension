@@ -277,7 +277,7 @@ function createEnemy(world, x , y) {
   itemCounter++;
   var enemy = createSprite('enemy' + itemCounter, x, y, 30, 30);
   enemy.world = world;
-  enemy.hp = 5;
+  enemy.hp = 10;
 
   enemies[enemies.length] = enemy;
 }
