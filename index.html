@@ -508,14 +508,14 @@
 
             var element = document.getElementById(bullets[i].element);
 
-            if(bullets[i].lifeTimer < 0) {
-              if(element !== null) {
-                element.style.display = "none";
-                element.parentNode.removeChild(element);
+            if(element !== null) {
+              if(bullets[i].lifeTimer < 0) {
+                  element.style.display = "none";
+                  element.parentNode.removeChild(element);
+              } else {
+                element.style.transform = 'rotate(' + bullets[i].angle + 'deg)';
+                setPosition(bullets[i]);
               }
-            } else {
-              element.style.transform = 'rotate(' + bullets[i].angle + 'deg)';
-              setPosition(bullets[i]);
             }
           }
         }
