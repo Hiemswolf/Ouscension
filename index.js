@@ -49,6 +49,8 @@ io.on('connection', function(socket){
         if(isMouseDown) {
           var angle = Math.atan2((playerSprite.mouse.y - bullets[i].y), (playerSprite.mouse.x - bullets[i].x)) * (180 / Math.PI);
           bullets[i].rotSpeed = (angle - bullets[i].angle) * 0.05 + bullets[i].rotSpeed * 0.8;
+        } else {
+          bullets[i].rotSpeed = 0;
         }
 
         bullets[i].x += 16 * Math.cos(bullets[i].angle * Math.PI / 180);
