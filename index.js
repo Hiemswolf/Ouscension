@@ -31,7 +31,7 @@ io.on('connection', function(socket){
     createBullet(player, bulletType);
   });
 
-  socket.on('playerInfo', function(playerSprite) {
+  socket.on('playerInfo', function(playerSprite, isMouseDown) {
 
     var inPlayerArray = false;
     for(i = 0; i < players.length; i++) {
@@ -46,8 +46,10 @@ io.on('connection', function(socket){
 
     for(i = 0; i < bullets.length; i++) {
       if(bullets[i].type === 'blueMint' && playerSprite.element === bullets[i].owner) {
-        var angle = Math.atan2((playerSprite.mouse.y - bullets[i].y), (playerSprite.mouse.x - bullets[i].x)) * (180 / Math.PI);
-        bullets[i].rotSpeed = (angle - bullets[i].angle) * 0.05 + bullets[i].rotSpeed * 0.8;
+        if(isMouseDown) {
+          var angle = Math.atan2((playerSprite.mouse.y - bullets[i].y), (playerSprite.mouse.x - bullets[i].x)) * (180 / Math.PI);
+          bullets[i].rotSpeed = (angle - bullets[i].angle) * 0.05 + bullets[i].rotSpeed * 0.8;
+        }
 
         bullets[i].x += 16 * Math.cos(bullets[i].angle * Math.PI / 180);
         bullets[i].y += 16 * Math.sin(bullets[i].angle * Math.PI / 180);
