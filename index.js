@@ -453,7 +453,7 @@ function bulletHandler() {
       var targets = [];
 
       for(j = 0; j < enemies.length; j++) {
-        if(enemies[j].world === enemies[i].world) {
+        if(enemies[j].world === bullets[i].world) {
           var target = enemies[j];
           target.distance = Math.hypot(enemies[j].x - bullets[i].x, enemies[j].y - bullets[i].y);
 
