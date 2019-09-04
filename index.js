@@ -460,10 +460,10 @@ function bulletHandler() {
       if(closest !== undefined) {
         var angle = Math.atan2((closest.y - bullets[i].y), (closest.x - bullets[i].x)) * (180 / Math.PI);
         bullets[i].rotSpeed = (angle - bullets[i].angle) * 0.05 + bullets[i].rotSpeed * 0.8;
-
-        bullets[i].x += 16 * Math.cos(bullets[i].angle * Math.PI / 180);
-        bullets[i].y += 16 * Math.sin(bullets[i].angle * Math.PI / 180);
       }
+
+      bullets[i].x += 16 * Math.cos(bullets[i].angle * Math.PI / 180);
+      bullets[i].y += 16 * Math.sin(bullets[i].angle * Math.PI / 180);
     }
 
     bullets[i].lifeTimer--;
