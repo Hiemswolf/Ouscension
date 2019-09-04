@@ -363,32 +363,33 @@
             function bulletFiring() {
               bulletTimer++;
 
-              if(bulletTimer >= 8 && isMouseDown) {
-                bulletTimer = 0;
-                if(player.weapon === 'lifeSaver') {
+              if(player.weapon === 'lifeSaver') {
+                if(bulletTimer >= 8 && isMouseDown) {
+                  bulletTimer = 0;
                   socket.emit('createBullet', player, 'lifeSaver');
                 }
-              }
+              } else {
 
-              if(bulletTimer >= 4 && isMouseDown) {
-                bulletTimer = 0;
+                if(bulletTimer >= 4 && isMouseDown) {
+                  bulletTimer = 0;
 
-                if(player.weapon === 'none') {
-                  socket.emit('createBullet', player, 'mint');
-                }
-                if(player.weapon === 'mint') {
-                  var preAngle = player.angle;
-                  player.angle += Math.random() * 30 - 15;
-                  socket.emit('createBullet', player, 'mint');
-                  player.angle += Math.random() * 30 - 15;
-                  socket.emit('createBullet', player, 'mint');
-                  player.angle = preAngle;
-                }
-                if(player.weapon === 'blueMint') {
-                  var preAngle = player.angle;
-                  player.angle = Math.random() * 360;
-                  socket.emit('createBullet', player, 'blueMint');
-                  player.angle = preAngle;
+                  if(player.weapon === 'none') {
+                    socket.emit('createBullet', player, 'mint');
+                  }
+                  if(player.weapon === 'mint') {
+                    var preAngle = player.angle;
+                    player.angle += Math.random() * 30 - 15;
+                    socket.emit('createBullet', player, 'mint');
+                    player.angle += Math.random() * 30 - 15;
+                    socket.emit('createBullet', player, 'mint');
+                    player.angle = preAngle;
+                  }
+                  if(player.weapon === 'blueMint') {
+                    var preAngle = player.angle;
+                    player.angle = Math.random() * 360;
+                    socket.emit('createBullet', player, 'blueMint');
+                    player.angle = preAngle;
+                  }
                 }
               }
             }

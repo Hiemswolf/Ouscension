@@ -104,16 +104,22 @@ io.on('connection', function(socket){
       if(enemies[i].element === value) {
         enemies[i].hp--;
         if(enemies[i].hp <= 0) {
-          //should be 8
-          if(Math.floor(Math.random() * 8) === 0) {
-            createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'mint');
-          } else {
+
+          if(enemies[i].type === 'skeleton') {
             if(Math.floor(Math.random() * 8) === 0) {
-              createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'lifeSaver');
+              createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'mint');
             } else {
               if(Math.floor(Math.random() * 8) === 0) {
-                createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'blueMint');
+                createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'lifeSaver');
+              } else {
+
               }
+            }
+          }
+
+          if(enemies[i].type === 'mage') {
+            if(Math.floor(Math.random() * 8) === 0) {
+              createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'blueMint');
             }
           }
 
