@@ -381,7 +381,10 @@
                   socket.emit('createBullet', player, 'lifeSaver');
                 }
                 if(player.weapon === 'blueMint') {
+                  var preAngle = player.angle;
+                  player.angle = Math.random() * 360;
                   socket.emit('createBullet', player, 'blueMint');
+                  player.angle = preAngle;
                 }
               }
             }
@@ -705,9 +708,6 @@
               }
             }
 
-            setPosition(enemyProjectiles[i]);
-            document.getElementById(enemyProjectiles[i].element).style.transform = 'rotate(' + enemyProjectiles[i].angle + 'deg)';
-
             for(j = 0; j < bullets.length; j++) {
               if(bullets[j].owner === player.element) {
                 if(bullets[j].world === enemyProjectiles[i].world) {
@@ -716,6 +716,18 @@
                     socket.emit('deleteBullet', bullets[j].element);
                   }
                 }
+              }
+            }
+
+            var element = document.getElementById(enemyProjectiles[i].element);
+
+            if(element !== null) {
+              if(enemyProjectiles[i].lifeTimer < 0) {
+                  element.style.display = "none";
+                  element.parentNode.removeChild(element);
+              } else {
+                setPosition(enemyProjectiles[i]);
+                document.getElementById(enemyProjectiles[i].element).style.transform = 'rotate(' + enemyProjectiles[i].angle + 'deg)';
               }
             }
           }
