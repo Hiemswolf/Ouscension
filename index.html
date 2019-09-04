@@ -105,6 +105,31 @@
                 position: absolute;
                 z-index: 1;
       }
+      .limeLifeSaver {
+                width: 25px;
+                height: 25px;
+                background-image: url('https://piskel-imgstore-b.appspot.com/img/66b62f4c-ceb5-11e9-8e4a-23fddcbaba0f.gif');
+                background-repeat: no-repeat;
+                background-size:100% 100%;
+                position: absolute;
+                z-index: 10;
+      }
+      .limeLifeSaverItem {
+                background-image: url("https://piskel-imgstore-b.appspot.com/img/66b62f4c-ceb5-11e9-8e4a-23fddcbaba0f.gif");
+                background-repeat: no-repeat;
+                background-size:100% 100%;
+                position: absolute;
+                z-index: 1000002;
+      }
+      .limeLifeSaverDropped {
+                width: 25px;
+                height: 25px;
+                background-image: url('https://piskel-imgstore-b.appspot.com/img/66b62f4c-ceb5-11e9-8e4a-23fddcbaba0f.gif');
+                background-repeat: no-repeat;
+                background-size:100% 100%;
+                position: absolute;
+                z-index: 1;
+      }
       .blueMint {
                 width: 10px;
                 height: 5px;
@@ -363,10 +388,10 @@
             function bulletFiring() {
               bulletTimer++;
 
-              if(player.weapon === 'lifeSaver') {
-                if(bulletTimer >= 8 && isMouseDown) {
+              if(player.weapon === 'limeLifeSaver') {
+                if(bulletTimer >= 12 && isMouseDown) {
                   bulletTimer = 0;
-                  socket.emit('createBullet', player, 'lifeSaver');
+                  socket.emit('createBullet', player, 'limeLifeSaver');
                 }
               } else {
 
