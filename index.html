@@ -389,7 +389,7 @@
               bulletTimer++;
 
               if(player.weapon === 'limeLifeSaver') {
-                if(bulletTimer >= 24 && isMouseDown) {
+                if(bulletTimer >= 12 && isMouseDown) {
                   bulletTimer = 0;
                   socket.emit('createBullet', player, 'limeLifeSaver');
                 }
