@@ -13,6 +13,7 @@ var portals = [];
 var floors = [];
 var enemies = [];
 var items = [];
+var enemyProjectiles = [];
 var dungeons = 0;
 
 app.get('/', function(req, res){
@@ -117,6 +118,20 @@ io.on('connection', function(socket){
           }
 
           enemies.splice(i, 1);
+        }
+      }
+    }
+
+    io.emit('delete', value);
+  });
+
+  socket.on('hurtEnemyProjectile', function(value) {
+    for(i = 0; i < enemyProjectiles.length; i++) {
+      if(enemyProjectiles[i].element === value) {
+        enemyProjectiles[i].hp--;
+        if(enemyProjectiles[i].hp <= 0) {
+
+          enemyProjectiles.splice(i, 1);
         }
       }
     }
@@ -277,11 +292,19 @@ function createFloor(world, x, y) {
   floors[floors.length] = floor;
 }
 
-function createEnemy(world, x , y) {
+function createEnemy(world, x , y, type) {
   itemCounter++;
-  var enemy = createSprite('enemy' + itemCounter, x, y, 30, 30);
+  var size = 30;
+  var enemy = createSprite('enemy' + itemCounter, x, y, size, size);
   enemy.world = world;
   enemy.hp = 10;
+  enemy.type = type;
+  enemy.speed = 10;
+
+  if(type === "mage") {
+    enemy.speed = 5;
+    enemy.projectileTimer = 24;
+  }
 
   enemies[enemies.length] = enemy;
 }
@@ -309,7 +332,10 @@ function createDungeon(name, length) {
     createFloor(name, floorX * 500 - 250, floorY * 500 - 250);
 
     for(j = 0; j < Math.floor(Math.random() * 3); j++){
-      createEnemy(name, floorX * 500 - 15, floorY * 500 - 15);
+      createEnemy(name, floorX * 500 - 15, floorY * 500 - 15, 'skeleton');
+    }
+    if(Math.floor(Math.random() * 3) === 0) {
+      createEnemy(name, floorX * 500 - 15, floorY * 500 - 15, 'mage');
     }
   }
   createPortal(name, 'Hub', floorX * 500 - 15, floorY * 500 - 15);
@@ -343,8 +369,19 @@ function enemyHandler() {
     if(closest !== undefined) {
       enemies[i].angle = Math.atan2((closest.y - enemies[i].y), (closest.x - enemies[i].x)) * (180 / Math.PI);
 
-      enemies[i].x += 10 * Math.cos(enemies[i].angle * Math.PI / 180);
-      enemies[i].y += 10 * Math.sin(enemies[i].angle * Math.PI / 180);
+      enemies[i].x += enemies[i].speed * Math.cos(enemies[i].angle * Math.PI / 180);
+      enemies[i].y += enemies[i].speed * Math.sin(enemies[i].angle * Math.PI / 180);
+
+      if(enemies.type === "mage") {
+        enemies[i].x += 20 / (enemies[i].x - closest.x);
+        enemies[i].y += 20 / (enemies[i].y - closest.y);
+
+        if(closestDistance < 500 && enemies[i].projectileTimer <= 0) {
+          projectileTimer = 24;
+
+          createEnemyProjectile(enemies[i]);
+        }
+      }
 
       for(j = 0; j < enemies.length; j++) {
         if(enemies[i].element != enemies[j].element && enemies[i].world === enemies[j].world) {
@@ -354,6 +391,35 @@ function enemyHandler() {
       }
     }
     blocker(enemies[i]);
+  }
+}
+
+function createEnemyProjectile(source) {
+  itemCounter++;
+  var size = 10;
+  var enemyProjectile = createSprite('enemy' + itemCounter, source.x, source.y, size, size);
+  enemyProjectile.world = world;
+  enemyProjectile.hp = 1;
+  enemyProjectile.angle = source.angle;
+  enemyProjectile.lifeTimer = 60;
+
+  bullet.mx = 12 * Math.cos(enemyProjectile.angle * Math.PI / 180);
+  bullet.my = 12 * Math.sin(enemyProjectile.angle * Math.PI / 180);
+
+  enemyProjectiles[enemyProjectiles.length] = enemyProjectile;
+}
+function enemyProjectileHandler() {
+  for(i = 0; i < enemyProjectiles.length; i++) {
+
+    enemyProjectiles[i].x += enemyProjectiles[i].mx;
+    enemyProjectiles[i].y += enemyProjectiles[i].my;
+
+    enemyProjectiles[i].lifeTimer--;
+    if(enemyProjectiles[i].lifeTimer < -1) {
+
+      enemyProjectiles.splice(i, 1);
+      i--;
+    }
   }
 }
 
@@ -382,12 +448,13 @@ function Update() {
     }
 
     enemyHandler();
+    enemyProjectileHandler();
 
     for(i = 0; i < portals.length; i++) {
       portals[i].angle += 9;
     }
 
-    io.emit('loop', bullets, portals, floors, enemies, items);
+    io.emit('loop', bullets, portals, floors, enemies, items, enemyProjectiles);
 
     lastUpdate = new Date().getTime();
   }

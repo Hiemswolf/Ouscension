@@ -36,11 +36,19 @@
                 position: absolute;
                 z-index: 0;
       }
-      .enemy {
+      .skeleton {
                 width: 30px;
                 height: 30px;
                 background: rgb(255, 0, 0);
                 background-image: url("https://image.ibb.co/bBKx1n/SkeleBoi.gif");
+                position: absolute;
+                z-index: 50;
+      }
+      .mage {
+                width: 30px;
+                height: 30px;
+                background: rgb(255, 0, 255);
+                background-image: url("https://piskel-imgstore-b.appspot.com/img/ba43275e-cea9-11e9-a495-23fddcbaba0f.gif");
                 position: absolute;
                 z-index: 50;
       }
@@ -119,6 +127,13 @@
                 background-size:100% 100%;
                 position: absolute;
                 z-index: 1;
+      }
+      .enemyProjectile {
+                width: 10px;
+                height: 10px;
+                background: #ff0000;
+                position: absolute;
+                z-index: 10;
       }
       #mainGUI {
         background: rgb(0, 0, 0);
@@ -205,6 +220,8 @@
         var floors = [];
         var enemies = [];
         var items = [];
+        var enemyProjectiles = [];
+
         var invItems = [];
         var invSlots = [];
 
@@ -569,7 +586,7 @@
             if(enemies[i].element !== null) {
               if($("#" + enemies[i].element).length == 0) {
                 var element = document.createElement("div");
-                element.className = "enemy";
+                element.className = enemies[i].type;
                 element.id = enemies[i].element;
                 element.style.left = '-50px';
                 element.style.top = '-50px';
@@ -674,6 +691,35 @@
             }
           }
         }
+        function enemyProjectileHandler() {
+          for(i = 0; i < enemyProjectiles.length; i++) {
+
+            if(enemyProjectiles[i].element !== null) {
+              if($("#" + enemyProjectiles[i].element).length == 0) {
+                var element = document.createElement("div");
+                element.className = 'enemyProjectile';
+                element.id = enemyProjectiles[i].element;
+                element.style.left = '-50px';
+                element.style.top = '-50px';
+                document.getElementById('enemyContainer').appendChild(element);
+              }
+            }
+
+            setPosition(enemyProjectiles[i]);
+            document.getElementById(enemyProjectiles[i].element).style.transform = 'rotate(' + enemyProjectiles[i].angle + 'deg)';
+
+            for(j = 0; j < bullets.length; j++) {
+              if(bullets[j].owner === player.element) {
+                if(bullets[j].world === enemyProjectiles[i].world) {
+                  if(checkCollision(bullets[j], enemyProjectiles[i])) {
+                    socket.emit('hurtEnemyProjectile', enemyProjectiles[i].element);
+                    socket.emit('deleteBullet', bullets[j].element);
+                  }
+                }
+              }
+            }
+          }
+        }
 
         //Weapon
         function equipWeapon() {
@@ -740,13 +786,14 @@
         }
 
             //Update
-            socket.on('loop', function(bulletsSetter, portalsSetter, floorsSetter, enemiesSetter, itemsSetter) {
+            socket.on('loop', function(bulletsSetter, portalsSetter, floorsSetter, enemiesSetter, itemsSetter, enemyProjectilesSetter) {
 
               bullets = bulletsSetter
               portals = portalsSetter;
               floors = floorsSetter;
               enemies = enemiesSetter;
               items = itemsSetter;
+              enemyProjectiles = enemyProjectilesSetter;
 
               handleControls();
               bulletHandler();
@@ -757,6 +804,7 @@
               playerCheck();
               itemHandler();
               bulletFiring();
+              enemyProjectileHandler();
 
               blocker(player);
 
