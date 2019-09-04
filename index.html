@@ -363,6 +363,13 @@
             function bulletFiring() {
               bulletTimer++;
 
+              if(bulletTimer >= 8 && isMouseDown) {
+                bulletTimer = 0;
+                if(player.weapon === 'lifeSaver') {
+                  socket.emit('createBullet', player, 'lifeSaver');
+                }
+              }
+
               if(bulletTimer >= 4 && isMouseDown) {
                 bulletTimer = 0;
 
@@ -376,9 +383,6 @@
                   player.angle += Math.random() * 30 - 15;
                   socket.emit('createBullet', player, 'mint');
                   player.angle = preAngle;
-                }
-                if(player.weapon === 'lifeSaver') {
-                  socket.emit('createBullet', player, 'lifeSaver');
                 }
                 if(player.weapon === 'blueMint') {
                   var preAngle = player.angle;

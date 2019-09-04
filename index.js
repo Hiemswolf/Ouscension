@@ -369,12 +369,11 @@ function enemyHandler() {
     if(closest !== undefined) {
       enemies[i].angle = Math.atan2((closest.y - enemies[i].y), (closest.x - enemies[i].x)) * (180 / Math.PI);
 
-      enemies[i].x += enemies[i].speed * Math.cos(enemies[i].angle * Math.PI / 180);
-      enemies[i].y += enemies[i].speed * Math.sin(enemies[i].angle * Math.PI / 180);
-
       if(enemies[i].type === "mage") {
-        enemies[i].x += 50 / (enemies[i].x - closest.x);
-        enemies[i].y += 50 / (enemies[i].y - closest.y);
+        if(closestDistance > 100) {
+          enemies[i].x += enemies[i].speed * Math.cos(enemies[i].angle * Math.PI / 180);
+          enemies[i].y += enemies[i].speed * Math.sin(enemies[i].angle * Math.PI / 180);
+        }
 
         if(closestDistance < 500 && enemies[i].projectileTimer <= 0) {
           enemies[i].projectileTimer = 24;
@@ -383,6 +382,9 @@ function enemyHandler() {
         } else {
           enemies[i].projectileTimer--;
         }
+      } else {
+        enemies[i].x += enemies[i].speed * Math.cos(enemies[i].angle * Math.PI / 180);
+        enemies[i].y += enemies[i].speed * Math.sin(enemies[i].angle * Math.PI / 180);
       }
 
       for(j = 0; j < enemies.length; j++) {
