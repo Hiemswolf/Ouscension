@@ -400,7 +400,7 @@ function createEnemyProjectile(source) {
   itemCounter++;
   var size = 10;
   var enemyProjectile = createSprite('enemy' + itemCounter, source.x, source.y, size, size);
-  enemyProjectile.world = world;
+  enemyProjectile.world = source.world;
   enemyProjectile.hp = 1;
   enemyProjectile.angle = source.angle;
   enemyProjectile.lifeTimer = 60;
