@@ -373,13 +373,15 @@ function enemyHandler() {
       enemies[i].y += enemies[i].speed * Math.sin(enemies[i].angle * Math.PI / 180);
 
       if(enemies.type === "mage") {
-        enemies[i].x += 20 / (enemies[i].x - closest.x);
-        enemies[i].y += 20 / (enemies[i].y - closest.y);
+        enemies[i].x += 100 / (enemies[i].x - closest.x);
+        enemies[i].y += 100 / (enemies[i].y - closest.y);
 
         if(closestDistance < 500 && enemies[i].projectileTimer <= 0) {
-          projectileTimer = 24;
+          enemies[i].projectileTimer = 24;
 
           createEnemyProjectile(enemies[i]);
+        } else {
+          enemies[i].projectileTimer--;
         }
       }
 
