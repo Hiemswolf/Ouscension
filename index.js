@@ -123,7 +123,7 @@ io.on('connection', function(socket){
             if(Math.floor(Math.random() * 8) === 0) {
               createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'blueMint');
             } else {
-              if(Math.floor(Math.random() * 0) === 0) {
+              if(Math.floor(Math.random() * 8) === 0) {
                 createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'purpleMint');
               }
             }
@@ -264,8 +264,16 @@ function createBullet(player, type) {
     bullet.rotSpeed = (360 + Math.random() * 60) / bullet.lifeTimer;
   }
 
-  if(type === 'blueMint' || type === 'purpleMint') {
+  if(type === 'blueMint') {
     bullet.lifeTimer = 180;
+
+    bullet.mx = 0;
+    bullet.my = 0;
+    bullet.rotSpeed = 0;
+  }
+
+  if(type === 'purpleMint') {
+    bullet.lifeTimer = 120;
 
     bullet.mx = 0;
     bullet.my = 0;
@@ -471,6 +479,8 @@ function bulletHandler() {
       if(closest !== undefined) {
         var angle = Math.atan2((closest.y - bullets[i].y), (closest.x - bullets[i].x)) * (180 / Math.PI);
         bullets[i].rotSpeed = (angle - bullets[i].angle) * 0.05 + bullets[i].rotSpeed * 0.8;
+      } else {
+        bullets[i].rotSpeed = 0;
       }
 
       bullets[i].x += 16 * Math.cos(bullets[i].angle * Math.PI / 180);
