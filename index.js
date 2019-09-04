@@ -405,8 +405,8 @@ function createEnemyProjectile(source) {
   enemyProjectile.angle = source.angle;
   enemyProjectile.lifeTimer = 60;
 
-  bullet.mx = 12 * Math.cos(enemyProjectile.angle * Math.PI / 180);
-  bullet.my = 12 * Math.sin(enemyProjectile.angle * Math.PI / 180);
+  enemyProjectile.mx = 12 * Math.cos(enemyProjectile.angle * Math.PI / 180);
+  enemyProjectile.my = 12 * Math.sin(enemyProjectile.angle * Math.PI / 180);
 
   enemyProjectiles[enemyProjectiles.length] = enemyProjectile;
 }
