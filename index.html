@@ -153,6 +153,29 @@
                 position: absolute;
                 z-index: 1;
       }
+      .purpleMint {
+                width: 10px;
+                height: 5px;
+                background: #ff00ff;
+                position: absolute;
+                z-index: 10;
+      }
+      .purpleMintItem {
+                background-image: url("https://piskel-imgstore-b.appspot.com/img/16873385-ceb9-11e9-adf2-25277fbbd3b8.gif");
+                background-repeat: no-repeat;
+                background-size:100% 100%;
+                position: absolute;
+                z-index: 1000002;
+      }
+      .purpleMintDropped {
+                width: 25px;
+                height: 25px;
+                background-image: url('https://piskel-imgstore-b.appspot.com/img/16873385-ceb9-11e9-adf2-25277fbbd3b8.gif');
+                background-repeat: no-repeat;
+                background-size:100% 100%;
+                position: absolute;
+                z-index: 1;
+      }
       .enemyProjectile {
                 width: 10px;
                 height: 10px;
@@ -417,6 +440,9 @@
                     player.angle = Math.random() * 360;
                     socket.emit('createBullet', player, 'blueMint');
                     player.angle = preAngle;
+                  }
+                  if(player.weapon === 'purpleMint') {
+                    socket.emit('createBullet', player, 'purpleMint');
                   }
                 }
               }

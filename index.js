@@ -112,7 +112,9 @@ io.on('connection', function(socket){
               if(Math.floor(Math.random() * 8) === 0) {
                 createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'lifeSaver');
               } else {
-                createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'limeLifeSaver');
+                if(Math.floor(Math.random() * 48) === 0) {
+                  createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'limeLifeSaver');
+                }
               }
             }
           }
@@ -120,6 +122,10 @@ io.on('connection', function(socket){
           if(enemies[i].type === 'mage') {
             if(Math.floor(Math.random() * 8) === 0) {
               createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'blueMint');
+            } else {
+              if(Math.floor(Math.random() * 0) === 0) {
+                createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'purpleMint');
+              }
             }
           }
 
@@ -258,7 +264,7 @@ function createBullet(player, type) {
     bullet.rotSpeed = (360 + Math.random() * 60) / bullet.lifeTimer;
   }
 
-  if(type === 'blueMint') {
+  if(type === 'blueMint' || type === 'purpleMint') {
     bullet.lifeTimer = 180;
 
     bullet.mx = 0;
@@ -413,8 +419,8 @@ function createEnemyProjectile(source) {
   enemyProjectile.angle = source.angle;
   enemyProjectile.lifeTimer = 60;
 
-  enemyProjectile.mx = 12 * Math.cos(enemyProjectile.angle * Math.PI / 180);
-  enemyProjectile.my = 12 * Math.sin(enemyProjectile.angle * Math.PI / 180);
+  enemyProjectile.mx = 14 * Math.cos(enemyProjectile.angle * Math.PI / 180);
+  enemyProjectile.my = 14 * Math.sin(enemyProjectile.angle * Math.PI / 180);
 
   enemyProjectiles[enemyProjectiles.length] = enemyProjectile;
 }
@@ -433,36 +439,59 @@ function enemyProjectileHandler() {
   }
 }
 
+function bulletHandler() {
+  for(i = 0; i < bullets.length; i++) {
+
+    bullets[i].x += bullets[i].mx;
+    bullets[i].y += bullets[i].my;
+    bullets[i].angle += bullets[i].rotSpeed;
+
+    if(bullets[i].type === 'purpleMint') {
+      var closestDistance = 200;
+      var closest;
+
+      for(j = 0; j < enemies.length; j++) {
+        if(enemies[j].distance < closestDistance) {
+          closest = enemies[j];
+          closestDistance = enemies[j].distance;
+        }
+      }
+
+      if(closest !== undefined) {
+        var angle = Math.atan2((closest.y - bullets[i].y), (closest.x - bullets[i].x)) * (180 / Math.PI);
+        bullets[i].rotSpeed = (angle - bullets[i].angle) * 0.05 + bullets[i].rotSpeed * 0.8;
+
+        bullets[i].x += 16 * Math.cos(bullets[i].angle * Math.PI / 180);
+        bullets[i].y += 16 * Math.sin(bullets[i].angle * Math.PI / 180);
+      }
+    }
+
+    bullets[i].lifeTimer--;
+    if(bullets[i].lifeTimer < -1) {
+      if(bullets[i].type === 'limeLifeSaver') {
+        for(j = 0; j < 6; j++) {
+          bullets[i].angle += 60;
+          createBullet(bullets[i], 'lifeSaver');
+        }
+      }
+      if(bullets[i].type === 'lifeSaver') {
+        for(j = 0; j < 6; j++) {
+          bullets[i].angle += 60;
+          createBullet(bullets[i], 'mint');
+        }
+      }
+
+      bullets.splice(i, 1);
+      i--;
+    }
+  }
+}
 
 //loop
 function Update() {
   if(lastUpdate + 40 <= new Date().getTime()) {
-    for(i = 0; i < bullets.length; i++) {
 
-      bullets[i].x += bullets[i].mx;
-      bullets[i].y += bullets[i].my;
-      bullets[i].angle += bullets[i].rotSpeed;
-
-      bullets[i].lifeTimer--;
-      if(bullets[i].lifeTimer < -1) {
-        if(bullets[i].type === 'limeLifeSaver') {
-          for(j = 0; j < 6; j++) {
-            bullets[i].angle += 60;
-            createBullet(bullets[i], 'lifeSaver');
-          }
-        }
-        if(bullets[i].type === 'lifeSaver') {
-          for(j = 0; j < 6; j++) {
-            bullets[i].angle += 60;
-            createBullet(bullets[i], 'mint');
-          }
-        }
-
-        bullets.splice(i, 1);
-        i--;
-      }
-    }
-
+    bulletHandler();
     enemyHandler();
     enemyProjectileHandler();
 
