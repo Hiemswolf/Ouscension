@@ -450,6 +450,17 @@ function bulletHandler() {
       var closestDistance = 200;
       var closest;
 
+      var targets = [];
+
+      for(j = 0; j < enemies.length; j++) {
+        if(enemies[j].world === enemies[i].world) {
+          var target = enemies[j];
+          target.distance = Math.hypot(enemies[j].x - bullets[i].x, enemies[j].y - bullets[i].y);
+
+          targets[targets.length] = target;
+        }
+      }
+
       for(j = 0; j < enemies.length; j++) {
         if(enemies[j].distance < closestDistance) {
           closest = enemies[j];
