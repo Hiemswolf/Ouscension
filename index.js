@@ -372,9 +372,9 @@ function enemyHandler() {
       enemies[i].x += enemies[i].speed * Math.cos(enemies[i].angle * Math.PI / 180);
       enemies[i].y += enemies[i].speed * Math.sin(enemies[i].angle * Math.PI / 180);
 
-      if(enemies.type === "mage") {
-        enemies[i].x += 100 / (enemies[i].x - closest.x);
-        enemies[i].y += 100 / (enemies[i].y - closest.y);
+      if(enemies[i].type === "mage") {
+        enemies[i].x += 50 / (enemies[i].x - closest.x);
+        enemies[i].y += 50 / (enemies[i].y - closest.y);
 
         if(closestDistance < 500 && enemies[i].projectileTimer <= 0) {
           enemies[i].projectileTimer = 24;
