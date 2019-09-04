@@ -384,6 +384,9 @@
                     socket.emit('createBullet', player, 'mint');
                     player.angle = preAngle;
                   }
+                  if(player.weapon === 'lifeSaver') {
+                    socket.emit('createBullet', player, 'lifeSaver');
+                  }
                   if(player.weapon === 'blueMint') {
                     var preAngle = player.angle;
                     player.angle = Math.random() * 360;

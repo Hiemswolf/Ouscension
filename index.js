@@ -251,7 +251,7 @@ function createBullet(player, type) {
   }
 
   if(type === 'lifeSaver') {
-    bullet.lifeTimer = 20;
+    bullet.lifeTimer = 60;
 
     bullet.mx = 6 * Math.cos(bullet.angle * Math.PI / 180);
     bullet.my = 6 * Math.sin(bullet.angle * Math.PI / 180);
@@ -259,7 +259,7 @@ function createBullet(player, type) {
   }
 
   if(type === 'blueMint') {
-    bullet.lifeTimer = 150;
+    bullet.lifeTimer = 180;
 
     bullet.mx = 0;
     bullet.my = 0;
