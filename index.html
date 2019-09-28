@@ -713,6 +713,16 @@
                 }
               }
             }
+
+            for(i = 0; i < enemyProjectiles.length; i++) {
+              if(player.world === enemyProjectiles[i].world) {
+                if(checkCollision(player, enemyProjectiles[i])) {
+                  player.x = 0;
+                  player.y = 0;
+                  player.world = "Hub";
+                }
+              }
+            }
           }
         }
 
