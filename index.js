@@ -445,8 +445,8 @@ function createEnemyProjectile(source) {
 
 function createParticle(x, y, velX, velY, world) {
   var particle = createSprite('particle' + itemCounter, x, y, 8, 8);
-  particle.mx = Math.random() * 10 - 5 + velX;
-  particle.my = Math.random() * 10 - 5 + velY;
+  particle.mx = Math.random() * 30 - 15 + velX;
+  particle.my = Math.random() * 30 - 15 + velY;
   particle.lifeTimer = 20;
   particle.world = world;
 
@@ -533,8 +533,8 @@ function particleHandler() {
   for(i = 0; i < particles.length; i++) {
     particles[i].x += particles[i].mx;
     particles[i].y += particles[i].my;
-    particles[i].mx = particles[i].mx * 0.9;
-    particles[i].my = particles[i].my * 0.9;
+    particles[i].mx = particles[i].mx * 0.8;
+    particles[i].my = particles[i].my * 0.8;
 
     if(particles[i].lifeTimer < -1) {
       particles.splice(i, 1);
