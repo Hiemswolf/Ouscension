@@ -105,7 +105,7 @@ io.on('connection', function(socket){
       if(enemies[i].element === value) {
         enemies[i].hp--;
 
-        createParticle(enemies[i].x, enemies[i].y, enemies[i].mx, enemies[i].my, enemies[i].world);
+        createParticle(enemies[i].x, enemies[i].y, enemies[i].world);
 
         if(enemies[i].hp <= 0) {
 
@@ -370,9 +370,6 @@ function createDungeon(name, length) {
 function enemyHandler() {
   for(i = 0; i < enemies.length; i++) {
 
-    var preX = enemies[i].x;
-    var preY = enemies[i].y;
-
     var targets = [];
 
     for(j = 0; j < players.length; j++) {
@@ -422,9 +419,6 @@ function enemyHandler() {
       }
     }
     blocker(enemies[i]);
-
-    enemies[i].mx = enemies[i].x - preX;
-    enemies[i].my = enemies[i].y - preY;
   }
 }
 
@@ -443,10 +437,10 @@ function createEnemyProjectile(source) {
   enemyProjectiles[enemyProjectiles.length] = enemyProjectile;
 }
 
-function createParticle(x, y, velX, velY, world) {
+function createParticle(x, y, world) {
   var particle = createSprite('particle' + itemCounter, x, y, 8, 8);
-  particle.mx = Math.random() * 10 - 5 + velX;
-  particle.my = Math.random() * 10 - 5 + velY;
+  particle.mx = Math.random() * 10 - 5;
+  particle.my = Math.random() * 10 - 5;
   particle.lifeTimer = 20;
   particle.world = world;
 
