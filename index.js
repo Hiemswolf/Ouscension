@@ -109,7 +109,7 @@ io.on('connection', function(socket){
         particle.velX = math.random() * 10 - 5;
         particle.velY = math.random() * 10 - 5;
         particle.lifeTimer = 100;
-        particle.world = enemies[i].world
+        particle.world = enemies[i].world;
 
         particles[particles.length] = particle;
 
