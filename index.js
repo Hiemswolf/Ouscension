@@ -105,9 +105,9 @@ io.on('connection', function(socket){
       if(enemies[i].element === value) {
         enemies[i].hp--;
 
-        createParticle(enemies[i].x, enemies[i].y, enemies[i].velX, enemies[i].velY, world);
-        createParticle(enemies[i].x, enemies[i].y, enemies[i].velX, enemies[i].velY, world);
-        createParticle(enemies[i].x, enemies[i].y, enemies[i].velX, enemies[i].velY, world);
+        createParticle(enemies[i].x, enemies[i].y, enemies[i].velX, enemies[i].velY, enemies[i].world);
+        createParticle(enemies[i].x, enemies[i].y, enemies[i].velX, enemies[i].velY, enemies[i].world);
+        createParticle(enemies[i].x, enemies[i].y, enemies[i].velX, enemies[i].velY, enemies[i].world);
 
         if(enemies[i].hp <= 0) {
 
