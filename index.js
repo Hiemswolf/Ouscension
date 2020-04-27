@@ -14,6 +14,7 @@ var floors = [];
 var enemies = [];
 var items = [];
 var enemyProjectiles = [];
+var particles = [];
 var dungeons = 0;
 
 app.get('/', function(req, res){
@@ -103,6 +104,15 @@ io.on('connection', function(socket){
     for(i = 0; i < enemies.length; i++) {
       if(enemies[i].element === value) {
         enemies[i].hp--;
+
+        var particle = createSprite(enemies[i].x, enemies[i].y, 5, 5);
+        particle.velX = math.random() * 10 - 5;
+        particle.velY = math.random() * 10 - 5;
+        particle.lifeTimer = 100;
+        particle.world = enemies[i].world
+
+        particles[particles.length] = particle;
+
         if(enemies[i].hp <= 0) {
 
           if(enemies[i].type === 'skeleton') {
@@ -508,6 +518,20 @@ function bulletHandler() {
   }
 }
 
+function particleHandler() {
+  for(i = 0; i < particles.length; i++) {
+    particles[i].x += particles[i].velX;
+    particles[i].y += particles[i].velY;
+    particles[i].velX = particles[i].velX * 0.95;
+    particles[i].velY = particles[i].velY * 0.95;
+
+    if(particles[i].lifeTimer < -1) {
+      bullets.splice(i, 1);
+      i--;
+    }
+  }
+}
+
 //loop
 function Update() {
   if(lastUpdate + 40 <= new Date().getTime()) {
@@ -515,12 +539,13 @@ function Update() {
     bulletHandler();
     enemyHandler();
     enemyProjectileHandler();
+    particleHandler();
 
     for(i = 0; i < portals.length; i++) {
       portals[i].angle += 9;
     }
 
-    io.emit('loop', bullets, portals, floors, enemies, items, enemyProjectiles);
+    io.emit('loop', bullets, portals, floors, enemies, items, enemyProjectiles, particles);
 
     lastUpdate = new Date().getTime();
   }

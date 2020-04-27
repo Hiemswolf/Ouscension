@@ -183,6 +183,13 @@
                 position: absolute;
                 z-index: 10;
       }
+      .hitParticle {
+        width: 5px;
+        height: 5px;
+        background: rgb(100,100,100);
+        position: absolute;
+        z-index: 10;
+      }
       #mainGUI {
         background: rgb(0, 0, 0);
         position: absolute;
@@ -203,6 +210,7 @@
     <div id="portalContainer"></div>
     <div id="floorContainer"></div>
     <div id="enemyContainer"></div>
+    <div id="particleContainer"></div>
     <div id="mainGUI"></div>
     <div id="inventorySlots"></div>
     <div id="items"></div>
@@ -269,6 +277,7 @@
         var enemies = [];
         var items = [];
         var enemyProjectiles = [];
+        var particles = [];
 
         var invItems = [];
         var invSlots = [];
@@ -866,8 +875,33 @@
           }
         }
 
+        function particlesHandler() {
+          for(i = 0; i < particles.length; i++) {
+            if(particles[i].element !== null) {
+              if($("#" + particles[i].element).length == 0) {
+                var element = document.createElement("div");
+                element.className = 'hitParticle';
+                element.id = particles[i].element;
+                element.style.left = '-50px';
+                element.style.top = '-50px';
+                document.getElementById('particleContainer').appendChild(element);
+              }
+            }
+
+            var element = document.getElementById(particles[i].element);
+
+            if(element !== null) {
+              if(particles[i].lifeTimer < 0) {
+                  element.style.display = "none";
+                  element.parentNode.removeChild(element);
+              } else {
+                setPosition(particles[i]);
+              }
+          }
+        }
+
             //Update
-            socket.on('loop', function(bulletsSetter, portalsSetter, floorsSetter, enemiesSetter, itemsSetter, enemyProjectilesSetter) {
+            socket.on('loop', function(bulletsSetter, portalsSetter, floorsSetter, enemiesSetter, itemsSetter, enemyProjectilesSetter, particlesSetter) {
 
               bullets = bulletsSetter
               portals = portalsSetter;
@@ -875,6 +909,7 @@
               enemies = enemiesSetter;
               items = itemsSetter;
               enemyProjectiles = enemyProjectilesSetter;
+              particles = particlesSetter;
 
               handleControls();
               bulletHandler();
@@ -886,6 +921,7 @@
               itemHandler();
               bulletFiring();
               enemyProjectileHandler();
+              particlesHandler();
 
               blocker(player);
 
