@@ -106,8 +106,8 @@ io.on('connection', function(socket){
         enemies[i].hp--;
 
         var particle = createSprite(enemies[i].x, enemies[i].y, 5, 5);
-        particle.velX = Math.random() * 10 - 5;
-        particle.velY = Math.random() * 10 - 5;
+        particle.velX = Math.random() * 2 - 1;
+        particle.velY = Math.random() * 2 - 1;
         particle.lifeTimer = 100;
         particle.world = enemies[i].world;
 
@@ -522,8 +522,13 @@ function particleHandler() {
   for(i = 0; i < particles.length; i++) {
     particles[i].x += particles[i].velX;
     particles[i].y += particles[i].velY;
-    particles[i].velX = particles[i].velX * 0.95;
-    particles[i].velY = particles[i].velY * 0.95;
+    if(particles[i].velX + particles[i].velY < 0.2) {
+      particles[i].velX = 0;
+      particles[i].velY = 0;
+    } else {
+      particles[i].velX = particles[i].velX * 0.99;
+      particles[i].velY = particles[i].velY * 0.99;
+    }
 
     if(particles[i].lifeTimer < -1) {
       bullets.splice(i, 1);
