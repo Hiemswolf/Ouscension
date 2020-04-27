@@ -105,13 +105,9 @@ io.on('connection', function(socket){
       if(enemies[i].element === value) {
         enemies[i].hp--;
 
-        var particle = createSprite('particle' + itemCounter, enemies[i].x, enemies[i].y, 5, 5);
-        particle.velX = Math.random() * 10 - 5;
-        particle.velY = Math.random() * 10 - 5;
-        particle.lifeTimer = 20;
-        particle.world = enemies[i].world;
-
-        particles[particles.length] = particle;
+        createParticle(enemies[i].x, enemies[i].y, enemies[i].velX, enemies[i].velY, world);
+        createParticle(enemies[i].x, enemies[i].y, enemies[i].velX, enemies[i].velY, world);
+        createParticle(enemies[i].x, enemies[i].y, enemies[i].velX, enemies[i].velY, world);
 
         if(enemies[i].hp <= 0) {
 
@@ -442,6 +438,17 @@ function createEnemyProjectile(source) {
 
   enemyProjectiles[enemyProjectiles.length] = enemyProjectile;
 }
+
+function createParticle(x, y, velX, velY, world) {
+  var particle = createSprite('particle' + itemCounter, x, y, 8, 8);
+  particle.velX = Math.random() * 10 - 5 + velX;
+  particle.velY = Math.random() * 10 - 5 + velY;
+  particle.lifeTimer = 20;
+  particle.world = world;
+
+  particles[particles.length] = particle;
+}
+
 function enemyProjectileHandler() {
   for(i = 0; i < enemyProjectiles.length; i++) {
 
@@ -526,8 +533,8 @@ function particleHandler() {
       particles[i].velX = 0;
       particles[i].velY = 0;
     } else {
-      particles[i].velX = particles[i].velX * 0.99;
-      particles[i].velY = particles[i].velY * 0.99;
+      particles[i].velX = particles[i].velX * 0.9;
+      particles[i].velY = particles[i].velY * 0.9;
     }
 
     if(particles[i].lifeTimer < -1) {
