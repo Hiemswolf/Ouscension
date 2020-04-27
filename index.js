@@ -105,10 +105,10 @@ io.on('connection', function(socket){
       if(enemies[i].element === value) {
         enemies[i].hp--;
 
-        var particle = createSprite(enemies[i].x, enemies[i].y, 5, 5);
-        particle.velX = Math.random() * 2 - 1;
-        particle.velY = Math.random() * 2 - 1;
-        particle.lifeTimer = 100;
+        var particle = createSprite('particle' + itemCounter, enemies[i].x, enemies[i].y, 5, 5);
+        particle.velX = Math.random() * 10 - 5;
+        particle.velY = Math.random() * 10 - 5;
+        particle.lifeTimer = 20;
         particle.world = enemies[i].world;
 
         particles[particles.length] = particle;
