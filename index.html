@@ -186,7 +186,7 @@
       .hitParticle {
         width: 8px;
         height: 8px;
-        background: rgb(255,0,0);
+        background: rgb(255,0,50);
         position: absolute;
         z-index: 10;
       }
@@ -889,6 +889,12 @@
             }
 
             var element = document.getElementById(particles[i].element);
+
+            if(particles[i].world === player.world) {
+              element.style.display = "block";
+            } else {
+              element.style.display = "none";
+            }
 
             if(element !== null) {
               if(particles[i].lifeTimer < 0) {

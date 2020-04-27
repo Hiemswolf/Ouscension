@@ -447,7 +447,7 @@ function createParticle(x, y, velX, velY, world) {
   var particle = createSprite('particle' + itemCounter, x, y, 8, 8);
   particle.mx = Math.random() * 30 - 15 + velX;
   particle.my = Math.random() * 30 - 15 + velY;
-  particle.lifeTimer = 20;
+  particle.lifeTimer = 300;
   particle.world = world;
 
   particles[particles.length] = particle;
@@ -536,6 +536,9 @@ function particleHandler() {
     particles[i].mx = particles[i].mx * 0.8;
     particles[i].my = particles[i].my * 0.8;
 
+    blocker(particles[i]);
+
+    particles[i].lifeTimer--;
     if(particles[i].lifeTimer < -1) {
       particles.splice(i, 1);
       i--;
