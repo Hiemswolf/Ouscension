@@ -529,16 +529,11 @@ function particleHandler() {
   for(i = 0; i < particles.length; i++) {
     particles[i].x += particles[i].velX;
     particles[i].y += particles[i].velY;
-    if(particles[i].velX + particles[i].velY < 0.2) {
-      particles[i].velX = 0;
-      particles[i].velY = 0;
-    } else {
-      particles[i].velX = particles[i].velX * 0.9;
-      particles[i].velY = particles[i].velY * 0.9;
-    }
+    particles[i].velX = particles[i].velX * 0.9;
+    particles[i].velY = particles[i].velY * 0.9;
 
     if(particles[i].lifeTimer < -1) {
-      bullets.splice(i, 1);
+      particles.splice(i, 1);
       i--;
     }
   }
