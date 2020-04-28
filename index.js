@@ -110,8 +110,8 @@ io.on('connection', function(socket){
   socket.on('hurtEnemy', function(value, bullet) {
     for(i = 0; i < enemies.length; i++) {
       if(enemies[i].element === value) {
-        if(enemies[i].lastBulletHit != bullet.element) {
-          enemies[i].lastBulletHit = bullet.element;
+        if(enemies[i].lastBulletHit != bullet) {
+          enemies[i].lastBulletHit = bullet;
           enemies[i].hp--;
 
           createParticle(enemies[i].x, enemies[i].y, enemies[i].mx, enemies[i].my, enemies[i].world);
@@ -148,6 +148,7 @@ io.on('connection', function(socket){
             enemies.splice(i, 1);
           }
         }
+        break;
       }
     }
 
