@@ -738,7 +738,7 @@
                     }
 
                     socket.emit('deleteBullet', bullets[j].element);
-                    socket.emit('hurtEnemy', enemies[i].element);
+                    socket.emit('hurtEnemy', enemies[i].element, bullets[j].element);
                   }
                 }
               }

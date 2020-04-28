@@ -107,43 +107,46 @@ io.on('connection', function(socket){
     }
   });
 
-  socket.on('hurtEnemy', function(value) {
+  socket.on('hurtEnemy', function(value, bullet) {
     for(i = 0; i < enemies.length; i++) {
       if(enemies[i].element === value) {
-        enemies[i].hp--;
+        if(enemies[i].lastBulletHit != bullet.element) {
+          enemies[i].lastBulletHit = bullet.element;
+          enemies[i].hp--;
 
-        createParticle(enemies[i].x, enemies[i].y, enemies[i].mx, enemies[i].my, enemies[i].world);
+          createParticle(enemies[i].x, enemies[i].y, enemies[i].mx, enemies[i].my, enemies[i].world);
 
-        if(enemies[i].hp <= 0) {
+          if(enemies[i].hp <= 0) {
 
-          if(enemies[i].type === 'skeleton') {
-            if(Math.floor(Math.random() * 8) === 0) {
-              createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'mint');
-            } else {
+            if(enemies[i].type === 'skeleton') {
               if(Math.floor(Math.random() * 8) === 0) {
-                createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'lifeSaver');
-              }
-                if(Math.floor(Math.random() * 24) === 0) {
-                  createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'greenOrangeMint');
-                } else {
-                  if(Math.floor(Math.random() * 48) === 0) {
-                    createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'limeLifeSaver');
+                createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'mint');
+              } else {
+                if(Math.floor(Math.random() * 8) === 0) {
+                  createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'lifeSaver');
+                }
+                  if(Math.floor(Math.random() * 24) === 0) {
+                    createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'greenOrangeMint');
+                  } else {
+                    if(Math.floor(Math.random() * 48) === 0) {
+                      createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'limeLifeSaver');
+                    }
                   }
                 }
-              }
-          }
+            }
 
-          if(enemies[i].type === 'mage') {
-            if(Math.floor(Math.random() * 8) === 0) {
-              createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'blueMint');
-            } else {
+            if(enemies[i].type === 'mage') {
               if(Math.floor(Math.random() * 8) === 0) {
-                createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'purpleMint');
+                createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'blueMint');
+              } else {
+                if(Math.floor(Math.random() * 8) === 0) {
+                  createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'purpleMint');
+                }
               }
             }
-          }
 
-          enemies.splice(i, 1);
+            enemies.splice(i, 1);
+          }
         }
       }
     }
