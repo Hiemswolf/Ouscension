@@ -35,7 +35,7 @@ io.on('connection', function(socket){
 
   socket.on('createGreenOrangeMint', function(bulletSpawner, bullet, enemy) {
     if(enemy.lastBulletHit != bullet.element) {
-      console.log('bullet: ' + bullet.element + 'enemy: ' enemy.lastBulletHit);
+      console.log('bullet: ' + bullet.element + 'enemy: ' + enemy.lastBulletHit);
       createBullet(bulletSpawner, 'greenOrangeMint');
     }
   });
