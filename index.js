@@ -35,8 +35,8 @@ io.on('connection', function(socket){
 
   socket.on('createGreenOrangeMint', function(bulletSpawner, bullet, enemy) {
     if(enemy.lastBulletHit != bullet.element) {
-      if(enemies[i].orangeGreenMintSpawns < 2) {
-        enemies[i].orangeGreenMintSpawns++;
+      if(enemy.orangeGreenMintSpawns < 2) {
+        enemy.orangeGreenMintSpawns++;
 
         console.log('bullet: ' + bullet.element + 'enemy: ' + enemy.lastBulletHit);
         createBullet(bulletSpawner, 'greenOrangeMint');
