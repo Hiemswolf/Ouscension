@@ -117,7 +117,7 @@ io.on('connection', function(socket){
                 createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'lifeSaver');
               }
                 if(Math.floor(Math.random() * 8) === 0) {
-                  createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'orangeGreenMint');
+                  createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'greenOrangeMint');
                 } else {
                   if(Math.floor(Math.random() * 48) === 0) {
                     createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'limeLifeSaver');
