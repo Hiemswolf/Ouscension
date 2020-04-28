@@ -700,6 +700,11 @@
                   if(checkCollision(bullets[j], enemies[i])) {
                     if(bullets[j].type === 'greenOrangeMint') {
                       var bulletSpawner = new Object();
+                      bulletSpawner.element = player.element;
+                      bulletSpawner.world = player.world;
+                      bulletSpawner.w = 10;
+                      bulletSpawner.h = 5;
+
                       var a = 45 / (Math.exp(bullets[j].x, 2) + Math.exp(bullets[j].y, 2))
                       bullets[j].x += a * bullets[j].mx;
                       bullets[j].y += a * bullets[j].my;
@@ -708,10 +713,6 @@
                       bullets[j].y += 8 * Math.sin(bullets[j].angle * Math.PI / 180);
                       bullets[j].angle -= 45;
 
-                      bulletSpawner.element = player.element;
-                      bulletSpawner.world = player.world;
-                      bulletSpawner.w = 10;
-                      bulletSpawner.h = 5;
                       bulletSpawner.x = bullets[j].x;
                       bulletSpawner.y = bullets[j].x;
                       bulletSpawner.angle = bullets[j].x;
@@ -722,10 +723,6 @@
                       bullets[j].y += 16 * Math.sin(bullets[j].angle * Math.PI / 180);
                       bullets[j].angle += 45;
 
-                      bulletSpawner.element = player.element;
-                      bulletSpawner.world = player.world;
-                      bulletSpawner.w = 10;
-                      bulletSpawner.h = 5;
                       bulletSpawner.x = bullets[j].x;
                       bulletSpawner.y = bullets[j].x;
                       bulletSpawner.angle = bullets[j].x;
