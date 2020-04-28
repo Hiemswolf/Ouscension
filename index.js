@@ -33,17 +33,6 @@ io.on('connection', function(socket){
     createBullet(player, bulletType);
   });
 
-  socket.on('createGreenOrangeMint', function(bulletSpawner, bullet, enemy) {
-    if(enemy.lastBulletHit != bullet.element) {
-      if(enemy.orangeGreenMintSpawns < 2) {
-        enemy.orangeGreenMintSpawns++;
-
-        console.log('bullet: ' + bullet.element + 'enemy: ' + enemy.lastBulletHit + 'enemyBulletSpawns: ' + enemy.orangeGreenMintSpawns);
-        createBullet(bulletSpawner, 'greenOrangeMint');
-      }
-    }
-  });
-
   socket.on('playerInfo', function(playerSprite, isMouseDown) {
 
     var inPlayerArray = false;
@@ -138,8 +127,8 @@ io.on('connection', function(socket){
               } else {
                 if(Math.floor(Math.random() * 8) === 0) {
                   createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'lifeSaver');
-                }
-                  if(Math.floor(Math.random() * 1/*24*/) === 0) {
+                } else {
+                  if(Math.floor(Math.random() * 24) === 0) {
                     createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'greenOrangeMint');
                   } else {
                     if(Math.floor(Math.random() * 48) === 0) {
@@ -147,6 +136,7 @@ io.on('connection', function(socket){
                     }
                   }
                 }
+              }
             }
 
             if(enemies[i].type === 'mage') {
