@@ -443,12 +443,6 @@
             function bulletFiring() {
               bulletTimer++;
 
-              if(player.weapon === 'greenOrangeMint') {
-                if(bulletTimer >= 8 && isMouseDown) {
-                  bulletTimer = 0;
-                  socket.emit('createBullet', player, 'greenOrangeMint');
-                }
-              }
               if(player.weapon === 'limeLifeSaver') {
                 if(bulletTimer >= 12 && isMouseDown) {
                   bulletTimer = 0;
@@ -481,6 +475,9 @@
                   }
                   if(player.weapon === 'purpleMint') {
                     socket.emit('createBullet', player, 'purpleMint');
+                  }
+                  if(player.weapon === 'greenOrangeMint' && bulletTimer >= 8) {
+                    socket.emit('createBullet', player, 'greenOrangeMint');
                   }
                 }
               }
