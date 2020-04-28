@@ -93,6 +93,13 @@ io.on('connection', function(socket){
         i--;
       }
     }
+    for(i = 0; i < particles.length; i++) {
+      if(particles[i].world === dungeon) {
+        io.emit('delete', particles[i].element);
+        particles.splice(i, 1);
+        i--;
+      }
+    }
 
     dungeons--;
     if(dungeons < 1) {
@@ -344,7 +351,7 @@ function createEnemy(world, x , y, type) {
   enemies[enemies.length] = enemy;
 }
 
-createDungeon('choose', 5);
+createDungeon('choose', 8);
 
 function createDungeon(name, length) {
   if(name === 'choose') {
@@ -410,7 +417,9 @@ function enemyHandler() {
       if(enemies[i].type === "mage") {
         if(closestDistance > 100) {
           enemies[i].x += enemies[i].speed * Math.cos(enemies[i].angle * Math.PI / 180);
+          blocker(enemies[i]);
           enemies[i].y += enemies[i].speed * Math.sin(enemies[i].angle * Math.PI / 180);
+          blocker(enemies[i]);
         }
 
         if(closestDistance < 500 && enemies[i].projectileTimer <= 0) {
@@ -421,18 +430,27 @@ function enemyHandler() {
           enemies[i].projectileTimer--;
         }
       } else {
-        enemies[i].x += enemies[i].speed * Math.cos(enemies[i].angle * Math.PI / 180);
-        enemies[i].y += enemies[i].speed * Math.sin(enemies[i].angle * Math.PI / 180);
+        var moveX = enemies[i].speed * Math.cos(enemies[i].angle * Math.PI / 180);
+        var moveY = enemies[i].speed * Math.sin(enemies[i].angle * Math.PI / 180);
+        if(moveX + moveY >= 11) {
+          moveX = 0;
+          moveY = 0;
+        }
+        enemies[i].x += moveX;
+        blocker(enemies[i]);
+        enemies[i].y += moveY;
+        blocker(enemies[i]);
       }
 
       for(j = 0; j < enemies.length; j++) {
         if(enemies[i].element != enemies[j].element && enemies[i].world === enemies[j].world) {
           enemies[i].x += 10 / (enemies[i].x - enemies[j].x);
+          blocker(enemies[i]);
           enemies[i].y += 10 / (enemies[i].y - enemies[j].y);
+          blocker(enemies[i]);
         }
       }
     }
-    blocker(enemies[i]);
 
     enemies[i].mx = enemies[i].x - preX;
     enemies[i].my = enemies[i].y - preY;
