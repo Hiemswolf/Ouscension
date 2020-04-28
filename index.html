@@ -704,8 +704,8 @@
                       bullets[j].x += a * bullets[j].mx;
                       bullets[j].y += a * bullets[j].my;
                       bullets[j].angle += 90;
-                      bullets[j].x += 8 * Math.cos(bullets[i].angle * Math.PI / 180);
-                      bullets[j].y += 8 * Math.sin(bullets[i].angle * Math.PI / 180);
+                      bullets[j].x += 8 * Math.cos(bullets[j].angle * Math.PI / 180);
+                      bullets[j].y += 8 * Math.sin(bullets[j].angle * Math.PI / 180);
                       bullets[j].angle -= 45;
 
                       bulletSpawner.x = bullets[j].x;
@@ -714,8 +714,8 @@
                       socket.emit('createBullet', bulletSpawner, 'greenOrangeMint');
 
                       bullets[j].angle -= 135;
-                      bullets[j].x += 16 * Math.cos(bullets[i].angle * Math.PI / 180);
-                      bullets[j].y += 16 * Math.sin(bullets[i].angle * Math.PI / 180);
+                      bullets[j].x += 16 * Math.cos(bullets[j].angle * Math.PI / 180);
+                      bullets[j].y += 16 * Math.sin(bullets[j].angle * Math.PI / 180);
                       bullets[j].angle += 45;
 
                       bulletSpawner.x = bullets[j].x;
@@ -723,6 +723,7 @@
                       bulletSpawner.angle = bullets[j].x;
                       socket.emit('createBullet', bulletSpawner, 'greenOrangeMint');
                     }
+
                     socket.emit('hurtEnemy', enemies[i].element);
                     socket.emit('deleteBullet', bullets[j].element);
                   }
