@@ -116,7 +116,7 @@ io.on('connection', function(socket){
               if(Math.floor(Math.random() * 8) === 0) {
                 createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'lifeSaver');
               }
-                if(Math.floor(Math.random() * 8) === 0) {
+                if(Math.floor(Math.random() * 24) === 0) {
                   createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'greenOrangeMint');
                 } else {
                   if(Math.floor(Math.random() * 48) === 0) {
@@ -255,12 +255,20 @@ function createBullet(player, type) {
   }
   bullet.type = type;
 
-  if(type === 'mint' || type === 'greenOrangeMint') {
+  if(type === 'mint') {
     bullet.mx = 16 * Math.cos(bullet.angle * Math.PI / 180);
     bullet.my = 16 * Math.sin(bullet.angle * Math.PI / 180);
     bullet.rotSpeed = 0;
 
     bullet.lifeTimer = 60;
+  }
+
+  if(type === 'greenOrangeMint') {
+    bullet.mx = 8 * Math.cos(bullet.angle * Math.PI / 180);
+    bullet.my = 8 * Math.sin(bullet.angle * Math.PI / 180);
+    bullet.rotSpeed = 0;
+
+    bullet.lifeTimer = 100;
   }
 
   if(type === 'lifeSaver' || type === 'limeLifeSaver') {
