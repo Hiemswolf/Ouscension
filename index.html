@@ -707,8 +707,8 @@
               if(bullets[j].owner === player.element) {
                 if(bullets[j].world === enemies[i].world) {
                   if(checkCollision(bullets[j], enemies[i])) {
-                    if(bullets[j].type === 'greenOrangeMint' && enemies[i].lastBulletHit != bullets[j].element) {
-                      enemies[i].lastBulletHit = bullets[j].element;
+                    if(bullets[j].type === 'greenOrangeMint' && !bullets[j].hitEnemy) {
+                      bullets[j].hitEnemy = true;
 
                       var bulletSpawner = new Object();
                       bulletSpawner.element = player.element;
