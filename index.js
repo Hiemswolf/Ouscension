@@ -441,7 +441,7 @@ function enemyHandler() {
           var moveX = 10 / (enemies[i].x - enemies[j].x);
           var moveY = 10 / (enemies[i].y - enemies[j].y);
 
-          if(moveX + moveY >= 20) {
+          if(Math.abs(moveX) + Math.ab(moveY) >= 20) {
             moveX = 0;
             moveY = 0;
           }
