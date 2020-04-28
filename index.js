@@ -430,23 +430,25 @@ function enemyHandler() {
           enemies[i].projectileTimer--;
         }
       } else {
-        var moveX = enemies[i].speed * Math.cos(enemies[i].angle * Math.PI / 180);
-        var moveY = enemies[i].speed * Math.sin(enemies[i].angle * Math.PI / 180);
-        if(moveX + moveY >= 11) {
-          moveX = 0;
-          moveY = 0;
-        }
-        enemies[i].x += moveX;
+        enemies[i].x += enemies[i].speed * Math.cos(enemies[i].angle * Math.PI / 180);
         blocker(enemies[i]);
-        enemies[i].y += moveY;
+        enemies[i].y += enemies[i].speed * Math.sin(enemies[i].angle * Math.PI / 180);
         blocker(enemies[i]);
       }
 
       for(j = 0; j < enemies.length; j++) {
         if(enemies[i].element != enemies[j].element && enemies[i].world === enemies[j].world) {
-          enemies[i].x += 10 / (enemies[i].x - enemies[j].x);
+          var moveX = 10 / (enemies[i].x - enemies[j].x);
+          var moveY = 10 / (enemies[i].y - enemies[j].y);
+
+          if(moveX + moveY >= 20) {
+            moveX = 0;
+            moveY = 0;
+          }
+
+          enemies[i].x += moveX;
           blocker(enemies[i]);
-          enemies[i].y += 10 / (enemies[i].y - enemies[j].y);
+          enemies[i].y += moveY;
           blocker(enemies[i]);
         }
       }
