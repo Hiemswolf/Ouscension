@@ -268,7 +268,7 @@ function createBullet(player, type) {
     bullet.my = 8 * Math.sin(bullet.angle * Math.PI / 180);
     bullet.rotSpeed = 0;
 
-    bullet.lifeTimer = 100;
+    bullet.lifeTimer = 60;
   }
 
   if(type === 'lifeSaver' || type === 'limeLifeSaver') {
