@@ -35,8 +35,12 @@ io.on('connection', function(socket){
 
   socket.on('createGreenOrangeMint', function(bulletSpawner, bullet, enemy) {
     if(enemy.lastBulletHit != bullet.element) {
-      console.log('bullet: ' + bullet.element + 'enemy: ' + enemy.lastBulletHit);
-      createBullet(bulletSpawner, 'greenOrangeMint');
+      if(enemies[i].orangeGreenMintSpawns < 2) {
+        enemies[i].orangeGreenMintSpawns++;
+
+        console.log('bullet: ' + bullet.element + 'enemy: ' + enemy.lastBulletHit);
+        createBullet(bulletSpawner, 'greenOrangeMint');
+      }
     }
   });
 
@@ -398,6 +402,7 @@ function createDungeon(name, length) {
 
 function enemyHandler() {
   for(i = 0; i < enemies.length; i++) {
+    enemies[i].orangeGreenMintSpawns = 0;
 
     var preX = enemies[i].x;
     var preY = enemies[i].y;
