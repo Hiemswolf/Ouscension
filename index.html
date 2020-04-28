@@ -535,15 +535,19 @@
                 }
                 if(controller.w) {
                     player.y -= player.moveSpeed * speed;
+                    blocker(player);
                 }
                 if(controller.a) {
                     player.x -= player.moveSpeed * speed;
+                    blocker(player);
                 }
                 if(controller.s) {
                     player.y += player.moveSpeed * speed;
+                    blocker(player);
                 }
                 if(controller.d) {
                     player.x += player.moveSpeed * speed;
+                    blocker(player);
                 }
             }
 
@@ -992,7 +996,7 @@
               enemyProjectileHandler();
               particlesHandler();
 
-              blocker(player);
+              //blocker(player);
 
               for(i = 0; i < players.length; i++) {
                 setPosition(players[i]);
