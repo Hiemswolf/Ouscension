@@ -705,11 +705,11 @@
                       bulletSpawner.w = 10;
                       bulletSpawner.h = 5;
 
-                      bullets[j].x += 45 * Math.cos(bullets[j].angle * Math.PI / 180);
-                      bullets[j].y += 45 * Math.sin(bullets[j].angle * Math.PI / 180);
+                      bullets[j].x += 0 * Math.cos(bullets[j].angle * Math.PI / 180);
+                      bullets[j].y += 0 * Math.sin(bullets[j].angle * Math.PI / 180);
                       bullets[j].angle += 90;
-                      bullets[j].x += 8 * Math.cos(bullets[j].angle * Math.PI / 180);
-                      bullets[j].y += 8 * Math.sin(bullets[j].angle * Math.PI / 180);
+                      bullets[j].x += 0 * Math.cos(bullets[j].angle * Math.PI / 180);
+                      bullets[j].y += 0 * Math.sin(bullets[j].angle * Math.PI / 180);
                       bullets[j].angle -= 45;
 
                       bulletSpawner.x = bullets[j].x;
@@ -718,8 +718,8 @@
                       socket.emit('createBullet', bulletSpawner, 'greenOrangeMint');
 
                       bullets[j].angle -= 135;
-                      bullets[j].x += 16 * Math.cos(bullets[j].angle * Math.PI / 180);
-                      bullets[j].y += 16 * Math.sin(bullets[j].angle * Math.PI / 180);
+                      bullets[j].x += 0 * Math.cos(bullets[j].angle * Math.PI / 180);
+                      bullets[j].y += 0 * Math.sin(bullets[j].angle * Math.PI / 180);
                       bullets[j].angle += 45;
 
                       bulletSpawner.x = bullets[j].x;
