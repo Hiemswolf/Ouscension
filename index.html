@@ -706,11 +706,10 @@
             for(j = 0; j < bullets.length; j++) {
               if(bullets[j].owner === player.element) {
                 if(bullets[j].world === enemies[i].world) {
-                  if(checkCollision(bullets[j], enemies[i]) && !bullets[j].hitEnemy) {
-                    bullets[j].hitEnemy = true;
-                    
-                    if(bullets[j].type === 'greenOrangeMint') {
+                  if(checkCollision(bullets[j], enemies[i])) {
+                    socket.emit('hurtEnemy', enemies[i].element, bullets[j].element);
 
+                    if(bullets[j].type === 'greenOrangeMint') {
                       var bulletSpawner = new Object();
                       bulletSpawner.element = player.element;
                       bulletSpawner.world = bullets[j].world;
@@ -727,7 +726,7 @@
                       bulletSpawner.x = bullets[j].x;
                       bulletSpawner.y = bullets[j].y;
                       bulletSpawner.angle = bullets[j].angle;
-                      socket.emit('createBullet', bulletSpawner, 'greenOrangeMint');
+                      socket.emit('createGreenOrangeMint', bulletSpawner, bullets[j], enemies[i]);
 
                       bullets[j].angle -= 135;
                       bullets[j].x += 8 * Math.cos(bullets[j].angle * Math.PI / 180);
@@ -737,11 +736,11 @@
                       bulletSpawner.x = bullets[j].x;
                       bulletSpawner.y = bullets[j].y;
                       bulletSpawner.angle = bullets[j].angle;
-                      socket.emit('createBullet', bulletSpawner, 'greenOrangeMint');
+                      socket.emit('createGreenOrangeMint', bulletSpawner, bullets[j], enemies[i]);
                     }
 
                     socket.emit('deleteBullet', bullets[j].element);
-                    socket.emit('hurtEnemy', enemies[i].element, bullets[j].element);
+
                   }
                 }
               }

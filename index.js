@@ -33,6 +33,12 @@ io.on('connection', function(socket){
     createBullet(player, bulletType);
   });
 
+  socket.on('createGreenOrangeMint', function(bulletSpawner, bullet, enemy) {
+    if(enemy.lastBulletHit != bullet.element) {
+      createBullet(bulletSpawner, 'greenOrangeMint');
+    }
+  });
+
   socket.on('playerInfo', function(playerSprite, isMouseDown) {
 
     var inPlayerArray = false;
@@ -259,7 +265,6 @@ function createBullet(player, type) {
   var bullet = createSprite(itemCounter, player.x + player.w / 2, player.y + player.h / 2, 5, 5);
   bullet.angle = player.angle;
   bullet.world = player.world;
-  bullet.hitEnemy = false;
   if(player.owner != undefined) {
     bullet.owner = player.owner;
   } else {
