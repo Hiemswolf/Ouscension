@@ -121,9 +121,12 @@ io.on('connection', function(socket){
   socket.on('hurtEnemy', function(value, bullet) {
     for(i = 0; i < enemies.length; i++) {
       if(enemies[i].element === value) {
-        if(enemies[i].lastBulletHit != bullet) {
-          enemies[i].lastBulletHit = bullet;
+        if(enemies[i].lastBulletHit != bullet.element) {
+          enemies[i].lastBulletHit = bullet.element;
           enemies[i].hp--;
+          if(bullet.type === 'greenOrangeMint') {
+            createGreenOrangeMint(bullet);
+          }
 
           createParticle(enemies[i].x, enemies[i].y, enemies[i].mx, enemies[i].my, enemies[i].world);
 
@@ -263,6 +266,36 @@ function blocker(sprite) {
           sprite.preY = sprite.y;
 
         }
+
+function createGreenOrangeMint(bullet) {
+  var bulletSpawner = new Object();
+  bulletSpawner.element = bullet.owner;
+  bulletSpawner.world = bullet.world;
+  bulletSpawner.w = 10;
+  bulletSpawner.h = 5;
+
+  bullet.x += 45 * Math.cos(bullet.angle * Math.PI / 180);
+  bullet.y += 45 * Math.sin(bullet.angle * Math.PI / 180);
+  bullet.angle += 90;
+  bullet.x += 8 * Math.cos(bullet.angle * Math.PI / 180);
+  bullet.y += 8 * Math.sin(bullet.angle * Math.PI / 180);
+  bullet.angle -= 45;
+
+  bulletSpawner.x = bullet.x;
+  bulletSpawner.y = bullet.y;
+  bulletSpawner.angle = bullet.angle;
+  createBullet(bulletSpawner, 'greenOrangeMint');
+
+  bullet.angle -= 135;
+  bullet.x += 8 * Math.cos(bullet.angle * Math.PI / 180);
+  bullet.y += 8 * Math.sin(bullet.angle * Math.PI / 180);
+  bullet.angle += 45;
+
+  bulletSpawner.x = bullet.x;
+  bulletSpawner.y = bullet.y;
+  bulletSpawner.angle = bullet.angle;
+  createBullet(bulletSpawner, 'greenOrangeMint');
+}
 
 function createBullet(player, type) {
   itemCounter++;

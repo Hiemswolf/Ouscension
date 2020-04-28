@@ -707,38 +707,8 @@
               if(bullets[j].owner === player.element) {
                 if(bullets[j].world === enemies[i].world) {
                   if(checkCollision(bullets[j], enemies[i])) {
-                    if(bullets[j].type === 'greenOrangeMint') {
-                      var bulletSpawner = new Object();
-                      bulletSpawner.element = player.element;
-                      bulletSpawner.world = bullets[j].world;
-                      bulletSpawner.w = 10;
-                      bulletSpawner.h = 5;
-
-                      bullets[j].x += 45 * Math.cos(bullets[j].angle * Math.PI / 180);
-                      bullets[j].y += 45 * Math.sin(bullets[j].angle * Math.PI / 180);
-                      bullets[j].angle += 90;
-                      bullets[j].x += 8 * Math.cos(bullets[j].angle * Math.PI / 180);
-                      bullets[j].y += 8 * Math.sin(bullets[j].angle * Math.PI / 180);
-                      bullets[j].angle -= 45;
-
-                      bulletSpawner.x = bullets[j].x;
-                      bulletSpawner.y = bullets[j].y;
-                      bulletSpawner.angle = bullets[j].angle;
-                      socket.emit('createBullet', bulletSpawner, 'greenOrangeMint');
-
-                      bullets[j].angle -= 135;
-                      bullets[j].x += 8 * Math.cos(bullets[j].angle * Math.PI / 180);
-                      bullets[j].y += 8 * Math.sin(bullets[j].angle * Math.PI / 180);
-                      bullets[j].angle += 45;
-
-                      bulletSpawner.x = bullets[j].x;
-                      bulletSpawner.y = bullets[j].y;
-                      bulletSpawner.angle = bullets[j].angle;
-                      socket.emit('createBullet', bulletSpawner, 'greenOrangeMint');
-                    }
-
                     socket.emit('deleteBullet', bullets[j].element);
-                    socket.emit('hurtEnemy', enemies[i].element, bullets[j].element);
+                    socket.emit('hurtEnemy', enemies[i].element, bullets[j]);
                   }
                 }
               }
