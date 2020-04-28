@@ -705,7 +705,7 @@
                       bulletSpawner.w = 10;
                       bulletSpawner.h = 5;
 
-                      var a = Math.pow(45, 2) / (Math.pow(bullets[j].x, 2) + Math.pow(bullets[j].y, 2))
+                      var a =  (Math.pow(bullets[j].x, 2) + Math.pow(bullets[j].y, 2)) / Math.pow(45, 2)
                       bullets[j].x += a * bullets[j].mx;
                       bullets[j].y += a * bullets[j].my;
                       bullets[j].angle += 90;
