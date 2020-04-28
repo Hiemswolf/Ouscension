@@ -707,51 +707,38 @@
               if(bullets[j].owner === player.element) {
                 if(bullets[j].world === enemies[i].world) {
                   if(checkCollision(bullets[j], enemies[i])) {
-                    var pseudoBullet = new Object();
                     if(bullets[j].type === 'greenOrangeMint') {
-                      pseudoBullet.world = bullets[j].world;
-                      pseudoBullet.element = bullets[j].element;
-                      pseudoBullet.owner = bullets[j].owner;
-                      pseudoBullet.type = bullets[j].type;
-                      pseudoBullet.angle = bullets[j].angle;
-                      pseudoBullet.x = bullets[j].x;
-                      pseudoBullet.y = bullets[j].y;
-                      pseudoBullet.w = bullets[j].w;
-                      pseudoBullet.h = bullets[j].h;
-                    }
-
-                    socket.emit('deleteBullet', bullets[j].element);
-                    socket.emit('hurtEnemy', enemies[i].element);
-
-                    if(pseudoBullet.type === 'greenOrangeMint') {
                       var bulletSpawner = new Object();
                       bulletSpawner.element = player.element;
-                      bulletSpawner.world = pseudoBullet.world;
+                      bulletSpawner.world = bullets[j].world;
                       bulletSpawner.w = 10;
                       bulletSpawner.h = 5;
 
-                      pseudoBullet.x += 45 * Math.cos(pseudoBullet.angle * Math.PI / 180);
-                      pseudoBullet.y += 45 * Math.sin(pseudoBullet.angle * Math.PI / 180);
-                      pseudoBullet.angle += 90;
-                      pseudoBullet.x += 8 * Math.cos(pseudoBullet.angle * Math.PI / 180);
-                      pseudoBullet.y += 8 * Math.sin(pseudoBullet.angle * Math.PI / 180);
-                      pseudoBullet.angle -= 45;
+                      bullets[j].x += 45 * Math.cos(bullets[j].angle * Math.PI / 180);
+                      bullets[j].y += 45 * Math.sin(bullets[j].angle * Math.PI / 180);
+                      bullets[j].angle += 90;
+                      bullets[j].x += 8 * Math.cos(bullets[j].angle * Math.PI / 180);
+                      bullets[j].y += 8 * Math.sin(bullets[j].angle * Math.PI / 180);
+                      bullets[j].angle -= 45;
 
-                      bulletSpawner.x = pseudoBullet.x;
-                      bulletSpawner.y = pseudoBullet.y;
-                      bulletSpawner.angle = pseudoBullet.angle;
-                      socket.emit('createGreenOrangeMint', bulletSpawner, pseudoBullet, enemies[i]);
+                      bulletSpawner.x = bullets[j].x;
+                      bulletSpawner.y = bullets[j].y;
+                      bulletSpawner.angle = bullets[j].angle;
+                      socket.emit('createBullet', bulletSpawner, 'greenOrangeMint');
 
-                      pseudoBullet.angle -= 135;
-                      pseudoBullet.x += 8 * Math.cos(bullets[j].angle * Math.PI / 180);
-                      pseudoBullet.y += 8 * Math.sin(bullets[j].angle * Math.PI / 180);
-                      pseudoBullet.angle += 45;
+                      bullets[j].angle -= 135;
+                      bullets[j].x += 8 * Math.cos(bullets[j].angle * Math.PI / 180);
+                      bullets[j].y += 8 * Math.sin(bullets[j].angle * Math.PI / 180);
+                      bullets[j].angle += 45;
 
-                      bulletSpawner.x = pseudoBullet.x;
-                      bulletSpawner.y = pseudoBullet.y;
-                      bulletSpawner.angle = pseudoBullet.angle;
-                      socket.emit('createGreenOrangeMint', bulletSpawner, pseudoBullet, enemies[i]);
+                      bulletSpawner.x = bullets[j].x;
+                      bulletSpawner.y = bullets[j].y;
+                      bulletSpawner.angle = bullets[j].angle;
+                      socket.emit('createBullet', bulletSpawner, 'greenOrangeMint');
                     }
+
+                    socket.emit('deleteBullet', bullets[j].element);
+                    socket.emit('hurtEnemy', enemies[i].element, bullets[j].element);
                   }
                 }
               }
