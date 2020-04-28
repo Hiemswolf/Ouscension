@@ -115,12 +115,15 @@ io.on('connection', function(socket){
             } else {
               if(Math.floor(Math.random() * 8) === 0) {
                 createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'lifeSaver');
-              } else {
-                if(Math.floor(Math.random() * 48) === 0) {
-                  createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'limeLifeSaver');
+              }
+                if(Math.floor(Math.random() * 8) === 0) {
+                  createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'orangeGreenMint');
+                } else {
+                  if(Math.floor(Math.random() * 48) === 0) {
+                    createItem(enemies[i].world, enemies[i].x, enemies[i].y, 'limeLifeSaver');
+                  }
                 }
               }
-            }
           }
 
           if(enemies[i].type === 'mage') {
@@ -252,7 +255,7 @@ function createBullet(player, type) {
   }
   bullet.type = type;
 
-  if(type === 'mint') {
+  if(type === 'mint' || type === 'greenOrangeMint') {
     bullet.mx = 16 * Math.cos(bullet.angle * Math.PI / 180);
     bullet.my = 16 * Math.sin(bullet.angle * Math.PI / 180);
     bullet.rotSpeed = 0;
@@ -444,6 +447,8 @@ function createEnemyProjectile(source) {
 }
 
 function createParticle(x, y, velX, velY, world) {
+  itemCounter++;
+
   var particle = createSprite('particle' + itemCounter, x, y, 8, 8);
   particle.mx = Math.random() * 30 - 15 + velX;
   particle.my = Math.random() * 30 - 15 + velY;

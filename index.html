@@ -176,6 +176,29 @@
                 position: absolute;
                 z-index: 1;
       }
+      .orangeGreenMint {
+                width: 10px;
+                height: 5px;
+                background-image: url("https://piskel-imgstore-b.appspot.com/img/cc337761-88f2-11ea-8203-ab4beb99da77.gif");
+                position: absolute;
+                z-index: 10;
+      }
+      .orangeGreenMintItem {
+                background-image: url("https://piskel-imgstore-b.appspot.com/img/ff51a435-88f2-11ea-9afa-ab4beb99da77.gif");
+                background-repeat: no-repeat;
+                background-size:100% 100%;
+                position: absolute;
+                z-index: 1000002;
+      }
+      .orangeGreenMintDropped {
+                width: 25px;
+                height: 25px;
+                background-image: url('https://piskel-imgstore-b.appspot.com/img/ff51a435-88f2-11ea-9afa-ab4beb99da77.gif');
+                background-repeat: no-repeat;
+                background-size:100% 100%;
+                position: absolute;
+                z-index: 1;
+      }
       .enemyProjectile {
                 width: 10px;
                 height: 10px;
@@ -453,6 +476,9 @@
                   if(player.weapon === 'purpleMint') {
                     socket.emit('createBullet', player, 'purpleMint');
                   }
+                  if(player.weapon === 'greenOrangeMint') {
+                    socket.emit('createBullet', player, 'greenOrangeMint');
+                  }
                 }
               }
             }
@@ -672,6 +698,31 @@
               if(bullets[j].owner === player.element) {
                 if(bullets[j].world === enemies[i].world) {
                   if(checkCollision(bullets[j], enemies[i])) {
+                    if(bullets[j].type === 'greenOrangeMint') {
+                      var bulletSpawner = player;
+                      var a = 30 / (Math.exp(bullets[j].x, 2) + Math.exp(bullets[j].y, 2))
+                      bullets[j].x += a * bullets[j].mx;
+                      bullets[j].y += a * bullets[j].my;
+                      bullets[j].angle += 90;
+                      bullets[j].x += 8 * Math.cos(bullets[i].angle * Math.PI / 180);
+                      bullets[j].y += 8 * Math.sin(bullets[i].angle * Math.PI / 180);
+                      bullets[j].angle -= 45;
+
+                      bulletSpawner.x = bullets[j].x;
+                      bulletSpawner.y = bullets[j].x;
+                      bulletSpawner.angle = bullets[j].x;
+                      socket.emit('createBullet', bulletSpawner, 'greenOrangeMint');
+
+                      bullets[j].angle -= 135;
+                      bullets[j].x += 16 * Math.cos(bullets[i].angle * Math.PI / 180);
+                      bullets[j].y += 16 * Math.sin(bullets[i].angle * Math.PI / 180);
+                      bullets[j].angle += 45;
+
+                      bulletSpawner.x = bullets[j].x;
+                      bulletSpawner.y = bullets[j].x;
+                      bulletSpawner.angle = bullets[j].x;
+                      socket.emit('createBullet', bulletSpawner, 'greenOrangeMint');
+                    }
                     socket.emit('hurtEnemy', enemies[i].element);
                     socket.emit('deleteBullet', bullets[j].element);
                   }
@@ -772,6 +823,7 @@
             }
           }
         }
+
         function enemyProjectileHandler() {
           for(i = 0; i < enemyProjectiles.length; i++) {
 
