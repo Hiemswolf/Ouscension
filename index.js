@@ -254,7 +254,6 @@ function createBullet(player, type) {
     bullet.owner = player.element;
   }
   bullet.type = type;
-  bullet.hit = false;
 
   if(type === 'mint') {
     bullet.mx = 16 * Math.cos(bullet.angle * Math.PI / 180);
