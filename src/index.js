@@ -1,21 +1,21 @@
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var port = process.env.PORT || 3000;
+let app = require('express')();
+let http = require('http').Server(app);
+let io = require('socket.io')(http);
+let port = process.env.PORT || 3000;
 
-var itemCounter = 0;
-var lastUpdate = new Date().getTime();
+let itemCounter = 0;
+let lastUpdate = new Date().getTime();
 
-var players = [];
+let players = [];
 
-var bullets = [];
-var portals = [];
-var floors = [];
-var enemies = [];
-var items = [];
-var enemyProjectiles = [];
-var particles = [];
-var dungeons = 0;
+let bullets = [];
+let portals = [];
+let floors = [];
+let enemies = [];
+let items = [];
+let enemyProjectiles = [];
+let particles = [];
+let dungeons = 0;
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
@@ -35,7 +35,7 @@ io.on('connection', function(socket){
 
   socket.on('playerInfo', function(playerSprite, isMouseDown) {
 
-    var inPlayerArray = false;
+    let inPlayerArray = false;
     for(i = 0; i < players.length; i++) {
       if(playerSprite.element === players[i].element) {
         inPlayerArray = true;
@@ -49,7 +49,7 @@ io.on('connection', function(socket){
     for(i = 0; i < bullets.length; i++) {
       if(bullets[i].type === 'blueMint' && playerSprite.element === bullets[i].owner) {
         if(isMouseDown) {
-          var angle = Math.atan2((playerSprite.mouse.y - bullets[i].y), (playerSprite.mouse.x - bullets[i].x)) * (180 / Math.PI);
+          let angle = Math.atan2((playerSprite.mouse.y - bullets[i].y), (playerSprite.mouse.x - bullets[i].x)) * (180 / Math.PI);
           bullets[i].rotSpeed = (angle - bullets[i].angle) * 0.05 + bullets[i].rotSpeed * 0.8;
         } else {
           bullets[i].rotSpeed = 0;
@@ -221,7 +221,7 @@ function checkCollision (a,b) {
 }
 
 function createSprite(element, x, y, w, h) {
-  var result = new Object();
+  let result = new Object();
   result.element = element;
   result.x = x;
   result.y = y;
@@ -237,7 +237,7 @@ function blocker(sprite) {
             sprite.preY = sprite.Y;
           }
 
-          var onFloor = false;
+          let onFloor = false;
 
           for(o = 0; o < floors.length; o++) {
             if(sprite.world === floors[o].world) {
@@ -258,7 +258,7 @@ function blocker(sprite) {
         }
 
 function createGreenOrangeMint(bullet) {
-  var bulletSpawner = new Object();
+  let bulletSpawner = new Object();
   bulletSpawner.element = bullet.owner;
   bulletSpawner.world = bullet.world;
   bulletSpawner.w = 10;
@@ -290,7 +290,7 @@ function createGreenOrangeMint(bullet) {
 function createBullet(player, type) {
   itemCounter++;
 
-  var bullet = createSprite(itemCounter, player.x + player.w / 2, player.y + player.h / 2, 5, 5);
+  let bullet = createSprite(itemCounter, player.x + player.w / 2, player.y + player.h / 2, 5, 5);
   bullet.angle = player.angle;
   bullet.world = player.world;
   if(player.owner != undefined) {
@@ -345,7 +345,7 @@ function createBullet(player, type) {
 
 function createItem(world, x, y, type) {
   itemCounter++;
-  var item = createSprite('item' + itemCounter, x, y, 25, 25);
+  let item = createSprite('item' + itemCounter, x, y, 25, 25);
   item.world = world;
   item.type = type;
 
@@ -354,7 +354,7 @@ function createItem(world, x, y, type) {
 
 function createPortal(world, teleport, x , y) {
   itemCounter++;
-  var portal = createSprite('portal' + itemCounter, x, y, 40, 40);
+  let portal = createSprite('portal' + itemCounter, x, y, 40, 40);
   portal.world = world;
   portal.teleport = teleport;
   portal.angle = 0;
@@ -366,7 +366,7 @@ createFloor('Hub', -250, -250);
 
 function createFloor(world, x, y) {
   itemCounter++;
-  var floor = createSprite('floor' + itemCounter, x, y, 500, 500);
+  let floor = createSprite('floor' + itemCounter, x, y, 500, 500);
   floor.world = world;
 
   floors[floors.length] = floor;
@@ -374,8 +374,8 @@ function createFloor(world, x, y) {
 
 function createEnemy(world, x , y, type) {
   itemCounter++;
-  var size = 30;
-  var enemy = createSprite('enemy' + itemCounter, x, y, size, size);
+  let size = 30;
+  let enemy = createSprite('enemy' + itemCounter, x, y, size, size);
   enemy.world = world;
   enemy.hp = 10;
   enemy.type = type;
@@ -393,18 +393,18 @@ createDungeon('choose', 8);
 
 function createDungeon(name, length) {
   if(name === 'choose') {
-    var names = ['Alpha', 'Beta', 'Delta', 'Zeta', 'Yotta'];
+    let names = ['Alpha', 'Beta', 'Delta', 'Zeta', 'Yotta'];
     name = names[Math.floor(Math.random() * 5)];
   }
 
   createPortal('Hub', name, (Math.floor(Math.random() * 5) - 1) * 60, -100);
 
   createFloor(name, -250, -250);
-  var floorX = 0;
-  var floorY = 0;
+  let floorX = 0;
+  let floorY = 0;
 
   for(i = 0; i < length; i++) {
-    var change = Math.floor(Math.random() * 4);
+    let change = Math.floor(Math.random() * 4);
     if(change === 0) {floorX++}
     if(change === 1) {floorX--}
     if(change === 2) {floorY++}
@@ -427,22 +427,22 @@ function enemyHandler() {
   for(i = 0; i < enemies.length; i++) {
     enemies[i].orangeGreenMintSpawns = 0;
 
-    var preX = enemies[i].x;
-    var preY = enemies[i].y;
+    let preX = enemies[i].x;
+    let preY = enemies[i].y;
 
-    var targets = [];
+    let targets = [];
 
     for(j = 0; j < players.length; j++) {
       if(players[j].world === enemies[i].world) {
-        var target = players[j];
+        let target = players[j];
         target.distance = Math.hypot(players[j].x - enemies[i].x, players[j].y - enemies[i].y);
 
         targets[targets.length] = target;
       }
     }
 
-    var closestDistance = 800;
-    var closest;
+    let closestDistance = 800;
+    let closest;
     for(j = 0; j < targets.length; j++) {
       if(targets[j].distance < closestDistance) {
         closest = targets[j];
@@ -477,8 +477,8 @@ function enemyHandler() {
 
       for(j = 0; j < enemies.length; j++) {
         if(enemies[i].element != enemies[j].element && enemies[i].world === enemies[j].world) {
-          var moveX = 10 / (enemies[i].x - enemies[j].x);
-          var moveY = 10 / (enemies[i].y - enemies[j].y);
+          let moveX = 10 / (enemies[i].x - enemies[j].x);
+          let moveY = 10 / (enemies[i].y - enemies[j].y);
 
           if(Math.abs(moveX) + Math.abs(moveY) >= 20) {
             moveX = 0;
@@ -500,8 +500,8 @@ function enemyHandler() {
 
 function createEnemyProjectile(source) {
   itemCounter++;
-  var size = 10;
-  var enemyProjectile = createSprite('enemy' + itemCounter, source.x, source.y, size, size);
+  let size = 10;
+  let enemyProjectile = createSprite('enemy' + itemCounter, source.x, source.y, size, size);
   enemyProjectile.world = source.world;
   enemyProjectile.hp = 1;
   enemyProjectile.angle = source.angle;
@@ -516,7 +516,7 @@ function createEnemyProjectile(source) {
 function createParticle(x, y, velX, velY, world) {
   itemCounter++;
 
-  var particle = createSprite('particle' + itemCounter, x, y, 8, 8);
+  let particle = createSprite('particle' + itemCounter, x, y, 8, 8);
   particle.mx = Math.random() * 30 - 15 + velX;
   particle.my = Math.random() * 30 - 15 + velY;
   particle.lifeTimer = 300;
@@ -548,14 +548,14 @@ function bulletHandler() {
     bullets[i].angle += bullets[i].rotSpeed;
 
     if(bullets[i].type === 'purpleMint') {
-      var closestDistance = 200;
-      var closest;
+      let closestDistance = 200;
+      let closest;
 
-      var targets = [];
+      let targets = [];
 
       for(j = 0; j < enemies.length; j++) {
         if(enemies[j].world === bullets[i].world) {
-          var target = enemies[j];
+          let target = enemies[j];
           target.distance = Math.hypot(enemies[j].x - bullets[i].x, enemies[j].y - bullets[i].y);
 
           targets[targets.length] = target;
@@ -570,7 +570,7 @@ function bulletHandler() {
       }
 
       if(closest !== undefined) {
-        var angle = Math.atan2((closest.y - bullets[i].y), (closest.x - bullets[i].x)) * (180 / Math.PI);
+        let angle = Math.atan2((closest.y - bullets[i].y), (closest.x - bullets[i].x)) * (180 / Math.PI);
         bullets[i].rotSpeed = (angle - bullets[i].angle) * 0.05 + bullets[i].rotSpeed * 0.8;
       } else {
         bullets[i].rotSpeed = 0;
