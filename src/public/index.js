@@ -433,9 +433,9 @@ $(function () {
             element.style.left = '-50px';
             element.style.top = '-50px';
             if(floors[i].world == 'Hub') {
-              element.style.backgroundImage = 'url("https://piskel-imgstore-b.appspot.com/img/27cf1200-cc49-11e9-8fa5-8f99fe5b287f.gif")'
+              element.style.backgroundImage = 'url(\'/images/floorTileHub.gif\')'
             }
-            document.getElementById('floorContainer').appendChild(element);
+            document.getElementById('floors').appendChild(element);
           }
         }
 
