@@ -35,7 +35,9 @@ io = {};
 const Game = class Game {
   constructor(app) {
     const http = require('http').Server(app);
-    io = require('socket.io')(http);
+    io = require('socket.io')(http, {
+      cors: { orgin: '*' }
+    });
     io.on('connection', function(socket){
       socket.on('createChar', function() {
         itemCounter++;
@@ -231,7 +233,7 @@ const Game = class Game {
     Update();
     const port = process.env.PORT || 3000;
     http.listen(port || 3000, function(){
-      console.log('listening on *:' + port);
+      console.log('listening on port ' + port);
     });
   } // constructor
 

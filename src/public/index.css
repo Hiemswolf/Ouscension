@@ -1,0 +1,218 @@
+body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+      overflow: hidden;
+      background-color: rgb(25, 25, 25);
+}
+.player {
+      width: 25px;
+      height: 25px;
+      background: rgb(0, 255, 255);
+      background-image: url("https://image.ibb.co/h55aMn/player.gif");
+      position: absolute;
+      z-index: 1000;
+}
+.portal {
+      width: 40px;
+      height: 40px;
+      background-image: url("https://image.ibb.co/kboGpe/Portal.gif");
+      text-align: center;
+      position: absolute;
+      z-index: 5;
+}
+.floor {
+      width: 500px;
+      height: 500px;
+      background: rgb(100, 100, 100);
+      background-image: url("https://image.ibb.co/g47Bu7/floor.gif");
+      position: absolute;
+      z-index: 0;
+}
+.skeleton {
+      width: 30px;
+      height: 30px;
+      background: rgb(255, 0, 0);
+      background-image: url("https://image.ibb.co/bBKx1n/SkeleBoi.gif");
+      position: absolute;
+      z-index: 50;
+}
+.mage {
+      width: 30px;
+      height: 30px;
+      background: rgb(255, 0, 0);
+      background-image: url("https://piskel-imgstore-b.appspot.com/img/ba43275e-cea9-11e9-a495-23fddcbaba0f.gif");
+      position: absolute;
+      z-index: 50;
+}
+.inventorySlot {
+      position: absolute;
+      z-index: 1000002;
+      opacity: 0.8;
+}
+.mint {
+      width: 10px;
+      height: 5px;
+      background: #00ff00;
+      position: absolute;
+      z-index: 10;
+}
+.mintItem {
+      background-image: url("https://piskel-imgstore-b.appspot.com/img/37dcbefa-cd01-11e9-ba60-0f8b12268432.gif");
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      position: absolute;
+      z-index: 1000002;
+}
+.mintDropped {
+      background-image: url("https://piskel-imgstore-b.appspot.com/img/37dcbefa-cd01-11e9-ba60-0f8b12268432.gif");
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      z-index: 1;
+}
+.lifeSaver {
+      width: 25px;
+      height: 25px;
+      background-image: url('https://piskel-imgstore-b.appspot.com/img/fb5cda8c-cd14-11e9-8a31-27fde8acf637.gif');
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      position: absolute;
+      z-index: 10;
+}
+.lifeSaverItem {
+      background-image: url("https://piskel-imgstore-b.appspot.com/img/fb5cda8c-cd14-11e9-8a31-27fde8acf637.gif");
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      position: absolute;
+      z-index: 1000002;
+}
+.lifeSaverDropped {
+      width: 25px;
+      height: 25px;
+      background-image: url('https://piskel-imgstore-b.appspot.com/img/fb5cda8c-cd14-11e9-8a31-27fde8acf637.gif');
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      position: absolute;
+      z-index: 1;
+}
+.limeLifeSaver {
+      width: 25px;
+      height: 25px;
+      background-image: url('https://piskel-imgstore-b.appspot.com/img/66b62f4c-ceb5-11e9-8e4a-23fddcbaba0f.gif');
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      position: absolute;
+      z-index: 10;
+}
+.limeLifeSaverItem {
+      background-image: url("https://piskel-imgstore-b.appspot.com/img/66b62f4c-ceb5-11e9-8e4a-23fddcbaba0f.gif");
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      position: absolute;
+      z-index: 1000002;
+}
+.limeLifeSaverDropped {
+      width: 25px;
+      height: 25px;
+      background-image: url('https://piskel-imgstore-b.appspot.com/img/66b62f4c-ceb5-11e9-8e4a-23fddcbaba0f.gif');
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      position: absolute;
+      z-index: 1;
+}
+.blueMint {
+      width: 10px;
+      height: 5px;
+      background: #00ffff;
+      position: absolute;
+      z-index: 10;
+}
+.blueMintItem {
+      background-image: url("https://piskel-imgstore-b.appspot.com/img/02ce5a23-cd9f-11e9-a8a5-0f5e8ece36f2.gif");
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      position: absolute;
+      z-index: 1000002;
+}
+.blueMintDropped {
+      width: 25px;
+      height: 25px;
+      background-image: url('https://piskel-imgstore-b.appspot.com/img/02ce5a23-cd9f-11e9-a8a5-0f5e8ece36f2.gif');
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      position: absolute;
+      z-index: 1;
+}
+.purpleMint {
+      width: 10px;
+      height: 5px;
+      background: #ff00ff;
+      position: absolute;
+      z-index: 10;
+}
+.purpleMintItem {
+      background-image: url("https://piskel-imgstore-b.appspot.com/img/16873385-ceb9-11e9-adf2-25277fbbd3b8.gif");
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      position: absolute;
+      z-index: 1000002;
+}
+.purpleMintDropped {
+      width: 25px;
+      height: 25px;
+      background-image: url('https://piskel-imgstore-b.appspot.com/img/16873385-ceb9-11e9-adf2-25277fbbd3b8.gif');
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      position: absolute;
+      z-index: 1;
+}
+.greenOrangeMint {
+      width: 10px;
+      height: 5px;
+      background-image: url("https://piskel-imgstore-b.appspot.com/img/cc337761-88f2-11ea-8203-ab4beb99da77.gif");
+      position: absolute;
+      z-index: 10;
+}
+.greenOrangeMintItem {
+      background-image: url("https://piskel-imgstore-b.appspot.com/img/ff51a435-88f2-11ea-9afa-ab4beb99da77.gif");
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      position: absolute;
+      z-index: 1000002;
+}
+.greenOrangeMintDropped {
+      width: 25px;
+      height: 25px;
+      background-image: url('https://piskel-imgstore-b.appspot.com/img/ff51a435-88f2-11ea-9afa-ab4beb99da77.gif');
+      background-repeat: no-repeat;
+      background-size:100% 100%;
+      position: absolute;
+      z-index: 1;
+}
+.enemyProjectile {
+    width: 10px;
+    height: 10px;
+    background: #ff0000;
+    position: absolute;
+    z-index: 10;
+}
+.hitParticle {
+    width: 8px;
+    height: 8px;
+    background: rgb(150,0,20);
+    position: absolute;
+    z-index: 10;
+}
+#mainGUI {
+    background: rgb(0, 0, 0);
+    position: absolute;
+    opacity: 0.5;
+    margin-top: 0px;
+    z-index: 1000000;
+}
