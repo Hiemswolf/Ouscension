@@ -1,8 +1,8 @@
 {
-  "name": "Ouscension",
+  "name": "Ouscent",
   "version": "0.0.1",
-  "main": "src/index.js",
-  "description": "A shootie gam",
+  "main": "src/server.js",
+  "description": "a remix of a shootie gam",
   "dependencies": {
     "express": "^4.17.1",
     "socket.io": "^1.7.3",

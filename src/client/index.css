@@ -204,7 +204,7 @@ body {
       z-index: 1;
 }
 .enemyProjectile {
-    width: 10px;a
+    width: 10px;
     height: 10px;
     background: #ff0000;
     position: absolute;
