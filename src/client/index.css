@@ -1,3 +1,6 @@
+* {
+      position: absolute;
+}
 body {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -13,7 +16,6 @@ body {
       height: 25px;
       background: rgb(0, 255, 255);
       background-image: url('/images/player.gif');
-      position: absolute;
       z-index: 1000;
       box-shadow: 0 0 10px green;
 }
@@ -22,7 +24,6 @@ body {
       height: 40px;
       background-image: url('/images/portal.gif');
       text-align: center;
-      position: absolute;
       z-index: 5;
 }
 .floor {
@@ -30,7 +31,6 @@ body {
       height: 500px;
       background: rgb(100, 100, 100);
       background-image: url('/images/floor.gif');
-      position: absolute;
       z-index: 1;
 }
 .skeleton {
@@ -38,7 +38,6 @@ body {
       height: 30px;
       background: rgb(255, 0, 0);
       background-image: url('/images/skele-boi.gif');
-      position: absolute;
       z-index: 50;
       box-shadow: 0 0 10px black;
 }
@@ -47,12 +46,10 @@ body {
       height: 30px;
       background: rgb(255, 0, 0);
       background-image: url('/images/mage.gif');
-      position: absolute;
       z-index: 50;
       box-shadow: 0 0 10px red;
 }
 .inventorySlot {
-      position: absolute;
       z-index: 1000002;
       opacity: 0.8;
       box-shadow: inset 0 0 6px black;
@@ -61,7 +58,6 @@ body {
       width: 10px;
       height: 5px;
       background: #b9ffb9;
-      position: absolute;
       z-index: 10;
       box-shadow: 0 0 10px #00ff00;
 }
@@ -69,7 +65,6 @@ body {
       background-image: url('/images/mint.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
-      position: absolute;
       z-index: 1000002;
 }
 .mintDropped {
@@ -78,7 +73,6 @@ body {
       background-size:100% 100%;
       width: 25px;
       height: 25px;
-      position: absolute;
       z-index: 1;
 }
 .lifeSaver {
@@ -87,14 +81,12 @@ body {
       background-image: url('/images/life-saver.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
-      position: absolute;
       z-index: 10;
 }
 .lifeSaverItem {
       background-image: url('/images/life-saver.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
-      position: absolute;
       z-index: 1000002;
 }
 .lifeSaverDropped {
@@ -103,7 +95,6 @@ body {
       background-image: url('/images/life-saver.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
-      position: absolute;
       z-index: 1;
 }
 .limeLifeSaver {
@@ -112,14 +103,12 @@ body {
       background-image: url('/images/lime-life-saver.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
-      position: absolute;
       z-index: 10;
 }
 .limeLifeSaverItem {
       background-image: url('/images/lime-life-saver.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
-      position: absolute;
       z-index: 1000002;
 }
 .limeLifeSaverDropped {
@@ -128,14 +117,12 @@ body {
       background-image: url('/images/lime-life-saver.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
-      position: absolute;
       z-index: 1;
 }
 .blueMint {
       width: 10px;
       height: 5px;
       background: #d5ffff;
-      position: absolute;
       z-index: 10;
       box-shadow: 0 0 10px #00ffff;
 }
@@ -143,7 +130,6 @@ body {
       background-image: url('/images/blue-mint.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
-      position: absolute;
       z-index: 1000002;
 }
 .blueMintDropped {
@@ -152,14 +138,12 @@ body {
       background-image: url('/images/blue-mint.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
-      position: absolute;
       z-index: 1;
 }
 .purpleMint {
       width: 10px;
       height: 5px;
       background: #ffcbff;
-      position: absolute;
       z-index: 10;
       box-shadow: 0 0 10px #ff00ff;
 }
@@ -167,7 +151,6 @@ body {
       background-image: url('/images/purple-mint.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
-      position: absolute;
       z-index: 1000002;
 }
 .purpleMintDropped {
@@ -176,14 +159,12 @@ body {
       background-image: url('/images/purple-mint.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
-      position: absolute;
       z-index: 1;
 }
 .greenOrangeMint {
       width: 10px;
       height: 5px;
       background-image: url('/images/green-orange-mint.gif');
-      position: absolute;
       z-index: 10;
       box-shadow: 0 0 12px 2px black;
 }
@@ -191,7 +172,6 @@ body {
       background-image: url('/images/green-orange-mint-item.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
-      position: absolute;
       z-index: 1000002;
 }
 .greenOrangeMintDropped {
@@ -200,14 +180,12 @@ body {
       background-image: url('/images/green-orange-mint-item.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
-      position: absolute;
       z-index: 1;
 }
 .enemyProjectile {
     width: 10px;
     height: 10px;
     background: #ff0000;
-    position: absolute;
     z-index: 10;
     box-shadow: 0 0 10px black;
 }
@@ -215,13 +193,11 @@ body {
     width: 8px;
     height: 8px;
     background: rgb(150,0,20);
-    position: absolute;
     z-index: 10;
     box-shadow: 0 0 3px black;
 }
 #mainGUI {
     background: rgb(0, 0, 0);
-    position: absolute;
     opacity: 0.25;
     margin-top: 0px;
     z-index: 1000000;
