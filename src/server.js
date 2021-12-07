@@ -9,28 +9,9 @@ io = new Server(server, {
     origin: '*'
   }
 });
-
 app.use('/', express.static(path.join(__dirname, '../public')));
 
-const {
-  checkCollision,
-  createSprite,
-  blocker,
-  createGreenOrangeMint,
-  createBullet,
-  createItem,
-  createPortal,
-  createFloor,
-  createEnemy,
-  createDungeon,
-  enemyHandler,
-  createEnemyProjectile,
-  createParticle,
-  enemyProjectHandler,
-  bulletHandler,
-  particleHandler,
-  Update
-} = require('./functions');
+const { startGame } = require('./gameFunctions');
 
 itemCounter = 0;
 lastUpdate = new Date().getTime();
@@ -47,9 +28,8 @@ dungeons = 0;
 const handleSocket = require('./socketHandler')(io);
 io.on('connection', handleSocket);
 
-createFloor('Hub', -250, -250);
-createDungeon('choose', 8);
-Update();
+
+startGame();
 
 
 const port = process.env.PORT || 3000;
