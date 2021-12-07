@@ -441,7 +441,7 @@ $(function () {
           element.style.left = '-50px';
           element.style.top = '-50px';
           if (floors[i].world == 'Hub') {
-            element.style.backgroundImage = 'url(\'/images/floorTileHub.gif\')'
+            element.style.backgroundImage = 'url(\'/assets/floorTileHub.gif\')'
           }
           document.getElementById('floors').appendChild(element);
         }
