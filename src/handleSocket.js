@@ -1,4 +1,3 @@
-
 const { createSprite, createDungeon } = require('./mutualFunctions');
 
 function createGreenOrangeMint(bullet) {
@@ -108,16 +107,19 @@ function createParticle(x, y, velX, velY, world) {
   particles[particles.length] = particle;
 }
 
+const { io } = require('./server');
 
-module.exports = (io) => (socket) => {
+module.exports = (socket) => {
   socket.on('createChar', function () {
     itemCounter++;
     socket.number = itemCounter;
     io.emit('loadNewChar', socket.number);
   });
+
   socket.on('createBullet', function (player, bulletType) {
     createBullet(player, bulletType);
   });
+
   socket.on('playerInfo', function (playerSprite, isMouseDown) {
 
     let inPlayerArray = false;

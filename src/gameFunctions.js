@@ -1,10 +1,11 @@
 module.exports = {
-	startGame
+	createGame
 };
 
 const { createSprite, createDungeon, createFloor } = require('./mutualFunctions');
+const { io } = require('./server');
 
-function startGame() {
+function createGame() {
 	createFloor('Hub', -250, -250);
 	createDungeon('choose', 8);
 

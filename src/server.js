@@ -4,14 +4,19 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require('socket.io');
-io = new Server(server, {
+const io = new Server(server, {
   cors: {
     origin: '*'
   }
 });
 app.use('/', express.static(path.join(__dirname, '../public')));
 
-const { startGame } = require('./gameFunctions');
+
+module.exports = {
+  io
+};
+
+const { createGame } = require('./gameFunctions');
 
 itemCounter = 0;
 lastUpdate = new Date().getTime();
@@ -25,11 +30,11 @@ enemyProjectiles = [];
 particles = [];
 dungeons = 0;
 
-const handleSocket = require('./socketHandler')(io);
+const handleSocket = require('./handleSocket');
 io.on('connection', handleSocket);
 
 
-startGame();
+createGame();
 
 
 const port = process.env.PORT || 3000;
