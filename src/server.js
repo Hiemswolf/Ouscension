@@ -1,7 +1,16 @@
+const path = require('path');
 const express = require('express');
 const app = express();
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require('socket.io');
+io = new Server(server, {
+  cors: {
+    origin: '*'
+  }
+});
 
-app.use('/', express.static(__dirname + '/client'));
+app.use('/', express.static(path.join(__dirname, '../public')));
 
 const {
   checkCollision,
@@ -35,13 +44,7 @@ enemyProjectiles = [];
 particles = [];
 dungeons = 0;
 
-io = {};
 
-const http = require('http').Server(app);
-
-io = require('socket.io')(http, {
-  cors: { orgin: '*' }
-});
 
 io.on('connection', function (socket) {
   socket.on('createChar', function () {
@@ -237,8 +240,8 @@ createFloor('Hub', -250, -250);
 createDungeon('choose', 8);
 Update();
 
-const port = process.env.PORT || 3000;
 
-http.listen(port, function () {
-  console.log('listening on port ' + port);
+const port = process.env.PORT || 3000;
+server.listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });
