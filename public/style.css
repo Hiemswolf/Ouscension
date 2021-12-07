@@ -15,14 +15,14 @@ body {
       width: 25px;
       height: 25px;
       background: rgb(0, 255, 255);
-      background-image: url('/images/player.gif');
+      background-image: url('/assets/player.gif');
       z-index: 1000;
       box-shadow: 0 0 10px green;
 }
 .portal {
       width: 40px;
       height: 40px;
-      background-image: url('/images/portal.gif');
+      background-image: url('/assets/portal.gif');
       text-align: center;
       z-index: 5;
 }
@@ -30,14 +30,14 @@ body {
       width: 500px;
       height: 500px;
       background: rgb(100, 100, 100);
-      background-image: url('/images/floor.gif');
+      background-image: url('/assets/floor.gif');
       z-index: 1;
 }
 .skeleton {
       width: 30px;
       height: 30px;
       background: rgb(255, 0, 0);
-      background-image: url('/images/skele-boi.gif');
+      background-image: url('/assets/skele-boi.gif');
       z-index: 50;
       box-shadow: 0 0 10px black;
 }
@@ -45,7 +45,7 @@ body {
       width: 30px;
       height: 30px;
       background: rgb(255, 0, 0);
-      background-image: url('/images/mage.gif');
+      background-image: url('/assets/mage.gif');
       z-index: 50;
       box-shadow: 0 0 10px red;
 }
@@ -62,13 +62,13 @@ body {
       box-shadow: 0 0 10px #00ff00;
 }
 .mintItem {
-      background-image: url('/images/mint.gif');
+      background-image: url('/assets/mint.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
       z-index: 1000002;
 }
 .mintDropped {
-      background-image: url('/images/mint.gif');
+      background-image: url('/assets/mint.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
       width: 25px;
@@ -78,13 +78,13 @@ body {
 .lifeSaver {
       width: 25px;
       height: 25px;
-      background-image: url('/images/life-saver.gif');
+      background-image: url('/assets/life-saver.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
       z-index: 10;
 }
 .lifeSaverItem {
-      background-image: url('/images/life-saver.gif');
+      background-image: url('/assets/life-saver.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
       z-index: 1000002;
@@ -92,7 +92,7 @@ body {
 .lifeSaverDropped {
       width: 25px;
       height: 25px;
-      background-image: url('/images/life-saver.gif');
+      background-image: url('/assets/life-saver.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
       z-index: 1;
@@ -100,13 +100,13 @@ body {
 .limeLifeSaver {
       width: 25px;
       height: 25px;
-      background-image: url('/images/lime-life-saver.gif');
+      background-image: url('/assets/lime-life-saver.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
       z-index: 10;
 }
 .limeLifeSaverItem {
-      background-image: url('/images/lime-life-saver.gif');
+      background-image: url('/assets/lime-life-saver.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
       z-index: 1000002;
@@ -114,7 +114,7 @@ body {
 .limeLifeSaverDropped {
       width: 25px;
       height: 25px;
-      background-image: url('/images/lime-life-saver.gif');
+      background-image: url('/assets/lime-life-saver.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
       z-index: 1;
@@ -127,7 +127,7 @@ body {
       box-shadow: 0 0 10px #00ffff;
 }
 .blueMintItem {
-      background-image: url('/images/blue-mint.gif');
+      background-image: url('/assets/blue-mint.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
       z-index: 1000002;
@@ -135,7 +135,7 @@ body {
 .blueMintDropped {
       width: 25px;
       height: 25px;
-      background-image: url('/images/blue-mint.gif');
+      background-image: url('/assets/blue-mint.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
       z-index: 1;
@@ -148,7 +148,7 @@ body {
       box-shadow: 0 0 10px #ff00ff;
 }
 .purpleMintItem {
-      background-image: url('/images/purple-mint.gif');
+      background-image: url('/assets/purple-mint.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
       z-index: 1000002;
@@ -156,7 +156,7 @@ body {
 .purpleMintDropped {
       width: 25px;
       height: 25px;
-      background-image: url('/images/purple-mint.gif');
+      background-image: url('/assets/purple-mint.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
       z-index: 1;
@@ -164,12 +164,12 @@ body {
 .greenOrangeMint {
       width: 10px;
       height: 5px;
-      background-image: url('/images/green-orange-mint.gif');
+      background-image: url('/assets/green-orange-mint.gif');
       z-index: 10;
       box-shadow: 0 0 12px 2px black;
 }
 .greenOrangeMintItem {
-      background-image: url('/images/green-orange-mint-item.gif');
+      background-image: url('/assets/green-orange-mint-item.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
       z-index: 1000002;
@@ -177,7 +177,7 @@ body {
 .greenOrangeMintDropped {
       width: 25px;
       height: 25px;
-      background-image: url('/images/green-orange-mint-item.gif');
+      background-image: url('/assets/green-orange-mint-item.gif');
       background-repeat: no-repeat;
       background-size:100% 100%;
       z-index: 1;
