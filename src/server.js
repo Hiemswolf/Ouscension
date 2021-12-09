@@ -19,7 +19,6 @@ module.exports = {
 const { createGame } = require('./gameFunctions');
 
 itemCounter = 0;
-lastUpdate = new Date().getTime();
 players = [];
 bullets = [];
 portals = [];
